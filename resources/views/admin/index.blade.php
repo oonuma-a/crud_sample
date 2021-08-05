@@ -2,7 +2,8 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-{include file='include/head.tpl'}
+<link rel="stylesheet" href="{{asset('/css/style.css')}}">
+<!-- {include file='include/head.tpl'} -->
 </head>
 <body{if !empty($pageID)} id="{$pageID}"{/if}>
 <div class="l-wrapper"><!-- WRAPPER -->
