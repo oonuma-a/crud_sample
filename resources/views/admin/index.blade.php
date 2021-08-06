@@ -9,12 +9,13 @@
 <link rel="stylesheet" href="{{asset('/css/modaal.css')}}">
 <!-- {include file='include/head.tpl'} -->
 </head>
-<body{if !empty($pageID)} id="{$pageID}"{/if}>
+<body><!-- <body{if !empty($pageID)} id="{$pageID}"{/if}> -->
 <div class="l-wrapper"><!-- WRAPPER -->
 	<div class="loginBox"><!-- LOGIN BOX -->
 		<div class="loginBox_inner">
 			<h1 class="loginBox_title"><img src="{{asset('/img/logo.png')}}" alt="Ken CLEANERS SYSTEM"></h1>
-			<form method="post" action="{$base_url}order/">
+			<form method="post" action="{{ route('client.index')}}">
+			@csrf
 				<dl class="loginBox_item">
 					<dt class="loginBox_item_title">ユーザーID</dt>
 					<!-- <dd class="loginBox_item_error">ユーザー名を入力してください</dd> -->

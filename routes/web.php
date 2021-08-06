@@ -18,40 +18,41 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->group(function(){
-    Route::get('/')->name('admin.index');
+    Route::match(['get', 'post'], '/','MainController@admin_index')->name('admin.index');
 });
 
+
 Route::prefix('client')->group(function(){
-    Route::get('/client/create')    ->name('client.create');
-    Route::get('/client/index')     ->name('client.index');
-    Route::get('/client/edit')      ->name('client.edit');
-    Route::get('/client/handled')   ->name('client.handled');
+    Route::post('/client/index'  ,'MainController@client_index')     ->name('client.index');
+    Route::post('/client/create' ,'MainController@client_create')    ->name('client.create');
+    Route::post('/client/edit'   ,'MainController@client_edit')      ->name('client.edit');
+    Route::post('/client/handled','MainController@client_handled')   ->name('client.handled');
 });
 
 Route::prefix('errors')->group(function(){
-    Route::get('/errors/index')            ->name('errors.index');
+    Route::post('/errors/index','MainController@errors_index')            ->name('errors.index');
 });
 
 Route::prefix('include')->group(function(){
-    Route::get('/include/common')            ->name('include.common');
-    Route::get('/include/head')              ->name('include.head');
-    Route::get('/include/header')            ->name('include.header');
-    Route::get('/include/sidebar')           ->name('include.sidebar');
+    Route::post('/include/common','MainController@include_common')            ->name('include.common');
+    Route::post('/include/head','MainController@include_head')              ->name('include.head');
+    Route::post('/include/header','MainController@include_header')            ->name('include.header');
+    Route::post('/include/sidebar','MainController@include_sidebar')           ->name('include.sidebar');
 });
 
 Route::prefix('order')->group(function(){
-    Route::get('/order/cancel')     ->name('order.index');
-    Route::get('/order/create')     ->name('order.index');
-    Route::get('/order/history')    ->name('order.index');
-    Route::get('/order/index')      ->name('order.index');
+    Route::post('/order/index','MainController@order_index')      ->name('order.index');
+    Route::post('/order/cancel','MainController@order_cancel')     ->name('order.cancel');
+    Route::post('/order/create','MainController@order_create')     ->name('order.create');
+    Route::post('/order/history','MainController@order_history')    ->name('order.history');
 });
 
 Route::prefix('settings')->group(function(){
-    Route::get('/settings/account')           ->name('settings.index');
-    Route::get('/settings/account_create')    ->name('settings.index');
-    Route::get('/settings/create')            ->name('settings.index');
-    Route::get('/settings/delete')            ->name('settings.index');
-    Route::get('/settings/index')             ->name('settings.index');
+    Route::post('/settings/account','MainController@settings_account')           ->name('settings.account');
+    Route::post('/settings/account_create','MainController@settings_account_create')    ->name('settings.account_create');
+    Route::post('/settings/create','MainController@settings_create')            ->name('settings.create');
+    Route::post('/settings/delete','MainController@settings_delete')            ->name('settings.delete');
+    Route::post('/settings/index','MainController@settings_index')             ->name('settings.index');
 });
 
 // Route::prefix('continuous_transition')->group(function () {

@@ -1,12 +1,12 @@
-{nocache}
+<!-- {nocache} -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-{include file='include/head.tpl'}
+<!-- {include file='include/head.tpl'} -->
 </head>
 <body{if !empty($pageID)} id="{$pageID}"{/if}>
 <div class="l-wrapper"><!-- L-WRAPPER  -->
-{include file='include/header.tpl'}
+<!-- {include file='include/header.tpl'} -->
 <div class="b-contents"><!-- B-CONTENTS -->
 <section><!-- SECTION -->
 <div class="contentsTitle">
