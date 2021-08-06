@@ -3,13 +3,17 @@
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="{{asset('/css/style.css')}}">
+<link rel="stylesheet" href="{{asset('/css/ie.css')}}">
+<link rel="stylesheet" href="{{asset('/css/jquery-ui.css')}}">
+<link rel="stylesheet" href="{{asset('/css/login.css')}}">
+<link rel="stylesheet" href="{{asset('/css/modaal.css')}}">
 <!-- {include file='include/head.tpl'} -->
 </head>
 <body{if !empty($pageID)} id="{$pageID}"{/if}>
 <div class="l-wrapper"><!-- WRAPPER -->
 	<div class="loginBox"><!-- LOGIN BOX -->
 		<div class="loginBox_inner">
-			<h1 class="loginBox_title"><img src="{$base_url}img/logo.png" alt="Ken CLEANERS SYSTEM"></h1>
+			<h1 class="loginBox_title"><img src="{{asset('/img/logo.png')}}" alt="Ken CLEANERS SYSTEM"></h1>
 			<form method="post" action="{$base_url}order/">
 				<dl class="loginBox_item">
 					<dt class="loginBox_item_title">ユーザーID</dt>
