@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\AdminRequest;
 use App\Http\Requests\ClientRequest;
-use App\Http\Requests\CustomerInformationAttributeTrait;
+
 
 use Illuminate\Http\Request;
 
@@ -13,7 +13,7 @@ class MainController extends Controller
         return view('admin.index');
     }
     public function client_index(ClientRequest $request){
-        $request = (object)$request->passwordInputs();
+        $request = (object)$request->getPasswordInputs();
         return view('client.index');
     }
 }

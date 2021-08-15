@@ -8,21 +8,20 @@ trait CustomerInformationAttributeTrait
     /**
      * お客様情報の項目
      */
-    private $passwordInputs = [
+    private $PasswordInfomationAttributeTrait = [
         'id',
-        'pass'
+        'pass',
     ];
 
     /**
      * お客様のユーザー名、パスワードを取得します。
      */
-    public function passwordInputs(): array
+    public function getPasswordInputs(): array
     {
         $passwordInputs = [];
-        foreach($this->CustomerInformationAttributeTrait as $attribute){
+        foreach($this->PasswordInfomationAttributeTrait as $attribute){
             $passwordInputs[$attribute] = $this->input($attribute) ?: $this->old($attribute);
         }
-        return $passwordInputs;
 
     }
 

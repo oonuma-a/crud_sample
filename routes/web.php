@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +24,10 @@ Route::prefix('admin')->group(function(){
 
 
 Route::prefix('client')->group(function(){
-    Route::post('/client/index'  ,'MainController@client_index')     ->name('client.index');
-    Route::post('/client/create' ,'MainController@client_create')    ->name('client.create');
-    Route::post('/client/edit'   ,'MainController@client_edit')      ->name('client.edit');
-    Route::post('/client/handled','MainController@client_handled')   ->name('client.handled');
+    Route::post('/index'  ,'MainController@client_index')     ->name('client.index');
+    Route::post('/create' ,'MainController@client_create')    ->name('client.create');
+    Route::post('/edit'   ,'MainController@client_edit')      ->name('client.edit');
+    Route::post('/handled','MainController@client_handled')   ->name('client.handled');
 });
 
 Route::prefix('errors')->group(function(){
@@ -62,3 +63,6 @@ Route::prefix('settings')->group(function(){
 //     Route::post('store',                      'ContinuousTransitionController@store')   ->name('continuous_transition.store');
 //     Route::get('complete',                    'ContinuousTransitionController@complete')->name('continuous_transition.complete');
 // });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

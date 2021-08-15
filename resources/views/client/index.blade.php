@@ -47,6 +47,7 @@
 		</ul>
 	</nav> -->
 	<form method="post" action="" class="js-insuranceSearchForm">
+		@csrf
 		<div class="block"><!-- 検索枠 -->
 			<div class="block_inner block_inner-7half">
 				<table class="table">
