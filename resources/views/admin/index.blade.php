@@ -17,6 +17,13 @@
 			<form method="post" action="{{ route('client.index')}}">
 			@csrf
 				<dl class="loginBox_item">
+					@if(count($errors) > 0)
+						<ul>
+							@foreach($errors->all() as $error)
+								<li>{{$error}}</li>
+							@endforeach
+						</ul>
+					@endif
 					<dt class="loginBox_item_title">ユーザーID</dt>
 					<!-- <dd class="loginBox_item_error">ユーザー名を入力してください</dd> -->
 					<dd class="loginBox_item_space"><input type="text" name="id" maxlength="30" value="" placeholder="ユーザー名を入力してください"></dd>

@@ -22,6 +22,7 @@ trait CustomerInformationAttributeTrait
         foreach($this->PasswordInfomationAttributeTrait as $attribute){
             $passwordInputs[$attribute] = $this->input($attribute) ?: $this->old($attribute);
         }
+        return $passwordInputs;
 
     }
 

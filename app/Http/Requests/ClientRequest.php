@@ -14,10 +14,7 @@ class ClientRequest extends FormRequest
      */
     public function authorize()
     {
-        return [
-        'id'   => 'required',
-        'pass' => 'required',
-        ];
+        return true;
     }
 
     /**
@@ -27,6 +24,22 @@ class ClientRequest extends FormRequest
      */
     public function rules()
     {
+        return [
+            'id'   => 'required',
+            'pass' => 'required',
+            ];
+    }
+
+    public function attributes(){
+        return [
+            'id'   => 'id',
+            'pass' => 'パスワード',
+            ];
+    }
+
+    public function messages()
+    {
+        
         return [
             'id.required' => 'ユーザー名を入力してください',
             'pass.required' => 'パスワードを入力してください',

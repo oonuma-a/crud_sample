@@ -1,6 +1,11 @@
 <!-- {nocache} -->
 <!DOCTYPE html>
 <html lang="ja">
+<link rel="stylesheet" href="{{asset('/css/style.css')}}">
+<link rel="stylesheet" href="{{asset('/css/ie.css')}}">
+<link rel="stylesheet" href="{{asset('/css/jquery-ui.css')}}">
+<link rel="stylesheet" href="{{asset('/css/login.css')}}">
+<link rel="stylesheet" href="{{asset('/css/modaal.css')}}">
 <head>
 <!-- {include file='include/head.tpl'} -->
 </head>
