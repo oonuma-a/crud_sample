@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\ClientRequest;
-
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -20,7 +19,14 @@ class MainController extends Controller
     */
     public function client_index(ClientRequest $request){
     //dd($request->all());
-        $request = (object)$request->getPasswordInputs();
-        return view('client.index');
+    //    $request = (object)$request->getPasswordInputs();
+        $credentials = $request->only('name', 'password');
+        if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+            return redirect('client.index')->with('login_success', 'ログイン成功');
+        }
+        return back()->withErrors([
+            'login_error'=>'ユーザーとパスワードが一致しません。',
+        ]);
     }
 }
