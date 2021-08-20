@@ -26,7 +26,7 @@
 					@endif
 					<dt class="loginBox_item_title">ユーザーID</dt>
 					<!-- <dd class="loginBox_item_error">ユーザー名を入力してください</dd> -->
-					<dd class="loginBox_item_space"><input type="text" name="id" maxlength="30" value="" placeholder="ユーザー名を入力してください"></dd>
+					<dd class="loginBox_item_space"><input type="text" name="user_id" maxlength="30" value="" placeholder="ユーザー名を入力してください"></dd>
 					<dt class="loginBox_item_title">パスワード</dt>
 					<!-- <dd class="loginBox_item_error">パスワードを入力してください</dd> -->
 					<dd class="loginBox_item_space"><input type="password" name="pass" maxlength="30" value="" placeholder="パスワードを入力してください"></dd>

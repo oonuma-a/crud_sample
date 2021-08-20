@@ -25,14 +25,14 @@ class ClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'   => 'required',
+            'user_id'   => 'required',
             'pass' => 'required',
             ];
     }
 
     public function attributes(){
         return [
-            'id'   => 'id',
+            'user_id'   => 'ユーザーID',
             'pass' => 'パスワード',
             ];
     }
@@ -41,7 +41,7 @@ class ClientRequest extends FormRequest
     {
         
         return [
-            'id.required' => 'ユーザー名を入力してください',
+            'user_id.required' => 'ユーザー名を入力してください',
             'pass.required' => 'パスワードを入力してください',
         ];
     }

@@ -11,7 +11,12 @@ class MainController extends Controller
      * @return View
      */
     public function admin_index(){
-        return view('admin.index');
+        if(Auth::check()){
+            //ログイン済の場合
+            return view('client.index');
+        }else{
+            return view('admin.index');
+        }
     }
     
     /**
@@ -20,7 +25,7 @@ class MainController extends Controller
     public function client_index(ClientRequest $request){
     //dd($request->all());
     //    $request = (object)$request->getPasswordInputs();
-        $credentials = $request->only('name', 'password');
+        $credentials = $request->only('user_id', 'password');
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
             return redirect('client.index')->with('login_success', 'ログイン成功');

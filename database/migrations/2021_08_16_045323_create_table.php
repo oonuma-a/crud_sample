@@ -38,3 +38,17 @@ class CreateTable extends Migration
     }
 }
 
+
+// create table "user"(
+//     "id"	INTEGER NOT NULL UNIQUE,
+//     "user_id" varchar not null, 
+//     "authority" integer not null, 
+//     "display_name" varchar not null, 
+//     "name" varchar not null, 
+//     "password" text not null, 
+//     "user_status" integer not null default '1',
+//     "inserted_at" datetime not null, 
+//     "update_at" datetime not null, 
+//     "delete_at" datetime not null,
+// 	PRIMARY KEY("id" AUTOINCREMENT)
+// 	);

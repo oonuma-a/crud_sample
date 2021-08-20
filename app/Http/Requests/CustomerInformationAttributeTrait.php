@@ -9,7 +9,7 @@ trait CustomerInformationAttributeTrait
      * お客様情報の項目
      */
     private $PasswordInfomationAttributeTrait = [
-        'id',
+        'user_id',
         'pass',
     ];
 
