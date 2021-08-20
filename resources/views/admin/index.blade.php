@@ -29,7 +29,7 @@
 					<dd class="loginBox_item_space"><input type="text" name="user_id" maxlength="30" value="" placeholder="ユーザー名を入力してください"></dd>
 					<dt class="loginBox_item_title">パスワード</dt>
 					<!-- <dd class="loginBox_item_error">パスワードを入力してください</dd> -->
-					<dd class="loginBox_item_space"><input type="password" name="pass" maxlength="30" value="" placeholder="パスワードを入力してください"></dd>
+					<dd class="loginBox_item_space"><input type="password" name="password" maxlength="30" value="" placeholder="パスワードを入力してください"></dd>
 				</dl>
 				<!-- <p class="loginBox_item_error-center">ユーザー名とパスワードが一致していません</p> -->
 				<div class="loginBox_btn">
