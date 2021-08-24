@@ -16,7 +16,7 @@ class TestdataSeeder extends Seeder
     {
         DB::table('user')->insert([
         [
-        'id'=>'1',
+        'id'=>'2',
         'user_id'=>'1',
         'authority'=>'1',
         'display_name' =>'taro',

@@ -23,14 +23,14 @@ Route::prefix('admin')->group(function(){
 
 
 Route::prefix('client')->group(function(){
-    Route::post('/index'  ,'MainController@client_index')     ->name('client.index');
+    Route::match(['get', 'post'], '/index'  ,'MainController@client_index')     ->name('client.index');
     Route::post('/create' ,'MainController@client_create')    ->name('client.create');
     Route::post('/edit'   ,'MainController@client_edit')      ->name('client.edit');
     Route::post('/handled','MainController@client_handled')   ->name('client.handled');
 });
 
 Route::prefix('errors')->group(function(){
-    Route::post('/errors/index','MainController@errors_index')            ->name('errors.index');
+    Route::post('/index','MainController@errors_index')            ->name('errors.index');
 });
 
 Route::prefix('include')->group(function(){
@@ -47,12 +47,13 @@ Route::prefix('order')->group(function(){
     Route::post('/order/history','MainController@order_history')    ->name('order.history');
 });
 
-Route::prefix('settings')->group(function(){
-    Route::post('/settings/account','MainController@settings_account')           ->name('settings.account');
-    Route::post('/settings/account_create','MainController@settings_account_create')    ->name('settings.account_create');
-    Route::post('/settings/create','MainController@settings_create')            ->name('settings.create');
-    Route::post('/settings/delete','MainController@settings_delete')            ->name('settings.delete');
-    Route::post('/settings/index','MainController@settings_index')             ->name('settings.index');
+
+Route::prefix('setting')->group(function(){
+    Route::get('/index','MainController@setting_index')                   ->name('setting.index');
+    Route::get('/account','MainController@setting_account')                  ->name('setting.account');
+    Route::get('/account_create','MainController@setting_account_create')    ->name('setting.account_create');
+    Route::get('/create','MainController@setting_create')                    ->name('setting.create');
+    Route::get('/delete','MainController@setting_delete')                    ->name('setting.delete');
 });
 
 // Route::prefix('continuous_transition')->group(function () {
