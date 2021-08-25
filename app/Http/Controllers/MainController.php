@@ -30,9 +30,13 @@ class MainController extends Controller
             'user_id' ,
             'password'
         );
+        // $credentials = $request->validate([
+        //     'user_id' => ['required'],
+        //     'password' => ['required'],
+        // ]);
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect('client/index');
+            return view('client.index');
         }
         return back()->withErrors([
             'login_error'=>'ユーザーとパスワードが一致しません。',
