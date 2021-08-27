@@ -1,39 +1,14 @@
-{nocache}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-{include file='include/head.tpl'}
-</head>
-<body{if !empty($pageID)} id="{$pageID}"{/if}>
-<div class="l-wrapper"><!-- L-WRAPPER  -->
-{include file='include/header.tpl'}
-<div class="b-contents"><!-- B-CONTENTS -->
-<section><!-- SECTION -->
-<div class="contentsTitle">
-	<div class="block">
-		<div class="block_inner block_inner-1">
-			<div class="title">
-				<div class="title_leftMark">
-					<h2 class="title_text title_text-size2L">アカウント</h2>
-				</div>
-			</div>
-		</div>
-		<div class="block_inner block_inner-1 block_inner-spaceS block_inner-titleBtn">
-			<div class="btn">
-				<p class="btn_box btn_box-color2">
-					<a href="{$base_url}setting/account_create/" class="focus" tabindex="1"><i class="btn_icon btn_icon-2"></i>アカウント登録</a>
-				</p>
-			</div>
-		</div>
-	</div>
-</div>
+@extends('layouts.layout')
+@section('head','アカウント')
+@section('btn','アカウント登録')
+@section('content')
 <div class="contents"><!-- CONTENTS -->
 	<nav>
 		<ul class="tabMenu">
 			<li class="tabMenu_box">
 				<div class="btn">
 					<p class="btn_box btn_box-sizeFixedS">
-						<a href="{$base_url}setting/" class="focus" tabindex="1"><i></i>商品設定</a>
+						<a href="{{route('setting.index')}}" class="focus" tabindex="1"><i></i>商品設定</a>
 					</p>
 				</div>
 			</li>
@@ -141,37 +116,41 @@
 						</tr>
 					</thead>
 					<tbody>
+						
+
+						@if(count()=0)
 						<tr>
 							<td colspan="6" class="table_data">該当データがありません</td>
 						</tr>
-						<tr class="table_status table_status-color">
-							<td class="table_data">9999</td>
-							<td class="table_data">管理者</td>
-							<td class="table_data table_data-positionLeft">テストテストテストテ</td>
-							<td class="table_data table_data-positionLeft"><input type="text" name="view" value="テキストテキストテキストテキストテキストテキストテキスト" class="form" readonly></td>
-							<td class="table_data">有効</td>
-							<td class="table_data table_data-btn">
-								<div class="btn">
-									<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-										<a href="#" class="focus" tabindex="1">無効</a>
-									</p>
-								</div>
-							</td>
-						</tr>
-						<tr class="table_status table_status-color">
-							<td class="table_data">9999</td>
-							<td class="table_data">従業員</td>
-							<td class="table_data table_data-positionLeft">テストテストテストテ</td>
-							<td class="table_data table_data-positionLeft"><input type="text" name="view" value="テキストテキストテキストテキストテキストテキストテキスト" class="form" readonly></td>
-							<td class="table_data">有効</td>
-							<td class="table_data table_data-btn">
-								<div class="btn">
-									<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-										<a href="#" class="focus" tabindex="1">無効</a>
-									</p>
-								</div>
-							</td>
-						</tr>
+						@else
+							@foreach()
+								<tr class="table_status table_status-color">
+									<td class="table_data">9999</td>
+									<td class="table_data">管理者</td>
+									<td class="table_data table_data-positionLeft">テストテストテストテ</td>
+									<td class="table_data table_data-positionLeft"><input type="text" name="view" value="テキストテキストテキストテキストテキストテキストテキスト" class="form" readonly></td>
+									<td class="table_data">有効</td>
+									<td class="table_data table_data-btn">
+										<div class="btn">
+											<p class="btn_box btn_box-innerSpaceXS btn_box-color">
+												<a href="#" class="focus" tabindex="1">無効</a>
+											</p>
+										</div>
+									</td>
+								</tr>
+							@endforeach
+						@endif
+						<!-- 検索データ全件表示件数ごと表示
+						データがない場合：該当データがありません
+						foreach(表示件数（default50）　件数){
+							<td>(DBidid)</td>
+							<td>(DB権限authority（1:管理者、2:従業員、3:ドライバー）)</td>
+							<td>(DB表示名display_name)</td>
+							<td>(DB名前name)</td>
+							<td>(DB状態user_status)</td>
+						}
+						検索
+						アカウント登録 -->
 						<tr class="table_status table_status-lineColor4">
 							<td class="table_data">9999</td>
 							<td class="table_data">従業員</td>
@@ -194,33 +173,4 @@
 </div><!-- / CONTENTS -->
 </section><!-- / SECTION -->
 </div><!-- / B-CONTENTS -->
-{include file='include/sidebar.tpl'}
-</div><!-- /L-WRAPPER  -->
-{literal}
-<script>
-	$(function() {
-	// Form 初期化
-	appForm.initialize();
-	//pop up
-	$('.js-pop_up').colorbox({width:'300'});
-	//テキスト入力の削除
-	$('.js-clearBtn').on('click', function(e) {
-		e.preventDefault();
-		$('.js-inputClear').each(function() {
-			$(this).find('input').val('');
-		});
-		$('.js-inputClear select').each(function() {
-			this.selectedIndex  = 0;
-		});
-	});
-	$('.js-datepicker').datepicker({
-		changeYear: false,
-		changeMonth: false
-	});
-});
-</script>
-{/literal}
-{include file='include/common.tpl'}
-</body>
-</html>
-{/nocache}
+@endsection

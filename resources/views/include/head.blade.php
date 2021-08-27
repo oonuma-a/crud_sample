@@ -1,4 +1,4 @@
-{if $is_ie}
+<!-- {if $is_ie}
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 {/if}
 <meta name="viewport" content="width=1260">
@@ -27,11 +27,11 @@
 {else}
 <title>{$head_title} | Ken Order System</title>
 {/if}
-{*
+{* -->
 <!-- <meta property="og:image" content="{$base_url}img/kencs.png"> -->
 <!-- <link rel="icon" href="{$base_url}favicon.ico"> -->
 <!-- <link rel="apple-touch-icon" href="/img/apple-touch-icon.png"> -->
-*}
+<!-- *}
 {if !empty($canonical)}
 <link rel="canonical" href="{$canonical}">
 {/if}
@@ -66,4 +66,4 @@
 <script src="{$base_url}js/plugins/ie/html5shiv-printshiv.js"></script>
 <script src="{$base_url}js/plugins/ie/css3-mediaqueries.js"></script>
 {/if}
-<script src="{$base_url}js/script_pc.js{* ?ver={$smarty.now|date_format:'%H%M%S'} *}"></script>
+<script src="{$base_url}js/script_pc.js{* ?ver={$smarty.now|date_format:'%H%M%S'} *}"></script> -->

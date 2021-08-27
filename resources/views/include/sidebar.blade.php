@@ -2,7 +2,7 @@
 	<div class="side">
 		<ul class="js-accordion sideBox {if !empty($sideNav)}sideNav-{$sideNav}{/if}">
 			<li class="sideBox_list">
-				<a href="{$base_url}order/" class="sideBox_listAnchor1" tabindex="-1">
+				<a href="{{route('order.index')}}" class="sideBox_listAnchor1" tabindex="-1">
 					<div class="sideBox_listIcon-1"></div><p><span>注文管理</span><i class="sideArrow1"></i></p>
 				</a>
 			</li>
@@ -12,7 +12,7 @@
 				</a>
 			</li> -->
 			<li class="sideBox_list">
-				<a href="{$base_url}client/" class="sideBox_listAnchor3" tabindex="-1">
+				<a href="{{route('client.index')}}" class="sideBox_listAnchor3" tabindex="-1">
 					<div class="sideBox_listIcon-3"></div><p><span>店舗管理</span><i class="sideArrow1"></i></p>
 				</a>
 			</li>
@@ -22,11 +22,11 @@
 				</a>
 			</li> -->
 			<li class="sideBox_list">
-				<a href="{$base_url}setting/" class="sideBox_listAnchor5" tabindex="-1">
+				<a href="{{route('setting.index')}}" class="sideBox_listAnchor5" tabindex="-1">
 					<div class="sideBox_listIcon-5"></div><p><span>設定</span><i class="sideArrow1"></i></p>
 				</a>
 			</li>
-{* 開くボタンを使用するとき
+<!-- {* 開くボタンを使用するとき -->
 <!-- 			<li class="sideBox_list">
 				<a href="#" class="js-accordion_btn sideBox_listAnchor2" tabindex="-1">
 					<div class="sideBox_listIcon-2"></div><p><span>〇〇</span><i class="sideArrow"></i></p>

@@ -27,7 +27,7 @@
 		<div class="block_inner block_inner-1 block_inner-spaceS block_inner-titleBtn">
 			<div class="btn">
 				<p class="btn_box btn_box-color2">
-					<a href="{$base_url}client/create/" class="focus" tabindex="1"><i class="btn_icon btn_icon-2"></i>新規店舗登録</a>
+					<a href="{$base_url}client/create/" class="focus" tabindex="1"><i class="btn_icon btn_icon-2"></i>@yield('btn')</a>
 				</p>
 			</div>
 		</div>

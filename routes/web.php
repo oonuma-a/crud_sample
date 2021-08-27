@@ -24,36 +24,36 @@ Route::prefix('admin')->group(function(){
 
 Route::prefix('client')->group(function(){
     Route::match(['get', 'post'], '/index'  ,'MainController@client_index')     ->name('client.index');
-    Route::post('/create' ,'MainController@client_create')    ->name('client.create');
-    Route::post('/edit'   ,'MainController@client_edit')      ->name('client.edit');
-    Route::post('/handled','MainController@client_handled')   ->name('client.handled');
+    Route::match(['get', 'post'], '/create' ,'MainController@client_create')    ->name('client.create');
+    Route::match(['get', 'post'], '/edit'   ,'MainController@client_edit')      ->name('client.edit');
+    Route::match(['get', 'post'], '/handled','MainController@client_handled')   ->name('client.handled');
 });
 
 Route::prefix('errors')->group(function(){
-    Route::post('/index','MainController@errors_index')            ->name('errors.index');
+    Route::match(['get', 'post'], '/index','MainController@errors_index')       ->name('errors.index');
 });
 
 Route::prefix('include')->group(function(){
-    Route::post('/include/common','MainController@include_common')            ->name('include.common');
-    Route::post('/include/head','MainController@include_head')              ->name('include.head');
-    Route::post('/include/header','MainController@include_header')            ->name('include.header');
-    Route::post('/include/sidebar','MainController@include_sidebar')           ->name('include.sidebar');
+    Route::match(['get', 'post'], '/include/common','MainController@include_common')      ->name('include.common');
+    Route::match(['get', 'post'], '/include/head','MainController@include_head')          ->name('include.head');
+    Route::match(['get', 'post'], '/include/header','MainController@include_header')      ->name('include.header');
+    Route::match(['get', 'post'], '/include/sidebar','MainController@include_sidebar')    ->name('include.sidebar');
 });
 
 Route::prefix('order')->group(function(){
-    Route::post('/order/index','MainController@order_index')      ->name('order.index');
-    Route::post('/order/cancel','MainController@order_cancel')     ->name('order.cancel');
-    Route::post('/order/create','MainController@order_create')     ->name('order.create');
-    Route::post('/order/history','MainController@order_history')    ->name('order.history');
+    Route::match(['get', 'post'], '/order/index','MainController@order_index')          ->name('order.index');
+    Route::match(['get', 'post'], '/order/cancel','MainController@order_cancel')        ->name('order.cancel');
+    Route::match(['get', 'post'], '/order/create','MainController@order_create')        ->name('order.create');
+    Route::match(['get', 'post'], '/order/history','MainController@order_history')      ->name('order.history');
 });
 
 
 Route::prefix('setting')->group(function(){
-    Route::get('/index','MainController@setting_index')                   ->name('setting.index');
-    Route::get('/account','MainController@setting_account')                  ->name('setting.account');
-    Route::get('/account_create','MainController@setting_account_create')    ->name('setting.account_create');
-    Route::get('/create','MainController@setting_create')                    ->name('setting.create');
-    Route::get('/delete','MainController@setting_delete')                    ->name('setting.delete');
+    Route::match(['get', 'post'], '/index','MainController@setting_index')                       ->name('setting.index');
+    Route::match(['get', 'post'], '/account','MainController@setting_account')                   ->name('setting.account');
+    Route::match(['get', 'post'], '/account_create','MainController@setting_account_create')     ->name('setting.account_create');
+    Route::match(['get', 'post'], '/create','MainController@setting_create')                     ->name('setting.create');
+    Route::match(['get', 'post'], '/delete','MainController@setting_delete')                     ->name('setting.delete');
 });
 
 // Route::prefix('continuous_transition')->group(function () {

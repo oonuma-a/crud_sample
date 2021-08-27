@@ -1,6 +1,6 @@
-
 @extends('layouts.layout')
 @section('head','店舗管理')
+@section('btn','新規店舗登録')
 @section('content')
 <div class="contents"><!-- CONTENTS -->
 <!-- 	<nav>月水金の配送ルートが必要で月・水・金　配送管理　配送ルートが決まっているので

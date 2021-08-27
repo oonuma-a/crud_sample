@@ -16,12 +16,12 @@ class TestdataSeeder extends Seeder
     {
         DB::table('user')->insert([
         [
-        'id'=>'2',
-        'user_id'=>'1',
+        'id'=>'1',
+        'user_id'=>'ken',
         'authority'=>'1',
-        'display_name' =>'taro',
+        'display_name' =>'ken',
         'name' =>'ken',
-        'password' =>'password',
+        'password' =>'$2y$10$1I6hK7GKSAAlXw8l/ll7HeihFKDY44GxbDTM7.hAG65gJNUL2Qsf2',
         'user_status'=>'2',
         'inserted_at'=>date('Y-m-d H:i:s'),
         'updated_at'=>date('Y-m-d H:i:s'),
