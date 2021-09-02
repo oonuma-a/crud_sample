@@ -49,7 +49,7 @@ Route::prefix('order')->group(function(){
 
 
 Route::prefix('setting')->group(function(){
-    Route::match(['get', 'post'], '/index','MainController@setting_index')                       ->name('setting.index');
+    Route::match(['get', 'post'], '/index'  ,'MainController@setting_index')                     ->name('setting.index');
     Route::match(['get', 'post'], '/account','MainController@setting_account')                   ->name('setting.account');
     Route::match(['get', 'post'], '/account_create','MainController@setting_account_create')     ->name('setting.account_create');
     Route::match(['get', 'post'], '/create','MainController@setting_create')                     ->name('setting.create');

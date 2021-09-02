@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ClientRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+        
 
 class MainController extends Controller
 {
@@ -48,18 +50,7 @@ class MainController extends Controller
     public function errors_index(){
         return view('errors.index');
     }
-    public function include_common(){
-        return view('include.common');
-    }
-    public function include_head(){
-        return view('include.head');
-    }
-    public function include_header(){
-        return view('include.header');
-    }
-    public function include_sidebar(){
-        return view('include.sidebar');
-    }
+
     public function order_index(){
         return view('order.index');
     }
@@ -77,8 +68,10 @@ class MainController extends Controller
     public function setting_index(){
         return view('setting.index');
     }
-    public function setting_account(){
-        return view('setting.account');
+    public function setting_account(Request $request){
+        $datacount = 0;
+    	$items = DB::select('select * from user');
+        return view('setting.account', compact('items'));
     }
     public function setting_account_create(){
         return view('setting.account_create');
@@ -88,5 +81,19 @@ class MainController extends Controller
     }
     public function setting_delete(){
         return view('setting.delete');
+    }
+
+
+    public function include_common(){
+        return view('include.common');
+    }
+    public function include_head(){
+        return view('include.head');
+    }
+    public function include_header(){
+        return view('include.header');
+    }
+    public function include_sidebar(){
+        return view('include.sidebar');
     }
 }

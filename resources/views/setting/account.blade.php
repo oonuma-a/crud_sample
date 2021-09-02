@@ -116,30 +116,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						
-
-						@if(count()=0)
-						<tr>
-							<td colspan="6" class="table_data">該当データがありません</td>
-						</tr>
-						@else
-							@foreach()
+						@foreach($items as $item)
 								<tr class="table_status table_status-color">
-									<td class="table_data">9999</td>
-									<td class="table_data">管理者</td>
-									<td class="table_data table_data-positionLeft">テストテストテストテ</td>
-									<td class="table_data table_data-positionLeft"><input type="text" name="view" value="テキストテキストテキストテキストテキストテキストテキスト" class="form" readonly></td>
-									<td class="table_data">有効</td>
+									<td class="table_data">{{$item->id}}</td>
+									<td class="table_data">{{$item->authority}}</td>
+									<td class="table_data table_data-positionLeft">{{$item->display_name}}</td>
+									<td class="table_data table_data-positionLeft"><input type="text" name="view" value="{{$item->name}}" class="form" readonly></td>
+									<td class="table_data">{{$item->user_status}}</td>
 									<td class="table_data table_data-btn">
 										<div class="btn">
 											<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-												<a href="#" class="focus" tabindex="1">無効</a>
+												<a href="#" class="focus" tabindex="1">{{$item->user_status}}</a>
 											</p>
 										</div>
 									</td>
 								</tr>
-							@endforeach
-						@endif
+						@endforeach
 						<!-- 検索データ全件表示件数ごと表示
 						データがない場合：該当データがありません
 						foreach(表示件数（default50）　件数){
@@ -150,7 +142,7 @@
 							<td>(DB状態user_status)</td>
 						}
 						検索
-						アカウント登録 -->
+						アカウント登録
 						<tr class="table_status table_status-lineColor4">
 							<td class="table_data">9999</td>
 							<td class="table_data">従業員</td>
