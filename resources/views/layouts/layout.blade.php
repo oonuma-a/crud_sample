@@ -6,33 +6,13 @@
 <link rel="stylesheet" href="{{asset('/css/jquery-ui.css')}}">
 <link rel="stylesheet" href="{{asset('/css/login.css')}}">
 <link rel="stylesheet" href="{{asset('/css/modaal.css')}}">
-<head>
+
 <!-- {include file='include/head.tpl'} -->
 @include('/include/head')
 </head>
-<body{if !empty($pageID)} id="{$pageID}"{/if}>
+<body>
 <div class="l-wrapper"><!-- L-WRAPPER  -->
-<!-- {include file='include/header.tpl'} -->
-<div class="b-contents"><!-- B-CONTENTS -->
-<section><!-- SECTION -->
-<div class="contentsTitle">
-	<div class="block">
-		<div class="block_inner block_inner-1">
-			<div class="title">
-				<div class="title_leftMark">
-					<h2 class="title_text title_text-size2L">@yield('head')</h2>
-				</div>
-			</div>
-		</div>
-		<div class="block_inner block_inner-1 block_inner-spaceS block_inner-titleBtn">
-			<div class="btn">
-				<p class="btn_box btn_box-color2">
-					<a href="{$base_url}client/create/" class="focus" tabindex="1"><i class="btn_icon btn_icon-2"></i>@yield('btn')</a>
-				</p>
-			</div>
-		</div>
-	</div>
-</div>
+<!-- include('/include/header') -->
 @yield('content')
 @include('/include/sidebar')
 </div><!-- /L-WRAPPER  -->

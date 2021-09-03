@@ -1,12 +1,6 @@
-{nocache}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-{include file='include/head.tpl'}
-</head>
+@extends('layouts.layout')
 <body{if !empty($pageID)} id="{$pageID}"{/if}>
 <div class="l-wrapper"><!-- L-WRAPPER  -->
-{include file='include/header.tpl'}
 <div class="b-contents"><!-- B-CONTENTS -->
 <section><!-- SECTION -->
 <div class="contentsTitle">
@@ -20,6 +14,7 @@
 		</div>
 	</div>
 </div>
+@section('content')
 <div class="contents"><!-- CONTENTS -->
 	<form method="post" action="" class="js-insuranceSearchForm">
 		<div class="block">
@@ -71,35 +66,4 @@
 	</form>
 
 </div><!-- / CONTENTS -->
-</section><!-- / SECTION -->
-</div><!-- / B-CONTENTS -->
-{include file='include/sidebar.tpl'}
-</div><!-- /L-WRAPPER  -->
-{literal}
-<script>
-	$(function() {
-	// Form 初期化
-	appForm.initialize();
-	//pop up
-	$('.js-pop_up').colorbox({width:'300'});
-	//テキスト入力の削除
-	$('.js-clearBtn').on('click', function(e) {
-		e.preventDefault();
-		$('.js-inputClear').each(function() {
-			$(this).find('input').val('');
-		});
-		$('.js-inputClear select').each(function() {
-			this.selectedIndex  = 0;
-		});
-	});
-	$('.js-datepicker').datepicker({
-		changeYear: false,
-		changeMonth: false
-	});
-});
-</script>
-{/literal}
-{include file='include/common.tpl'}
-</body>
-</html>
-{/nocache}
+@endsection

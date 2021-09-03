@@ -2,6 +2,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+	<!-- {include file='include/head.tpl'} -->
+@include('/include/head')
+</head>
+<body>
+<div class="l-wrapper"><!-- L-WRAPPER  -->
+<!-- @include('/include/header') -->
+@yield('content')
+@include('/include/sidebar')
 {include file='include/head.tpl'}
 </head>
 <body{if !empty($pageID)} id="{$pageID}"{/if}>

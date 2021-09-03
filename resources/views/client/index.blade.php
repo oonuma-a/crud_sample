@@ -1,6 +1,28 @@
 @extends('layouts.layout')
-@section('head','店舗管理')
-@section('btn','新規店舗登録')
+</head>
+<body{if !empty($pageID)} id="{$pageID}"{/if}>
+<div class="l-wrapper"><!-- L-WRAPPER  -->
+<!-- {include file='include/header.tpl'} -->
+<div class="b-contents"><!-- B-CONTENTS -->
+<section><!-- SECTION -->
+<div class="contentsTitle">
+	<div class="block">
+		<div class="block_inner block_inner-1">
+			<div class="title">
+				<div class="title_leftMark">
+					<h2 class="title_text title_text-size2L">店舗管理</h2>
+				</div>
+			</div>
+		</div>
+		<div class="block_inner block_inner-1 block_inner-spaceS block_inner-titleBtn">
+			<div class="btn">
+				<p class="btn_box btn_box-color2">
+					<a href="{$base_url}client/create/" class="focus" tabindex="1"><i class="btn_icon btn_icon-2"></i>新規店舗登録</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
 @section('content')
 <div class="contents"><!-- CONTENTS -->
 <!-- 	<nav>月水金の配送ルートが必要で月・水・金　配送管理　配送ルートが決まっているので

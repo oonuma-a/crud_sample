@@ -1,6 +1,25 @@
 @extends('layouts.layout')
-@section('head','アカウント')
-@section('btn','アカウント登録')
+<!-- {include file='include/header.tpl'} -->
+<div class="b-contents"><!-- B-CONTENTS -->
+<section><!-- SECTION -->
+<div class="contentsTitle">
+	<div class="block">
+		<div class="block_inner block_inner-1">
+			<div class="title">
+				<div class="title_leftMark">
+					<h2 class="title_text title_text-size2L">アカウント</h2>
+				</div>
+			</div>
+		</div>
+		<div class="block_inner block_inner-1 block_inner-spaceS block_inner-titleBtn">
+			<div class="btn">
+				<p class="btn_box btn_box-color2">
+					<a href="{{route('setting.account_create')}}" class="focus" tabindex="1"><i class="btn_icon btn_icon-2"></i>アカウント登録</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
 @section('content')
 <div class="contents"><!-- CONTENTS -->
 	<nav>
