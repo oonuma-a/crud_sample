@@ -14,7 +14,8 @@
 </div>
 @section('content')
 <div class="contents"><!-- CONTENTS -->
-	<form method="post" action="" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('setting.account_create')}}" class="js-insuranceSearchForm">
+		@csrf
 		<div class="block">
 			<div class="block_inner block_inner-7">
 				<table class="table table-borderLeftNone table-form">
@@ -22,6 +23,7 @@
 					<colgroup style="width: 80%"></colgroup>
 					<tbody>
 						<tr>
+							<input type="hidden" name="id" value="">
 							<th class="table_title"><div class="table_title_required">ログインID<span>必須</span></div></th>
 							<td class="table_data">
 								<input type="text" name="user_id" value="" class="form form-maxSizeM" maxlength="10" placeholder="ここに入力" tabindex="1">
@@ -83,7 +85,7 @@
 						<a href="{$base_url}setting/" class="focus" tabindex="1"><i class="btn_icon btn_icon-4"></i>戻る</a>
 					</li>
 					<li class="btn_box btn_box-sizeS btn_box-inline btn_box-color1">
-						<a href="#" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a>
+						<a href="{{route('setting.account_create')}}" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a>
 					</li>
 				</ul>
 			</div>

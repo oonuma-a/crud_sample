@@ -5,6 +5,7 @@ use App\Http\Requests\ClientRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
         
 
 class MainController extends Controller
@@ -69,20 +70,24 @@ class MainController extends Controller
         return view('setting.index');
     }
     public function setting_account(Request $request){
-    	$items = DB::select('select * from user');
+        $items = User::all();
+    	// $items = DB::select('select * from user');
         return view('setting.account', compact('items'));
     }
     public function setting_account_create(Request $request){
-        $param =  ['user_id'=>$request->user_id,
-                   'authority'=>$request->authority,
-                   'display_name'=>$request->display_name,
-                   'name'=>$request->name,
-                   'password'=>$request->password,
-                  ];
-        $items = DB::insert('insert into user(user_id,authority,display_name,name,password) values(:user_id,:authority,:display_name,:name,:password)',$param);//user_status
+        // $param =  [
+        //     'user_id'=>$request->user_id,
+        //     'authority'=>$request->authority,
+        //     'display_name'=>$request->display_name,
+        //     'name'=>$request->name,
+        //     'password'=>$request->password,
+        //     'user_status'=>1,
+        //    ];
+            DB::table('user')->insert($param);//user_status
         return view('setting.account_create');
     }
-    public function setting_create(){
+    public function setting_create(Request $request){
+
         return view('setting.create');
     }
     public function setting_delete(){
