@@ -69,21 +69,26 @@ class MainController extends Controller
     public function setting_index(){
         return view('setting.index');
     }
-    public function setting_account(Request $request){
-        $items = User::all();
-    	// $items = DB::select('select * from user');
+    public function setting_account_get(Request $request){
+        $items = DB::select('select * from user');
+        // dd($items);
+        return view('setting.account', compact('items'));
+    }
+    public function setting_account_post(AccountCreateRequest $request){
+        $items =  [
+            'user_id'=>$request->user_id,
+            'authority'=>$request->authority,
+            'display_name'=>$request->display_name,
+            'name'=>$request->name,
+            'password'=>$request->password,
+            'user_status'=>1,
+           ];
+        //    dd($item);    
+        //insert into user values(2,'123',1,'displayname','name','pass',1,'','','');    
+        DB::table('user')->insert($items);//user_status
         return view('setting.account', compact('items'));
     }
     public function setting_account_create(Request $request){
-        // $param =  [
-        //     'user_id'=>$request->user_id,
-        //     'authority'=>$request->authority,
-        //     'display_name'=>$request->display_name,
-        //     'name'=>$request->name,
-        //     'password'=>$request->password,
-        //     'user_status'=>1,
-        //    ];
-            DB::table('user')->insert($param);//user_status
         return view('setting.account_create');
     }
     public function setting_create(Request $request){

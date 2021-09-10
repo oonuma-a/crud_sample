@@ -135,6 +135,10 @@
 						</tr>
 					</thead>
 					<tbody>
+						
+					<!-- @php
+					dump($items);
+					@endphp -->
 						@foreach($items as $item)
 								<tr class="table_status table_status-color">
 									<td class="table_data">{{$item->id}}</td>
