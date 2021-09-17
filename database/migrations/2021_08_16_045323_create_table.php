@@ -27,13 +27,13 @@ class CreateTable extends Migration
         // });
         
         Schema::create('item', function (Blueprint $table) {
-            $table->increments('id',10)                                             ->unique()              ;
-            $table->integer('item_number',false,false)                                          ->unsigned();
-            $table->string('item_name',2)                                                                   ;
-            $table->text('remarks',100)               ->nullable() ->default(null)                          ;
-            $table->date('inserted_at',200)                                                                 ;
-            $table->date('updated_at')                ->nullable() ->default(null)                          ;
-            $table->date('deleted_at', 2)             ->nullable() ->default(null)                          ;
+            $table->increments('id',10)               ->unique();
+            $table->integer('item_number',false,false)->unsigned();
+            $table->string('item_name',2);
+            $table->text('remarks',100)               ->nullable() ->default(null);
+            $table->date('inserted_at',200);
+            $table->date('updated_at')                ->nullable() ->default(null);
+            $table->date('deleted_at', 2)             ->nullable() ->default(null);
             $table->dropPrimary('item_number');
         });
         // integerの第2,3引数はAutoIncrement, unsignedを設定している

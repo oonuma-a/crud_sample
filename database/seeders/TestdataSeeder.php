@@ -30,3 +30,4 @@ class TestdataSeeder extends Seeder
         ]);
     }
 }
+

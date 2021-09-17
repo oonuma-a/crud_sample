@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-        
+use App\Http\Requests\AccountCreateRequest;
+use Carbon\Carbon;
 
 class MainController extends Controller
 {
@@ -71,22 +72,24 @@ class MainController extends Controller
     }
     public function setting_account_get(Request $request){
         $items = DB::select('select * from user');
-        // dd($items);
+        // dd($request);
+        
         return view('setting.account', compact('items'));
     }
     public function setting_account_post(AccountCreateRequest $request){
-        $items =  [
+        $now = Carbon::now()->format('Y-m-d H:i:s.v');
+
+        $params =  [
             'user_id'=>$request->user_id,
             'authority'=>$request->authority,
             'display_name'=>$request->display_name,
             'name'=>$request->name,
             'password'=>$request->password,
-            'user_status'=>1,
-           ];
-        //    dd($item);    
-        //insert into user values(2,'123',1,'displayname','name','pass',1,'','','');    
-        DB::table('user')->insert($items);//user_status
-        return view('setting.account', compact('items'));
+            'user_status'=>1,//upid
+            'inserted_at' =>$now,
+        ];   
+        DB::insert('insert into user(user_id,authority,display_name,name,password,user_status,inserted_at) values(:user_id,:authority,:display_name,:name,:password,:user_status,:inserted_at)',$params);
+        return view('setting.account');
     }
     public function setting_account_create(Request $request){
         return view('setting.account_create');

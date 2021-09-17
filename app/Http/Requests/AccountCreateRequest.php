@@ -31,4 +31,24 @@ class AccountCreateRequest extends FormRequest
             'user_status'=>'required',
         ];
     }
+    public function attribute(){
+        return [
+            'user_id'=>'ユーザーID',
+            'authority'=>'権限',
+            'display_name'=>'表示名',
+            'name'=>'名前',
+            'user_status'=>'状態',
+        ];
+    }
+    public function message(){
+        return [
+        'user_id.required'=>'ユーザーIDを入力してください',
+        'authority.required'=>'権限を入力してください',
+        'display_name.required'=>'表示名を入力してください',
+        'name.required'=>'名前を入力してください',
+        'user_status.required'=>'状態を入力してください',
+        ];
+    }
 }
+
+
