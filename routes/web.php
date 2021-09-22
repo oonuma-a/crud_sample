@@ -69,55 +69,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-///動作テスト成功時のみ一覧追加
-// DBクエリを使用してhtmlのフォーム入力データをDBに追加する。
-// テーブル（user） データ（name:jiro mail: a@a age 3)
-// ---
-// - HTML -
-// <form action="{{form.index}}" method="post">
-//     <input type="text" name="name">
-//     <input type="text" name="mail">
-//     <input type="text" name="age">
-// </form>
 
-// - controller -
-// public function add(Request $request){
-//     return view('form.add');
-// }
-// public function create(Request $request){ //送信ボタンを押した時に動作する
-//     $param = [
-//         "name" => $request -> name,
-//         "mail" => $request -> mail,
-//         "age"  => $request -> age,
-//     ];
-//     //プレースホルダ―で保管先を作成
-//     //redirect で移動させることができる。
-//     DB::insert('insert into user (name,mail,age)　values (:name, :age : age)', $param);
-//     return redirect('/form');
-// }
-// - route -
-//     Route::get('form/add', 'MainController@add');
-//     Route::post('form/add', 'MainController@create');
-// ///
-// DBにデータをinsertする
-// table: user(id(not null, autoincrement),name(not null),mail,age)
-// date: name=taro, mail=a@a
-// ---
-// insert into user (name,mail) values('taro', 'a@a');
-// insert into user values(null,'aaa',0,'dname','name','pass',0,date(CURRENT_TIMESTAMP),null,null);
-
-// もしくはテーブル内に項目を指定して選択項目のみ挿入する
-// insert into user (user_id,authority,display_name,name,password,user_status,inserted_at) values('aaa',0,'dname','name','pass',0,date(CURRENT_TIMESTAMP));
-// ///
-// SQLでテーブルに現在時刻を挿入する
-// ---
-// insert ... GETDATE();
-// SQLiteは　date(CURRENT_TIMESTAMP)
-// ///
-// フォームデータ入力画面を設定する（HTML）
-// ---
-// <form action="index">
-//     @csrf
-//     <input type="text" name="受信先で使用する名前を設定">
-// </form>
 

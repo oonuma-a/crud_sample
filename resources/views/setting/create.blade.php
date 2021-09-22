@@ -17,6 +17,7 @@
 @section('content')
 <div class="contents"><!-- CONTENTS -->
 	<form method="post" action="" class="js-insuranceSearchForm">
+		@csrf
 		<div class="block">
 			<div class="block_inner block_inner-7">
 				<table class="table table-borderLeftNone table-form">

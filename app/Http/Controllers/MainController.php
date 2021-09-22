@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Http\Requests\AccountCreateRequest;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class MainController extends Controller
 {
@@ -70,26 +71,26 @@ class MainController extends Controller
     public function setting_index(){
         return view('setting.index');
     }
-    public function setting_account_get(Request $request){
+    public function setting_account(Request $request){
         $items = DB::select('select * from user');
         // dd($request);
         
         return view('setting.account', compact('items'));
     }
-    public function setting_account_post(AccountCreateRequest $request){
+    public function setting_account_post(Request $request){
         $now = Carbon::now()->format('Y-m-d H:i:s.v');
-
-        $params =  [
-            'user_id'=>$request->user_id,
-            'authority'=>$request->authority,
-            'display_name'=>$request->display_name,
-            'name'=>$request->name,
-            'password'=>$request->password,
-            'user_status'=>1,//upid
-            'inserted_at' =>$now,
+        $getUserInfo =  [
+            'user_id'       =>$request->user_id,
+            'authority'     =>$request->authority,
+            'display_name'  =>$request->display_name,
+            'name'          =>$request->name,
+            'password'      =>Hash::make($request->password),
+            'user_status'   =>$request->upid,
+            'inserted_at'   =>$now
         ];   
-        DB::insert('insert into user(user_id,authority,display_name,name,password,user_status,inserted_at) values(:user_id,:authority,:display_name,:name,:password,:user_status,:inserted_at)',$params);
-        return view('setting.account');
+        DB::insert('insert into user(user_id,authority,display_name,name,password,user_status,inserted_at) values(:user_id,:authority,:display_name,:name,:password,:user_status,:inserted_at)',$getUserInfo);
+        $items = DB::select('select * from user');
+        return view('setting.account',compact('items'));
     }
     public function setting_account_create(Request $request){
         return view('setting.account_create');
