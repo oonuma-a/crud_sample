@@ -56,7 +56,7 @@
 						<tr class="js-inputClear">
 							<th class="table_title table_title-positionCenter">権限</th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
+								<select name="search_authority" class="form" tabindex="1">
 									<option value="">未選択</option>
 									<option value="0">管理者</option>
 									<option value="1">従業員</option>
@@ -86,7 +86,7 @@
 			<div class="block_inner block_inner-btn block_inner-spaceS">
 				<div class="btn">
 					<p class="btn_box btn_box-color6">
-						<a href="#" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-3"></i>検索</a>
+						<a href="{{route('setting.account')}}" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-3"></i>検索</a>
 					</p>
 				</div>
 			</div>
@@ -145,11 +145,23 @@
 									<td class="table_data">{{$item->authority}}</td>
 									<td class="table_data table_data-positionLeft">{{$item->display_name}}</td>
 									<td class="table_data table_data-positionLeft"><input type="text" name="view" value="{{$item->name}}" class="form" readonly></td>
-									<td class="table_data">{{$item->user_status}}</td>
+									<td class="table_data">
+										@if($item->user_status == 1)
+											有効
+										@else
+											無効
+										@endif</a>
+									</td>
 									<td class="table_data table_data-btn">
 										<div class="btn">
 											<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-												<a href="#" class="focus" tabindex="1">{{$item->user_status}}</a>
+												<a href="#" class="focus" tabindex="1">
+													@if($item->user_status == 1)
+														有効
+													@else
+														無効
+													@endif</a>
+												</a>
 											</p>
 										</div>
 									</td>
