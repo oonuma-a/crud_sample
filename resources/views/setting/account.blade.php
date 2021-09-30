@@ -40,7 +40,8 @@
 			</li>
 		</ul>
 	</nav>
-	<form method="post" action="" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('setting.account')}}" class="js-insuranceSearchForm">
+		@csrf
 		<div class="block block-spaceM"><!-- 検索枠 -->
 			<div class="block_inner block_inner-6">
 				<table class="table">
@@ -65,15 +66,15 @@
 							</td>
 							<th class="table_title table_title-positionCenter">表示名</th>
 							<td class="table_data">
-								<input type="text" name="" value="" maxlength="10" class="form" placeholder="0000" tabindex="1">
+								<input type="text" name="search_display_name" value="" maxlength="10" class="form" placeholder="0000" tabindex="1">
 							</td>
 							<th class="table_title table_title-positionCenter">名前</th>
 							<td class="table_data">
-								<input type="text" name="" value="" class="form" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="search_name" value="" class="form" placeholder="ここに入力" tabindex="1">
 							</td>
 							<th class="table_title table_title-positionCenter">状態</th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
+								<select name="search_user_status" class="form" tabindex="1">
 									<option value="">未選択</option>
 									<option value="0">有効</option>
 									<option value="1">無効</option>
@@ -86,7 +87,8 @@
 			<div class="block_inner block_inner-btn block_inner-spaceS">
 				<div class="btn">
 					<p class="btn_box btn_box-color6">
-						<a href="{{route('setting.account')}}" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-3"></i>検索</a>
+						<input type="submit" value="検索">
+						<!-- <a href="{{route('setting.account')}}" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-3"></i>検索</a> -->
 					</p>
 				</div>
 			</div>
@@ -139,14 +141,45 @@
 					<!-- @php
 					dump($items);
 					@endphp -->
-						@foreach($items as $item)
+						@if(empty($search_data))
+							@foreach($items as $item)
+									<tr class="table_status table_status-color">aaa
+										<td class="table_data">{{$item->id}}</td>
+										<td class="table_data">{{$item->authority}}</td>
+										<td class="table_data table_data-positionLeft">{{$item->display_name}}</td>
+										<td class="table_data table_data-positionLeft"><input type="text" name="view" value="{{$item->name}}" class="form" readonly></td>
+										<td class="table_data">
+											@if($item->user_status == 1)
+												有効
+											@else
+												無効
+											@endif</a>
+										</td>
+										<td class="table_data table_data-btn">
+											<div class="btn">
+												<p class="btn_box btn_box-innerSpaceXS btn_box-color">
+													<a href="#" class="focus" tabindex="1">
+														@if($item->user_status == 1)
+															有効
+														@else
+															無効
+														@endif</a>
+													</a>
+												</p>
+											</div>
+										</td>
+									</tr>
+							@endforeach
+						@else
+						{{$search_data}}
+							@foreach($search_data as $data)
 								<tr class="table_status table_status-color">
-									<td class="table_data">{{$item->id}}</td>
-									<td class="table_data">{{$item->authority}}</td>
-									<td class="table_data table_data-positionLeft">{{$item->display_name}}</td>
-									<td class="table_data table_data-positionLeft"><input type="text" name="view" value="{{$item->name}}" class="form" readonly></td>
+									<td class="table_data">{{$data->id}}</td>
+									<td class="table_data">{{$data->authority}}</td>
+									<td class="table_data table_data-positionLeft">{{$data->display_name}}</td>
+									<td class="table_data table_data-positionLeft"><input type="text" name="view" value="{{$data->name}}" class="form" readonly></td>
 									<td class="table_data">
-										@if($item->user_status == 1)
+										@if($data->user_status == 1)
 											有効
 										@else
 											無効
@@ -156,7 +189,7 @@
 										<div class="btn">
 											<p class="btn_box btn_box-innerSpaceXS btn_box-color">
 												<a href="#" class="focus" tabindex="1">
-													@if($item->user_status == 1)
+													@if($data->user_status == 1)
 														有効
 													@else
 														無効
@@ -166,7 +199,8 @@
 										</div>
 									</td>
 								</tr>
-						@endforeach
+							@endforeach
+						@endif
 						<!-- 検索データ全件表示件数ごと表示
 						データがない場合：該当データがありません
 						foreach(表示件数（default50）　件数){

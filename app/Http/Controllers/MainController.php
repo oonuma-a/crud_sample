@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Http\Requests\AccountCreateRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Users;
 
 class MainController extends Controller
 {
@@ -74,12 +75,35 @@ class MainController extends Controller
     public function setting_account(Request $request){
         if(isset($request->search_authority)){
             $items = DB::select('select * from user  where authority=:authority,display_name=:display_name,name=:name,password,user_status');
-        else{
+        }else{
             $items = DB::select('select * from user');
         }
         return view('setting.account', compact('items'));
     }
     public function setting_account_post(Request $request){
+        //検索時処理
+        // dd($request->search_display_name);
+        $accountSearch = Users::query();
+        // dd($accountSearch);
+        $search_authority = $request->search_authority;
+        $search_display_name = $request->search_display_name;
+        $search_dname = $request->search_dname;
+        $search_user_status = $request->search_user_status;
+        if(!empty($search_authority)){
+            $accountSearch->where('authority','like','%'.$search_authority.'%');
+        }
+        if(!empty($search_display_name)){
+            $accountSearch->where('display_name','like','%'.$search_display_name.'%');
+        }
+        if(!empty($search_dname)){
+            $accountSearch->where('name','like','%'.$search_dname.'%');
+        }
+        if(!empty($search_user_status)){
+            $accountSearch->where('user_status','like','%'.$search_user_status.'%');
+        }
+        $search_data = $accountSearch->get();
+
+        //新規アカウント登録時処理
         $now = Carbon::now()->format('Y-m-d H:i:s.v');
         $getUserInfo =  [
             'user_id'       =>$request->user_id,
@@ -92,7 +116,7 @@ class MainController extends Controller
         ];   
         DB::insert('insert into user(user_id,authority,display_name,name,password,user_status,inserted_at) values(:user_id,:authority,:display_name,:name,:password,:user_status,:inserted_at)',$getUserInfo);
         $items = DB::select('select * from user');
-        return view('setting.account',compact('items'));
+        return view('setting.account',compact('items','search_data'));
     }
     public function setting_account_create(Request $request){
         return view('setting.account_create');

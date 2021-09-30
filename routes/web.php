@@ -69,5 +69,18 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+// CREATE TABLE "user" (
+// 	"id"	INTEGER NOT NULL UNIQUE,
+// 	"user_id"	string(30) NOT NULL,
+// 	"authority"	tinyint(2) NOT NULL,
+// 	"display_name"	string(100) NOT NULL,
+// 	"name"	string(200) NOT NULL,
+// 	"password"	text NOT NULL,
+// 	"user_status"	tinyint(2) NOT NULL DEFAULT ('1'),
+// 	"inserted_at"	datetime NOT NULL,
+// 	"updated_at"	 DEFAULT (null),
+// 	"deleted_at"	 DEFAULT (null),
+// 	PRIMARY KEY("id" AUTOINCREMENT)
+// );
 
 
