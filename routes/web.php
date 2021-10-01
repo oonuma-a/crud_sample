@@ -84,3 +84,74 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // );
 
 
+
+//コントローラーを分ける settingcontroller
+//ページごとに分けて作成する。settingでもアカウント、商品と分ける。
+//インサート文はコントローラーに書いてはいけない
+
+//https://qiita.com/nunulk/items/6ed409345efb6ee4f660
+//リクエストのデータを処理する関数は FormRequest に書く
+// レスポンスのデータを処理する関数は ViewModel あるいは Resource に書く
+// シングルアクションコントローラーにする
+// 複数の Controller に分離する
+// UseCaseInteractor を使う
+
+
+//Eloquentを使用してバリデーション付きのモデルを作成し、バリデーション付きのデータを登録したい
+//(idは自動採番、データすべてにrequired)
+//---
+// Route::get('/',                                     'App\Http\Controllers\HomeController@display')        ->name('display');
+// Route::post('/',                                     'App\Http\Controllers\HomeController@input')        ->name('input');
+
+// c
+// public function display(Request $request){
+//     return view('/form/input');
+// }
+
+// v
+// @if(count($errors) > 0)
+// <ul>
+//     @foreach($errors->all() as $error)
+//         <li>{{$error}}</li>
+//     @endforeach
+// </ul>
+// @endif	
+            
+// <form name="sentMessage" id="applicationForm" class="form-horizontal" action="{{route('display')}}" method="post">
+// @csrf
+// name:<input type="text" name="name" value="{{old('name')}}">
+// mail:<input type="text" mail="mail" value="{{old('mail')}}">
+// age: <input type="number" name="age" value="{{old('age')}}">
+// <input type="submit" value="send">
+// </form>
+
+// c
+// public function input(Request $request){
+//     $this->validate($request,Test::$rules);
+//     $tableData = new Test;
+//     $form = $request->all();
+//     unset($form['_token']);
+//     $tableData->fill($form)->save();
+//     return view('/form/input');
+// }
+//validate()に引数を指定し$requestの内容をTest::$rulesを使用して判定している。
+//$tableData はインスタンスを作成している。
+//$form は保管する値を用意している。
+//$tableDataでフォームのidを検索し、取得した値を
+//save()で保存している。
+//インスタンスを作成し、値を設定してsaveする流れは基本となっていて同じ。
+
+// m
+//     protected $guarded = array('id');
+//     public $timestamps = false;
+//     public static $rules = array(
+        
+//         'name' => 'required',
+//         'mail' => 'email',
+//         'age' => 'integer|min:0|max:150'
+//     );
+//guardは入力保護の設定
+// 送信された値を元としてインスタンスを作成するが、
+// モデルでは必要項目すべての値が揃って初めて保存ができる。
+// $guardは自動でIDを割り振るため、モデル作成時にidをが不要となり、
+// nullでもエラーが起こらなくなる

@@ -138,10 +138,8 @@
 					</thead>
 					<tbody>
 						
-					<!-- @php
-					dump($items);
-					@endphp -->
-						@if(empty($search_data))
+					
+						@if(!isset($search_data))
 							@foreach($items as $item)
 									<tr class="table_status table_status-color">aaa
 										<td class="table_data">{{$item->id}}</td>
@@ -171,13 +169,12 @@
 									</tr>
 							@endforeach
 						@else
-						{{$search_data}}
 							@foreach($search_data as $data)
 								<tr class="table_status table_status-color">
 									<td class="table_data">{{$data->id}}</td>
 									<td class="table_data">{{$data->authority}}</td>
 									<td class="table_data table_data-positionLeft">{{$data->display_name}}</td>
-									<td class="table_data table_data-positionLeft"><input type="text" name="view" value="{{$data->name}}" class="form" readonly></td>
+									<td class="table_data table_data-positionLeft">{{$data->name}}</td>
 									<td class="table_data">
 										@if($data->user_status == 1)
 											有効

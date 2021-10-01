@@ -81,13 +81,12 @@ class MainController extends Controller
         return view('setting.account', compact('items'));
     }
     public function setting_account_post(Request $request){
-        //検索時処理
-        // dd($request->search_display_name);
+        
+        //検索アカウント一覧表示処理
         $accountSearch = Users::query();
-        // dd($accountSearch);
         $search_authority = $request->search_authority;
         $search_display_name = $request->search_display_name;
-        $search_dname = $request->search_dname;
+        $search_name = $request->search_name;
         $search_user_status = $request->search_user_status;
         if(!empty($search_authority)){
             $accountSearch->where('authority','like','%'.$search_authority.'%');
@@ -95,8 +94,8 @@ class MainController extends Controller
         if(!empty($search_display_name)){
             $accountSearch->where('display_name','like','%'.$search_display_name.'%');
         }
-        if(!empty($search_dname)){
-            $accountSearch->where('name','like','%'.$search_dname.'%');
+        if(!empty($search_name)){
+            $accountSearch->where('name','like','%'.$search_name.'%');
         }
         if(!empty($search_user_status)){
             $accountSearch->where('user_status','like','%'.$search_user_status.'%');
@@ -115,6 +114,8 @@ class MainController extends Controller
             'inserted_at'   =>$now
         ];   
         DB::insert('insert into user(user_id,authority,display_name,name,password,user_status,inserted_at) values(:user_id,:authority,:display_name,:name,:password,:user_status,:inserted_at)',$getUserInfo);
+ 
+        //初期アカウント一覧表示処理
         $items = DB::select('select * from user');
         return view('setting.account',compact('items','search_data'));
     }
