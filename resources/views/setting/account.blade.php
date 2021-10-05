@@ -140,7 +140,7 @@
 						
 					
 						@if(!isset($search_data))
-							@foreach($items as $item)
+							@foreach($accountList as $item)
 									<tr class="table_status table_status-color">aaa
 										<td class="table_data">{{$item->id}}</td>
 										<td class="table_data">{{$item->authority}}</td>

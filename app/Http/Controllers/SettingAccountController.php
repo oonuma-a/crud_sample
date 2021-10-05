@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SettingAccountController extends Controller
 {
     public function setting_account(Request $request){
-        if(isset($request->search_authority)){
-            $items = DB::select('select * from user  where authority=:authority,display_name=:display_name,name=:name,password,user_status');
-        }else{
-            $items = DB::select('select * from user');
-        }
-        return view('setting.account', compact('items'));
+        $accountList = Users::all();
+        return view('setting.account', compact('accountList'));
     }
     public function setting_account_post(Request $request){
         
@@ -39,25 +36,15 @@ class SettingAccountController extends Controller
             $accountSearch->where('user_status','like','%'.$search_user_status.'%');
         }
         $search_data = $accountSearch->get();
-
-        //新規アカウント登録時処理
-        $now = Carbon::now()->format('Y-m-d H:i:s.v');
-        $getUserInfo =  [
-            'user_id'       =>$request->user_id,
-            'authority'     =>$request->authority,
-            'display_name'  =>$request->display_name,
-            'name'          =>$request->name,
-            'password'      =>Hash::make($request->password),
-            'user_status_display'   =>$request->upid,
-            'inserted_at'   =>$now
-        ];   
-        DB::insert('insert into user(user_id,authority,display_name,name,password,user_status,inserted_at) values(:user_id,:authority,:display_name,:name,:password,:user_status,:inserted_at)',$getUserInfo);
- 
-        //初期アカウント一覧表示処理
-        $items = DB::select('select * from user');
-        return view('setting.account',compact('items','search_data'));
     }
     public function setting_account_create(Request $request){
+        //新規アカウント登録時処理
+        $newUserInfo = $request->all();
+        unset($newUserInfo['_token']);
+        $insertData = new Users;
+        $insertData->fill($newUserInfo)->save();
+        $accountList = Users::all();
+        return view('setting.account',compact('accountList'));
         return view('setting.account_create');
     }
 }
