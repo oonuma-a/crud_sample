@@ -6,6 +6,11 @@ use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+
+
 class SettingAccountController extends Controller
 {
     public function setting_account(Request $request){
@@ -38,13 +43,19 @@ class SettingAccountController extends Controller
         $search_data = $accountSearch->get();
     }
     public function setting_account_create(Request $request){
+        return view('setting.account_create');
+    }
+    
+    public function setting_account_create_post(Request $request){
         //新規アカウント登録時処理
         $newUserInfo = $request->all();
         unset($newUserInfo['_token']);
         $insertData = new Users;
         $insertData->fill($newUserInfo)->save();
+        Users::insert(array('inserted_at'=>Carbon::now()));
+
+
         $accountList = Users::all();
-        return view('setting.account',compact('accountList'));
-        return view('setting.account_create');
+        return view('setting.account_create',compact('accountList'));
     }
 }

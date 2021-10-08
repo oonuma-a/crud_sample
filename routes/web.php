@@ -58,6 +58,7 @@ Route::prefix('setting_account')->group(function(){
     Route::get('/account','SettingAccountController@setting_account')                                      ->name('setting.account');
     Route::post('/account','SettingAccountController@setting_account_post')                                ->name('setting.account_post');
     Route::match(['get', 'post'], '/account_create','SettingAccountController@setting_account_create')     ->name('setting.account_create');
+    Route::match(['get', 'post'], '/account_create','SettingAccountController@setting_account_create_post')     ->name('setting.account_create_post');
 });
 
 // Route::prefix('continuous_transition')->group(function () {
