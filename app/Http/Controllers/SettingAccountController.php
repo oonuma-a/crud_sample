@@ -20,10 +20,15 @@ class SettingAccountController extends Controller
     public function setting_account_post(Request $request){
         
 //インサート文はコントローラーに書いてはいけない
+//参考URL通り作成していく。
+// 参考サイトと同じように作っていく
+// （INSERTの登録とアクションが分かれている）
+// この機能はここ、といった感じで割り振っていく
 
         
         //検索アカウント一覧表示処理
         $accountSearch = Users::query();
+        dd($request->search_display_name);
         $search_authority = $request->search_authority;
         $search_display_name = $request->search_display_name;
         $search_name = $request->search_name;
@@ -52,7 +57,7 @@ class SettingAccountController extends Controller
         unset($newUserInfo['_token']);
         $insertData = new Users;
         $insertData->fill($newUserInfo)->save();
-        Users::insert(array('inserted_at'=>Carbon::now()));
+
 
 
         $accountList = Users::all();

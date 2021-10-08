@@ -14,7 +14,7 @@
 </div>
 @section('content')
 <div class="contents"><!-- CONTENTS -->
-	<form method="post" action="{{route('setting.account')}}" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('setting.account_create')}}" class="js-insuranceSearchForm">
 		@csrf
 		<div class="block">
 			<div class="block_inner block_inner-7">
