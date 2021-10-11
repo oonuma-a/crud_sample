@@ -81,7 +81,7 @@
 			<div class="block_inner block_inner-7">
 				<ul class="btn">
 					<li class="btn_box btn_box-sizeS btn_box-inline btn_box-color">
-						<a href="{$base_url}setting/" class="focus" tabindex="1"><i class="btn_icon btn_icon-4"></i>戻る</a>
+						<a href="{{route('setting.account')}}" class="focus" tabindex="1"><i class="btn_icon btn_icon-4"></i>戻る</a>
 					</li>
 					<li class="btn_box btn_box-sizeS btn_box-inline btn_box-color1">
 						<!-- <a href="{{route('setting.account_post')}}" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a> -->

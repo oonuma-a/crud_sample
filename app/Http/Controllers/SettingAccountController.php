@@ -17,35 +17,27 @@ class SettingAccountController extends Controller
         $accountList = Users::all();
         return view('setting.account', compact('accountList'));
     }
-    public function setting_account_post(Request $request){
-        
-//インサート文はコントローラーに書いてはいけない
-//参考URL通り作成していく。
-// 参考サイトと同じように作っていく
-// （INSERTの登録とアクションが分かれている）
-// この機能はここ、といった感じで割り振っていく
-
-        
+    public function setting_account_post(Request $request){  
         //検索アカウント一覧表示処理
         $accountSearch = Users::query();
-        dd($request->search_display_name);
-        $search_authority = $request->search_authority;
-        $search_display_name = $request->search_display_name;
-        $search_name = $request->search_name;
-        $search_user_status = $request->search_user_status;
-        if(!empty($search_authority)){
-            $accountSearch->where('authority','like','%'.$search_authority.'%');
+        $searchAuthority = $request->searchAuthority;
+        $searchDisplayName = $request->searchDisplayName;
+        $searchName = $request->searchName;
+        $searchUserStatus = $request->searchUserStatus;
+        if(!empty($searchAuthority)){
+            $accountSearch->where('authority','like','%'.$searchAuthority.'%');
         }
-        if(!empty($search_display_name)){
-            $accountSearch->where('display_name','like','%'.$search_display_name.'%');
+        if(!empty($searchDisplayName)){
+            $accountSearch->where('display_name','like','%'.$searchDisplayName.'%');
         }
-        if(!empty($search_name)){
-            $accountSearch->where('name','like','%'.$search_name.'%');
+        if(!empty($searchName)){
+            $accountSearch->where('name','like','%'.$searchName.'%');
         }
-        if(!empty($search_user_status)){
-            $accountSearch->where('user_status','like','%'.$search_user_status.'%');
+        if(!empty($searchUserStatus)){
+            $accountSearch->where('user_status','like','%'.$searchUserStatus.'%');
         }
-        $search_data = $accountSearch->get();
+        $searchData = $accountSearch->get();
+        return view('setting.account', compact('searchData'));
     }
     public function setting_account_create(Request $request){
         return view('setting.account_create');

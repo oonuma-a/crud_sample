@@ -57,7 +57,7 @@
 						<tr class="js-inputClear">
 							<th class="table_title table_title-positionCenter">権限</th>
 							<td class="table_data">
-								<select name="search_authority" class="form" tabindex="1">
+								<select name="searchAuthority" class="form" tabindex="1">
 									<option value="">未選択</option>
 									<option value="0">管理者</option>
 									<option value="1">従業員</option>
@@ -66,15 +66,15 @@
 							</td>
 							<th class="table_title table_title-positionCenter">表示名</th>
 							<td class="table_data">
-								<input type="text" name="search_display_name" value="" maxlength="10" class="form" placeholder="0000" tabindex="1">
+								<input type="text" name="searchDisplayName" value="" maxlength="10" class="form" placeholder="0000" tabindex="1">
 							</td>
 							<th class="table_title table_title-positionCenter">名前</th>
 							<td class="table_data">
-								<input type="text" name="search_name" value="" class="form" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="searchName" value="" class="form" placeholder="ここに入力" tabindex="1">
 							</td>
 							<th class="table_title table_title-positionCenter">状態</th>
 							<td class="table_data">
-								<select name="search_user_status" class="form" tabindex="1">
+								<select name="searchUserStatus" class="form" tabindex="1">
 									<option value="">未選択</option>
 									<option value="0">有効</option>
 									<option value="1">無効</option>
@@ -139,9 +139,9 @@
 					<tbody>
 						
 					
-						@if(!isset($search_data))
+						@if(!isset($searchData))
 							@foreach($accountList as $item)
-									<tr class="table_status table_status-color">aaa
+									<tr class="table_status table_status-color">
 										<td class="table_data">{{$item->id}}</td>
 										<td class="table_data">{{$item->authority}}</td>
 										<td class="table_data table_data-positionLeft">{{$item->display_name}}</td>
@@ -169,7 +169,7 @@
 									</tr>
 							@endforeach
 						@else
-							@foreach($search_data as $data)
+							@foreach($searchData as $data)
 								<tr class="table_status table_status-color">
 									<td class="table_data">{{$data->id}}</td>
 									<td class="table_data">{{$data->authority}}</td>
