@@ -49,9 +49,12 @@ Route::prefix('order')->group(function(){
 
 
 Route::prefix('setting')->group(function(){
-    Route::match(['get', 'post'], '/index'  ,'SettingController@setting_index')                     ->name('setting.index');
-    Route::match(['get', 'post'], '/create','SettingController@setting_create')                     ->name('setting.create');
-    Route::match(['get', 'post'], '/delete','SettingController@setting_delete')                     ->name('setting.delete');
+    Route::get('/index'  ,'SettingController@setting_index_get')                     ->name('setting.index');
+    Route::post('/index'  ,'SettingController@setting_index_post')                     ->name('setting.index');
+    Route::get('/create','SettingController@setting_create_get')                                        ->name('setting.create');
+    Route::post('/create','SettingController@setting_create_post')                                  ->name('setting.create_post');
+    Route::get('/delete','SettingController@setting_delete_get')                     ->name('setting.delete');
+    Route::post('/delete','SettingController@setting_delete_post')                     ->name('setting.delete');
 });
 
 Route::prefix('setting')->group(function(){

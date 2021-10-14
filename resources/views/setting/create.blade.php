@@ -27,13 +27,13 @@
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品番号<span>必須</span></div></th>
 							<td class="table_data">
-								<input type="text" name="" value="" class="form form-maxSizeL" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="item_number" value="" class="form form-maxSizeL" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品名<span>必須</span></div></th>
 							<td class="table_data">
-								<input type="text" name="" value="" class="form" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="item_name" value="" class="form" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 <!-- 						<tr>
@@ -59,7 +59,8 @@
 						<a href="javascript:history.back();" class="focus" tabindex="1"><i class="btn_icon btn_icon-4"></i>戻る</a>
 					</li>
 					<li class="btn_box btn_box-sizeS btn_box-inline btn_box-color1">
-						<a href="#" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a>
+						<input type="submit"  value="登録" class="focus js-btnSearch">
+						<!-- <a href="{{route('setting.index')}}" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a> -->
 					</li>
 				</ul>
 			</div>

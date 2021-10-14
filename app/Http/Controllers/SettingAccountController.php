@@ -49,9 +49,6 @@ class SettingAccountController extends Controller
         unset($newUserInfo['_token']);
         $insertData = new Users;
         $insertData->fill($newUserInfo)->save();
-
-
-
         $accountList = Users::all();
         return view('setting.account_create',compact('accountList'));
     }

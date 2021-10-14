@@ -17,7 +17,7 @@
 		<div class="block_inner block_inner-1 block_inner-spaceS block_inner-titleBtn">
 			<div class="btn">
 				<p class="btn_box btn_box-color2">
-					<a href="{{route('client.create')}}" class="focus" tabindex="1"><i class="btn_icon btn_icon-2"></i>商品登録</a>
+					<a href="{{route('setting.create')}}" class="focus" tabindex="1"><i class="btn_icon btn_icon-2"></i>商品登録</a>
 				</p>
 			</div>
 		</div>
@@ -43,7 +43,8 @@
 			</li>
 		</ul>
 	</nav>
-	<form method="post" action="" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('setting.index')}}" class="js-insuranceSearchForm">
+		@csrf
 		<div class="block block-spaceM"><!-- 検索枠 -->
 			<div class="block_inner block_inner-5">
 				<table class="table">
@@ -55,11 +56,11 @@
 						<tr class="js-inputClear">
 							<th class="table_title table_title-positionCenter">商品番号</th>
 							<td class="table_data">
-								<input type="text" name="" value="" maxlength="" class="form" placeholder="0000" tabindex="1">
+								<input type="text" name="searchItemNumber" value="" maxlength="" class="form" placeholder="0000" tabindex="1">
 							</td>
 							<th class="table_title table_title-positionCenter">商品名</th>
 							<td class="table_data">
-								<input type="text" name="" value="" class="form" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="searchItemName" value="" class="form" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 					</tbody>
@@ -68,7 +69,8 @@
 			<div class="block_inner block_inner-btn block_inner-spaceS">
 				<div class="btn">
 					<p class="btn_box btn_box-color6">
-						<a href="#" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-3"></i>検索</a>
+						<input type="submit" value="検索">
+						<!-- <a href="{{route('setting.index')}}" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-3"></i>検索</a> -->
 					</p>
 				</div>
 			</div>
@@ -118,82 +120,51 @@
 						<tr>
 							<td colspan="5" class="table_data">該当データがありません</td>
 						</tr>
-						<tr class="table_status table_status-color">
-							<td class="table_data table_data-btn">
-								<div class="btn">
-									<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
-										<a href="{$base_url}setting/details/" class="focus" tabindex="1">編集</a>
-									</p>
-								</div>
-							</td>
-							<td class="table_data table_data-positionCenter"><input type="text" name="view" value="9999" class="form" readonly></td>
-							<td class="table_data table_data-positionLeft">太線（29ｘ17cm）</td>
-							<td class="table_data table_data-positionLeft">テキストテキストテキストテキストテキストテキストテキスト</td>
-							<td class="table_data table_data-btn">
-								<div class="btn">
-									<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-										<a href="#" class="focus" tabindex="1">削除</a>
-									</p>
-								</div>
-							</td>
-						</tr>
-						<tr class="table_status table_status-color">
-							<td class="table_data table_data-btn">
-								<div class="btn">
-									<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
-										<a href="{$base_url}setting/details/" class="focus" tabindex="1">編集</a>
-									</p>
-								</div>
-							</td>
-							<td class="table_data table_data-positionCenter"><input type="text" name="view" value="9999" class="form" readonly></td>
-							<td class="table_data table_data-positionLeft">細線（34ｘ17cm）</td>
-							<td class="table_data table_data-positionLeft">テキストテキストテキストテキストテキストテキストテキスト</td>
-							<td class="table_data table_data-btn">
-								<div class="btn">
-									<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-										<a href="#" class="focus" tabindex="1">削除</a>
-									</p>
-								</div>
-							</td>
-						</tr>
-						<tr class="table_status table_status-color">
-							<td class="table_data table_data-btn">
-								<div class="btn">
-									<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
-										<a href="{$base_url}setting/details/" class="focus" tabindex="1">編集</a>
-									</p>
-								</div>
-							</td>
-							<td class="table_data table_data-positionCenter"><input type="text" name="view" value="9999" class="form" readonly></td>
-							<td class="table_data table_data-positionLeft">太線（29ｘ17cm）</td>
-							<td class="table_data table_data-positionLeft">テキストテキストテキストテキストテキストテキストテキスト</td>
-							<td class="table_data table_data-btn">
-								<div class="btn">
-									<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-										<a href="#" class="focus" tabindex="1">削除</a>
-									</p>
-								</div>
-							</td>
-						</tr>
-						<tr class="table_status table_status-color">
-							<td class="table_data table_data-btn">
-								<div class="btn">
-									<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
-										<a href="{$base_url}setting/details/" class="focus" tabindex="1">編集</a>
-									</p>
-								</div>
-							</td>
-							<td class="table_data table_data-positionCenter"><input type="text" name="view" value="9999" class="form" readonly></td>
-							<td class="table_data table_data-positionLeft">太線（29ｘ17cm）</td>
-							<td class="table_data table_data-positionLeft">テキストテキストテキストテキストテキストテキストテキスト</td>
-							<td class="table_data table_data-btn">
-								<div class="btn">
-									<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-										<a href="#" class="focus" tabindex="1">削除</a>
-									</p>
-								</div>
-							</td>
-						</tr>
+						@if(empty($searchData))
+							@foreach($itemList as $item)
+							<tr class="table_status table_status-color">
+								<td class="table_data table_data-btn">
+									<div class="btn">
+										<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
+											<a href="{$base_url}setting/details/" class="focus" tabindex="1">編集</a>
+										</p>
+									</div>
+								</td>
+								<td class="table_data table_data-positionCenter"><input type="text" name="{{$item->item_number}}" value="" class="form" readonly></td>
+								<td class="table_data table_data-positionLeft">{{$item->item_name}}</td>
+								<td class="table_data table_data-positionLeft">{{$item->remarks}}</td>
+								<td class="table_data table_data-btn">
+									<div class="btn">
+										<p class="btn_box btn_box-innerSpaceXS btn_box-color">
+											<a href="#" class="focus" tabindex="1">削除</a>
+										</p>
+									</div>
+								</td>
+							</tr>
+							@endforeach
+						@else
+							@foreach($searchData as $item)
+							<tr class="table_status table_status-color">
+								<td class="table_data table_data-btn">
+									<div class="btn">
+										<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
+											<a href="{$base_url}setting/details/" class="focus" tabindex="1">編集</a>
+										</p>
+									</div>
+								</td>
+								<td class="table_data table_data-positionCenter"><input type="text" name="{{$item->item_number}}" value="" class="form" readonly></td>
+								<td class="table_data table_data-positionLeft">{{$item->item_name}}</td>
+								<td class="table_data table_data-positionLeft">{{$item->remarks}}</td>
+								<td class="table_data table_data-btn">
+									<div class="btn">
+										<p class="btn_box btn_box-innerSpaceXS btn_box-color">
+											<a href="#" class="focus" tabindex="1">削除</a>
+										</p>
+									</div>
+								</td>
+							</tr>
+							@endforeach
+						@endif
 					</tbody>
 				</table>
 			<!--</div>--><!-- / block_inner_dataTable -->
