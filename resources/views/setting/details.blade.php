@@ -1,16 +1,4 @@
-{nocache}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-	<!-- {include file='include/head.tpl'} -->
-@include('/include/head')
-</head>
-<body>
-<div class="l-wrapper"><!-- L-WRAPPER  -->
-<!-- @include('/include/header') -->
-@yield('content')
-@include('/include/sidebar')
-{include file='include/head.tpl'}
+@extends('layouts.layout')
 </head>
 <body{if !empty($pageID)} id="{$pageID}"{/if}>
 <div class="l-wrapper"><!-- L-WRAPPER  -->
@@ -28,8 +16,11 @@
 		</div>
 	</div>
 </div>
+
+@section('content')
 <div class="contents"><!-- CONTENTS -->
-	<form method="post" action="" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('setting.details')}}" class="js-insuranceSearchForm">
+		@csrf
 		<div class="block">
 			<div class="block_inner block_inner-7">
 				<table class="table table-borderLeftNone table-form">
@@ -37,15 +28,16 @@
 					<colgroup style="width: 80%"></colgroup>
 					<tbody>
 						<tr>
+							<input type="hidden" name="id" value="{{$updateData->id}}">
 							<th class="table_title"><div class="table_title_required">商品番号<span>必須</span></div></th>
 							<td class="table_data">
-								<input type="text" name="" value="999" class="form form-maxSizeL" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="item_number" value="{{$updateData->item_number}}" class="form form-maxSizeL" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品名<span>必須</span></div></th>
 							<td class="table_data">
-								<input type="text" name="" value="太線（29ｘ17cm）" class="form" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="item_name" value="{{$updateData->item_name}}" class="form" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 <!-- 						<tr>
@@ -57,7 +49,7 @@
 						<tr>
 							<th class="table_title">備考</th>
 							<td class="table_data">
-								<textarea name="remarks" class="form form-textarea form-heightS form-textAreaMiddle" tabindex="1"></textarea>
+								<textarea name="remarks" class="form form-textarea form-heightS form-textAreaMiddle" tabindex="1">{{$updateData->remarks}}</textarea>
 							</td>
 						</tr>
 					</tbody>
@@ -68,7 +60,8 @@
 			<div class="block_inner block_inner-7">
 				<ul class="btn">
 					<li class="btn_box btn_box-sizeS btn_box-inline btn_box-color1">
-						<a href="#" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a>
+						<input type="submit" value="登録">
+						<!-- <a href="#" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a> -->
 					</li>
 <!-- 					<li class="btn_box btn_box-sizeM btn_box-inline btn_box-color">
 						<a href="{$base_url}product/" class="focus" tabindex="1"><i class="btn_icon btn_icon-0"></i>戻る</a>

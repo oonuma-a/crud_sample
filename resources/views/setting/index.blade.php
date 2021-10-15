@@ -126,7 +126,13 @@
 								<td class="table_data table_data-btn">
 									<div class="btn">
 										<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
-											<a href="{$base_url}setting/details/" class="focus" tabindex="1">編集</a>
+											<form action="{{route('setting.details')}}">
+												@csrf
+												<!-- <a href="{{route('setting.details')}}" class="focus" tabindex="1">編集</a> -->
+												<input type="hidden" name="updateId" value="{{$item->id}}">
+												<input type="hidden" name="remarks" value="{{$item->remarks}}">
+												<input type="submit" value="編集" class="focus">
+											</form>
 										</p>
 									</div>
 								</td>
@@ -136,7 +142,12 @@
 								<td class="table_data table_data-btn">
 									<div class="btn">
 										<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-											<a href="#" class="focus" tabindex="1">削除</a>
+											<form action="{{route('setting.index')}}" method="post">
+												@csrf
+												<input type="hidden" name="deleteId" value="{{$item->id}}">
+												<input type="submit" class="focus" value="削除">
+											</form>
+											<!-- <a href="{{route('setting.index')}}" class="focus" tabindex="1">削除</a> -->
 										</p>
 									</div>
 								</td>
@@ -148,7 +159,7 @@
 								<td class="table_data table_data-btn">
 									<div class="btn">
 										<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
-											<a href="{$base_url}setting/details/" class="focus" tabindex="1">編集</a>
+											<a href="{{route('setting.details')}}" class="focus" tabindex="1">編集</a>
 										</p>
 									</div>
 								</td>
@@ -158,7 +169,7 @@
 								<td class="table_data table_data-btn">
 									<div class="btn">
 										<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-											<a href="#" class="focus" tabindex="1">削除</a>
+											<a href="{{route('setting.index')}}" class="focus" tabindex="1">削除</a>
 										</p>
 									</div>
 								</td>

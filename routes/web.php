@@ -50,11 +50,12 @@ Route::prefix('order')->group(function(){
 
 Route::prefix('setting')->group(function(){
     Route::get('/index'  ,'SettingController@setting_index_get')                     ->name('setting.index');
-    Route::post('/index'  ,'SettingController@setting_index_post')                     ->name('setting.index');
+    Route::post('/index'  ,'SettingController@setting_index_search')                     ->name('setting.index_search');
+    Route::post('/index'  ,'SettingController@setting_index_delete')                     ->name('setting.index_delete');
     Route::get('/create','SettingController@setting_create_get')                                        ->name('setting.create');
     Route::post('/create','SettingController@setting_create_post')                                  ->name('setting.create_post');
-    Route::get('/delete','SettingController@setting_delete_get')                     ->name('setting.delete');
-    Route::post('/delete','SettingController@setting_delete_post')                     ->name('setting.delete');
+    Route::get('/details','SettingController@setting_details_get')                     ->name('setting.details');
+    Route::post('/details','SettingController@setting_details_post')                     ->name('setting.details');
 });
 
 Route::prefix('setting')->group(function(){

@@ -11,7 +11,17 @@ class SettingController extends Controller
         $itemList = Item::all();
         return view('setting.index', compact('itemList'));
     }
-    public function setting_index_post(Request $request){
+    public function setting_index_delete(Request $request){
+        $deleteId = Item::find($request->deleteId)->delete();
+        $itemList = Item::all();
+        return view('setting.index', compact('itemList'));
+    }
+    public function setting_index_update(Request $request){
+        $deleteId = Item::find($request->deleteId)->delete();
+        $itemList = Item::all();
+        return view('setting.index', compact('itemList'));
+    }
+    public function setting_index_search(Request $request){
         $searchItem = Item::query();
         $searchNumber = $request->searchItemNumber;
         $searchName = $request->searchItemName;
@@ -36,10 +46,16 @@ class SettingController extends Controller
         $itemList = Item::all();
         return view('setting.create', compact('itemList'));
     }
-    public function setting_delete_get(Request $request){
-        return view('setting.delete');
+    public function setting_details_get(Request $request){
+        $updateData = Item::find($request->updateId);
+        return view('setting.details', compact('updateData'));
     }
-    public function setting_delete_post(Request $request){
-        return view('setting.delete');
+    public function setting_details_post(Request $request){
+        $getUpdateData = $request->all();
+        unset($getUpdateData['_token']);
+        $updateData = Item::find($request->id);
+        $updateData->fill($getUpdateData)->save();
+        $updateData = Item::find($request->updateId);
+        return view('setting.details', compact('updateData'));
     }
 }

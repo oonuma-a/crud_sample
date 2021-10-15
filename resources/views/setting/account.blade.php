@@ -156,12 +156,15 @@
 										<td class="table_data table_data-btn">
 											<div class="btn">
 												<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-													<a href="#" class="focus" tabindex="1">
-														@if($item->user_status == 1)
-															有効
-														@else
-															無効
-														@endif</a>
+													<!-- <a href="#" class="focus" tabindex="1"> -->
+													<form action="{{route('setting.account')}}" >
+														@csrf
+															@if($item->user_status == 1)
+																<input type="button" class="focus" name="userStatusChange" value="有効">
+															@else
+																<input type="button" class="focus" name="userStatusChange" value="無効">
+															@endif
+													</form>
 													</a>
 												</p>
 											</div>
