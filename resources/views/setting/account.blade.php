@@ -140,14 +140,57 @@
 						
 					
 						@if(!isset($searchData))
-							@foreach($accountList as $item)
+							@if(count($accountList) == 0)
+									<tr>
+										<td colspan="5" class="table_data">該当データがありません</td>
+									</tr>
+							@else
+								@foreach($accountList as $item)
+										<tr class="table_status table_status-color">
+											<td class="table_data">{{$item->id}}</td>
+											<td class="table_data">{{$item->authority}}</td>
+											<td class="table_data table_data-positionLeft">{{$item->display_name}}</td>
+											<td class="table_data table_data-positionLeft"><input type="text" name="view" value="{{$item->name}}" class="form" readonly></td>
+											<td class="table_data">
+												@if($item->user_status == 1)
+													有効
+												@else
+													無効
+												@endif</a>
+											</td>
+											<td class="table_data table_data-btn">
+												<div class="btn">
+													<p class="btn_box btn_box-innerSpaceXS btn_box-color">
+														<!-- <a href="#" class="focus" tabindex="1"> -->
+														<form action="{{route('setting.account')}}" >
+															@csrf
+																@if($item->user_status == 1)
+																	<input type="button" class="focus" name="userStatusChange" value="有効">
+																@else
+																	<input type="button" class="focus" name="userStatusChange" value="無効">
+																@endif
+														</form>
+														</a>
+													</p>
+												</div>
+											</td>
+										</tr>
+								@endforeach
+							@endif
+						@else
+							@if(count($searchData) == 0)
+									<tr>
+										<td colspan="5" class="table_data">該当データがありません</td>
+									</tr>
+							@else
+								@foreach($searchData as $data)
 									<tr class="table_status table_status-color">
-										<td class="table_data">{{$item->id}}</td>
-										<td class="table_data">{{$item->authority}}</td>
-										<td class="table_data table_data-positionLeft">{{$item->display_name}}</td>
-										<td class="table_data table_data-positionLeft"><input type="text" name="view" value="{{$item->name}}" class="form" readonly></td>
+										<td class="table_data">{{$data->id}}</td>
+										<td class="table_data">{{$data->authority}}</td>
+										<td class="table_data table_data-positionLeft">{{$data->display_name}}</td>
+										<td class="table_data table_data-positionLeft">{{$data->name}}</td>
 										<td class="table_data">
-											@if($item->user_status == 1)
+											@if($data->user_status == 1)
 												有効
 											@else
 												無効
@@ -156,50 +199,19 @@
 										<td class="table_data table_data-btn">
 											<div class="btn">
 												<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-													<!-- <a href="#" class="focus" tabindex="1"> -->
-													<form action="{{route('setting.account')}}" >
-														@csrf
-															@if($item->user_status == 1)
-																<input type="button" class="focus" name="userStatusChange" value="有効">
-															@else
-																<input type="button" class="focus" name="userStatusChange" value="無効">
-															@endif
-													</form>
+													<a href="#" class="focus" tabindex="1">
+														@if($data->user_status == 1)
+															有効
+														@else
+															無効
+														@endif</a>
 													</a>
 												</p>
 											</div>
 										</td>
 									</tr>
-							@endforeach
-						@else
-							@foreach($searchData as $data)
-								<tr class="table_status table_status-color">
-									<td class="table_data">{{$data->id}}</td>
-									<td class="table_data">{{$data->authority}}</td>
-									<td class="table_data table_data-positionLeft">{{$data->display_name}}</td>
-									<td class="table_data table_data-positionLeft">{{$data->name}}</td>
-									<td class="table_data">
-										@if($data->user_status == 1)
-											有効
-										@else
-											無効
-										@endif</a>
-									</td>
-									<td class="table_data table_data-btn">
-										<div class="btn">
-											<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-												<a href="#" class="focus" tabindex="1">
-													@if($data->user_status == 1)
-														有効
-													@else
-														無効
-													@endif</a>
-												</a>
-											</p>
-										</div>
-									</td>
-								</tr>
-							@endforeach
+								@endforeach
+							@endif
 						@endif
 						<!-- 検索データ全件表示件数ごと表示
 						データがない場合：該当データがありません

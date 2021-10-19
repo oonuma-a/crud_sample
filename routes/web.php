@@ -49,21 +49,21 @@ Route::prefix('order')->group(function(){
 
 
 Route::prefix('setting')->group(function(){
-    Route::get('/index'  ,'SettingController@setting_index_get')                     ->name('setting.index');
-    Route::post('/index'  ,'SettingController@setting_index_search')                     ->name('setting.index_search');
-    Route::post('/index'  ,'SettingController@setting_index_delete')                     ->name('setting.index_delete');
-    Route::get('/create','SettingController@setting_create_get')                                        ->name('setting.create');
-    Route::post('/create','SettingController@setting_create_post')                                  ->name('setting.create_post');
-    Route::get('/details','SettingController@setting_details_get')                     ->name('setting.details');
-    Route::post('/details','SettingController@setting_details_post')                     ->name('setting.details');
+    Route::get('/index'  ,'SettingController@setting_index_get')                                 ->name('setting.index');
+    Route::post('/index'  ,'SettingController@setting_index_post')                               ->name('setting.index_post');
+    Route::get('/create','SettingController@setting_create_get')                                 ->name('setting.create');
+    Route::post('/create','SettingController@setting_create_post')                               ->name('setting.create_post');
+    Route::get('/details','SettingController@setting_details_get')                               ->name('setting.details');
+    Route::post('/details','SettingController@setting_details_post')                             ->name('setting.details');
+
+    Route::prefix('setting')->group(function(){
+        Route::get('/account','SettingAccountController@setting_account')                        ->name('setting.account');
+        Route::post('/account','SettingAccountController@setting_account_post')                  ->name('setting.account_post');
+        Route::get('/account_create','SettingAccountController@setting_account_create')          ->name('setting.account_create');
+        Route::post('/account_create','SettingAccountController@setting_account_create_post')    ->name('setting.account_create_post');
+    });
 });
 
-Route::prefix('setting')->group(function(){
-    Route::get('/account','SettingAccountController@setting_account')                        ->name('setting.account');
-    Route::post('/account','SettingAccountController@setting_account_post')                  ->name('setting.account_post');
-    Route::get('/account_create','SettingAccountController@setting_account_create')          ->name('setting.account_create');
-    Route::post('/account_create','SettingAccountController@setting_account_create_post')    ->name('setting.account_create_post');
-});
 
 // Route::prefix('continuous_transition')->group(function () {
 //     Route::get('/',                           'ContinuousTransitionController@index')   ->name('continuous_transition.index');
