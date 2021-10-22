@@ -89,7 +89,7 @@
 			<!-- <div class="block_inner_dataTable"> -->{*<!-- dataTable使用の場合 -->*}
 				<div class="pager">
 					<ul class="pager_box">
-						<li class="pager_box_list pager_box_list-prev"><a href="{{ $paginator->previousPageUrl() }}" class="disabled js-disable">前へ</a></li><li class="pager_box_list"><span>1</span></li><li class="pager_box_list"><a href="">2</a></li><li class="pager_box_list pager_box_list-next"><a href="{{ $paginator->url(1) }}">次へ</a></li>
+						<li class="pager_box_list pager_box_list-prev"><a href="" class="disabled js-disable">前へ</a></li><li class="pager_box_list"><span>1</span></li><li class="pager_box_list"><a href="">2</a></li><li class="pager_box_list pager_box_list-next"><a href="">次へ</a></li>
 					</ul>
 					<div class="block_inner_page">
 						表示件数：<select name="" class="form form-maxSizeS" tabindex="1">
