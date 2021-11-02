@@ -8,7 +8,12 @@ class SettingController extends Controller
 {
 
     public function setting_index_get(Request $request){
-        $itemList = Item::paginate(5);
+        if(isset($request->paginateValue)){
+            $paginateValue = $request->paginateValue;
+            $itemList = Item::paginate($paginateValue);
+            return view('setting.index', compact('itemList'));
+        }
+        $itemList = Item::paginate(50);
         return view('setting.index', compact('itemList'));
     }
     public function setting_index_post(Request $request){

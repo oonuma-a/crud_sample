@@ -88,17 +88,18 @@
 		<div class="block_inner block_inner-7">
 			<!-- <div class="block_inner_dataTable"> -->{*<!-- dataTable使用の場合 -->*}
 				<div class="pager">
-					
 				{{$itemList->links()}}
-					
 					<div class="block_inner_page">
-						表示件数：<select name="" class="form form-maxSizeS" tabindex="1">
-							<option value="25">25件</option>
-							<option value="50" selected>50件</option>
-							<option value="75">75件</option>
-							<option value="100">100件</option>
-							<option value="200">200件</option>
-						</select>
+						表示件数：
+						<form action="{{route('setting.index')}}" method="get">
+							<select name="paginateValue" class="form form-maxSizeS" tabindex="1" onchange="submit();">
+								<option value="25">25件</option>
+								<option value="50" selected>50件</option>
+								<option value="75">75件</option>
+								<option value="100">100件</option>
+								<option value="200">200件</option>
+							</select>
+						</form>
 					</div>
 				</div>
 				<table class="table table-list table-center table-borderTopNone table-positionCenter js-dataTable">
