@@ -1,4 +1,7 @@
 @extends('layouts.layout')
+</head>
+<body{if !empty($pageID)} id="{$pageID}"{/if}>
+<div class="l-wrapper"><!-- L-WRAPPER  -->
 <!-- {include file='include/header.tpl'} -->
 <div class="b-contents"><!-- B-CONTENTS -->
 <section><!-- SECTION -->
@@ -105,18 +108,19 @@
 	<div class="block block-spaceL">
 		<div class="block_inner block_inner-5half">
 			<!-- <div class="block_inner_dataTable"> -->{*<!-- dataTable使用の場合 -->*}
-				<div class="pager">
-					<ul class="pager_box">
-						<li class="pager_box_list pager_box_list-prev"><a href="" class="disabled js-disable">前へ</a></li><li class="pager_box_list"><span>1</span></li><li class="pager_box_list"><a href="">2</a></li><li class="pager_box_list pager_box_list-next"><a href="">次へ</a></li>
-					</ul>
+				<div class="pager">		
+				{{$accountList->links()}}
 					<div class="block_inner_page">
-						表示件数：<select name="" class="form form-maxSizeS" tabindex="1">
+						<form action="{{route('setting.account')}}" methos="get">
+						表示件数：<select name="paginateValue" class="form form-maxSizeS" tabindex="1" onchange="submit();";>
+						<option value="5" selected>5件</option>
 							<option value="25">25件</option>
-							<option value="50" selected>50件</option>
+							<option value="50">50件</option>
 							<option value="75">75件</option>
 							<option value="100">100件</option>
 							<option value="200">200件</option>
-						</select>
+							</select>
+						</form>
 					</div>
 				</div>
 				<table class="table table-list table-center table-borderTopNone table-positionCenter js-dataTable">
@@ -156,7 +160,7 @@
 													有効
 												@else
 													無効
-												@endif</a>
+												@endif
 											</td>
 											<td class="table_data table_data-btn">
 												<div class="btn">
@@ -165,9 +169,9 @@
 														<form action="{{route('setting.account')}}" >
 															@csrf
 																@if($item->user_status == 1)
-																	<input type="button" class="focus" name="userStatusChange" value="有効">
-																@else
 																	<input type="button" class="focus" name="userStatusChange" value="無効">
+																@else
+																	<input type="button" class="focus" name="userStatusChange" value="有効">
 																@endif
 														</form>
 														</a>
@@ -194,7 +198,7 @@
 												有効
 											@else
 												無効
-											@endif</a>
+											@endif
 										</td>
 										<td class="table_data table_data-btn">
 											<div class="btn">
@@ -204,7 +208,7 @@
 															有効
 														@else
 															無効
-														@endif</a>
+														@endif
 													</a>
 												</p>
 											</div>

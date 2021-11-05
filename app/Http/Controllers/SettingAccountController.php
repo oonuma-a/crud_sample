@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Users;
 use Illuminate\Http\Request;
+use App\Models\Users;
 use Illuminate\Support\Facades\DB;
-
-
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,30 +12,40 @@ use Illuminate\Support\Facades\Hash;
 class SettingAccountController extends Controller
 {
     public function setting_account(Request $request){
-        $accountList = Users::all();
-        return view('setting.account', compact('accountList'));
+        //表示件数変更
+        if(isset($request->paginateValue)){
+            $paginateValue = $request->paginateValue;
+            $accountList = Users::paginate($paginateValue);
+            return view('setting.account', compact('accountList'));
+        }else{
+            $accountList = Users::paginate(5);
+            return view('setting.account', compact('accountList'));
+        }
     }
     public function setting_account_post(Request $request){  
         //検索アカウント一覧表示処理
-        $accountSearch = Users::query();
-        $searchAuthority = $request->searchAuthority;
-        $searchDisplayName = $request->searchDisplayName;
-        $searchName = $request->searchName;
-        $searchUserStatus = $request->searchUserStatus;
-        if(!empty($searchAuthority)){
-            $accountSearch->where('authority','like','%'.$searchAuthority.'%');
+        if(isset($request->accountSeach)){
+            $accountSearch = Users::query();
+            $searchAuthority = $request->searchAuthority;
+            $searchDisplayName = $request->searchDisplayName;
+            $searchName = $request->searchName;
+            $searchUserStatus = $request->searchUserStatus;
+            if(!empty($searchAuthority)){
+                $accountSearch->where('authority','like','%'.$searchAuthority.'%');
+            }
+            if(!empty($searchDisplayName)){
+                $accountSearch->where('display_name','like','%'.$searchDisplayName.'%');
+            }
+            if(!empty($searchName)){
+                $accountSearch->where('name','like','%'.$searchName.'%');
+            }
+            if(!empty($searchUserStatus)){
+                $accountSearch->where('user_status','like','%'.$searchUserStatus.'%');
+            }
+            $searchData = $accountSearch->get();
+            return view('setting.account', compact('searchData'));
+        }elseif(isset($request->userStatusChange)){
         }
-        if(!empty($searchDisplayName)){
-            $accountSearch->where('display_name','like','%'.$searchDisplayName.'%');
-        }
-        if(!empty($searchName)){
-            $accountSearch->where('name','like','%'.$searchName.'%');
-        }
-        if(!empty($searchUserStatus)){
-            $accountSearch->where('user_status','like','%'.$searchUserStatus.'%');
-        }
-        $searchData = $accountSearch->get();
-        return view('setting.account', compact('searchData'));
     }
     public function setting_account_create(Request $request){
         return view('setting.account_create');

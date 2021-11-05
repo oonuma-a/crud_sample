@@ -1,25 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Item;
+
 class SettingController extends Controller
 {
-
     public function setting_index_get(Request $request){
+        //表示件数変更
         if(isset($request->paginateValue)){
             $paginateValue = $request->paginateValue;
             $itemList = Item::paginate($paginateValue);
             return view('setting.index', compact('itemList'));
+        }else{
+            $itemList = Item::paginate(5);
+            return view('setting.index', compact('itemList'));
         }
-        $itemList = Item::paginate(50);
-        return view('setting.index', compact('itemList'));
     }
     public function setting_index_post(Request $request){
         if(isset($request->deleteId)){
             $deleteId = Item::find($request->deleteId)->delete();
-            $itemList = Item::all();
+            $itemList = Item::paginate(5);
             return view('setting.index', compact('itemList'));
         }else{
             $searchItem = Item::query();
