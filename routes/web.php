@@ -23,10 +23,13 @@ Route::prefix('admin')->group(function(){
 
 
 Route::prefix('client')->group(function(){
-    Route::match(['get', 'post'], '/index'  ,'ClientController@client_index')     ->name('client.index');
-    Route::match(['get', 'post'], '/create' ,'ClientController@client_create')    ->name('client.create');
-    Route::match(['get', 'post'], '/edit'   ,'ClientController@client_edit')      ->name('client.edit');
-    Route::match(['get', 'post'], '/handled','ClientController@client_handled')   ->name('client.handled');
+    Route::post('/index'  ,'ClientController@client_index')                             ->name('client.index');
+    Route::get('/create' ,'ClientController@client_create_get')                         ->name('client.create');
+    Route::post('/create' ,'ClientController@client_create_post');
+    Route::get('/edit'  ,'ClientController@client_edit_get')                            ->name('client.edit');
+    Route::post('/edit'  ,'ClientController@client_edit_post');
+    Route::get('/handled','ClientController@client_handled_get')                        ->name('client.handled');
+    Route::post('/handled','ClientController@client_handled_post');
 });
 
 Route::prefix('errors')->group(function(){

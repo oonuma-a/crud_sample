@@ -1,22 +1,8 @@
-{nocache}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-{include file='include/head.tpl'}
-{literal}
-<style>
-<!--
-.js-regularly {
-	white-space: nowrap;
-	display: inline-block;
-}
--->
-</style>
-{/literal}
+@extends('layouts.layout')
 </head>
 <body{if !empty($pageID)} id="{$pageID}"{/if}>
 <div class="l-wrapper"><!-- L-WRAPPER  -->
-{include file='include/header.tpl'}
+<!-- {include file='include/header.tpl'} -->
 <div class="b-contents"><!-- B-CONTENTS -->
 <section><!-- SECTION -->
 <div class="contentsTitle">

@@ -32,4 +32,28 @@ class ClientController extends Controller
     // ]);
     }
 
+    public function client_create_get(Request $request)
+    {
+        return view('client.create');
+    }
+    public function client_create_post(Request $request)
+    {
+        return view('client.create');
+    }
+    public function client_edit_get(Request $request)
+    {
+        return view('client.edit');
+    }
+    public function client_edit_post(Request $request)
+    {
+        return view('client.edit');
+    }
+    public function client_handled_get(Request $request)
+    {
+        return view('client.handled');
+    }
+    public function client_handled_post(Request $request)
+    {
+        return view('client.handled');
+    }
 }
