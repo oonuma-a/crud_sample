@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\shop;
 
 class ClientController extends Controller
 {
@@ -25,7 +26,8 @@ class ClientController extends Controller
     // );
     // if(Auth::attempt($credentials)){
     //     $request->session()->regenerate();
-            return view('client.index');
+    $shopList = shop::paginate(5);
+            return view('client.index',compact('shopList'));
     // }
     // return back()->withErrors([
     //     'login_error'=>'ユーザーとパスワードが一致しません。',

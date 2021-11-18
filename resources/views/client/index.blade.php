@@ -129,9 +129,7 @@
 		<div class="block_inner">
 			<!-- <div class="block_inner_dataTable"> -->{*<!-- dataTable使用の場合 -->*}
 				<div class="pager">
-					<ul class="pager_box">
-						<li class="pager_box_list pager_box_list-prev"><a href="" class="disabled js-disable">前へ</a></li><li class="pager_box_list"><span>1</span></li><li class="pager_box_list"><a href="">2</a></li><li class="pager_box_list pager_box_list-next"><a href="">次へ</a></li>
-					</ul>
+				{{$shopList->links()}}
 					<div class="block_inner_page">
 						表示件数：<select name="" class="form form-maxSizeS" tabindex="1">
 							<option value="25">25件</option>
@@ -174,7 +172,6 @@
 						<tr>
 							<td colspan="12" class="table_data">該当データがありません</td>
 						</tr>
-						<tr class="table_status table_status-color">
 <!-- 							<td class="table_data table_data-btn">
 								<div class="btn">
 									<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
@@ -189,68 +186,27 @@
 									</p>
 								</div>
 							</td> -->
-							<td class="table_data">99999999</td>
-							<td class="table_data">password</td>
-							<td class="table_data table_data-positionLeft"><a href="{$base_url}client/edit/" class="focus" tabindex="1">テスト店舗テスト店舗</a></td>
-							<td class="table_data">090-1234-5678</td>
-							<td class="table_data">東京(01)</td>
-							<td class="table_data">20番 <span class="table_data_keep">10枚</span></td>
-							<td class="table_data">25番 <span class="table_data_keep">50枚</span></td>
-							<td class="table_data">100番 <span class="table_data_keep">100枚</span></td>
-							<td class="table_data">100番 <span class="table_data_keep">1000枚</span></td>
-							<td class="table_data table_data-positionLeft">テキストテキストテキストテキストテキスト</td>
-							<td class="table_data">有</td>
-							<td class="table_data"></td>
-						</tr>
-						<tr class="table_status table_status-lineColor4 table_status-color4">
-<!-- 							<td class="table_data table_data-btn">
-								<div class="btn">
-									<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
-										<a href="{$base_url}client/edit/" class="focus" tabindex="1" target="_blank">編集</a>
-									</p>
-								</div>
-							</td> -->
-							<td class="table_data">9999</td>
-							<td class="table_data">password</td>
-							<td class="table_data table_data-positionLeft"><a href="{$base_url}client/edit/" class="focus" tabindex="1">テスト店舗</a></td>
-							<td class="table_data">090-1234-5678</td>
-							<td class="table_data">神奈川(03)</td>
-							<td class="table_data">20番 <span class="table_data_keep">10枚</span></td>
-							<td class="table_data">25番 <span class="table_data_keep">50枚</span></td>
-							<td class="table_data">100番 <span class="table_data_keep">100枚</span></td>
-							<td class="table_data">100番 <span class="table_data_keep">1000枚</span></td>
-							<td class="table_data table_data-positionLeft">テキストテキスト</td>
-							<td class="table_data"></td>
-							<td class="table_data table_data-status">解約</td>
-						</tr>
-						<tr class="table_status table_status-color4">
-							<td class="table_data">9999</td>
-							<td class="table_data">password</td>
-							<td class="table_data table_data-positionLeft"><a href="{$base_url}client/edit/" class="focus" tabindex="1">テスト店舗</a></td>
-							<td class="table_data">090-1234-5678</td>
-							<td class="table_data">神奈川(03)</td>
-							<td class="table_data">20番 <span class="table_data_keep">10枚</span></td>
-							<td class="table_data">25番 <span class="table_data_keep">50枚</span></td>
-							<td class="table_data">100番 <span class="table_data_keep">100枚</span></td>
-							<td class="table_data">100番 <span class="table_data_keep">1000枚</span></td>
-							<td class="table_data table_data-positionLeft">テキストテキストテキスト</td>
-							<td class="table_data"></td>
-							<td class="table_data"></td>
-						</tr>
-						<tr class="table_status table_status-lineColor4 table_status-color4">
-							<td class="table_data">9999</td>
-							<td class="table_data">password</td>
-							<td class="table_data table_data-positionLeft"><a href="{$base_url}client/edit/" class="focus" tabindex="1">テスト店舗</a></td>
-							<td class="table_data">090-1234-5678</td>
-							<td class="table_data">神奈川(03)</td>
-							<td class="table_data">20番 <span class="table_data_keep">10枚</span></td>
-							<td class="table_data">25番 <span class="table_data_keep">50枚</span></td>
-							<td class="table_data">100番 <span class="table_data_keep">100枚</span></td>
-							<td class="table_data">100番 <span class="table_data_keep">1000枚</span></td>
-							<td class="table_data table_data-positionLeft">テキストテキスト</td>
-							<td class="table_data"></td>
-							<td class="table_data table_data-status">解約</td>
-						</tr>
+
+							@foreach($shopList as $data)
+							@if($data->id  % 2 == 0)
+								<tr class="table_status table_status-color">
+							@else
+								<tr class="table_status table_status-lineColor4 table_status-color4">
+							@endif
+									<td class="table_data">{{$data->shop_number}}</td>
+									<td class="table_data">{{$data->password}}</td>
+									<td class="table_data table_data-positionLeft"><a href="{$base_url}client/edit/" class="focus" tabindex="1">{{$data->shop_name}}</a></td>
+									<td class="table_data">{{$data->tel}}</td>
+									<td class="table_data">{{$data->area1}}({{$data->area2}})</td>
+									<td class="table_data">{{$data->item1}}<span class="table_data_keep">{{$data->item1_num}}枚</span></td>
+									<td class="table_data">{{$data->item2}}<span class="table_data_keep">{{$data->item2_num}}枚</span></td>
+									<td class="table_data">{{$data->item3}}<span class="table_data_keep">{{$data->item3_num}}枚</span></td>
+									<td class="table_data">{{$data->item4}}<span class="table_data_keep">{{$data->item4_num}}枚</span></td>
+									<td class="table_data table_data-positionLeft">{{$data->Notices}}</td>
+									<td class="table_data">有</td>
+									<td class="table_data">{{$data->contract_status}}</td>
+								</tr>
+							@endforeach
 					</tbody>
 				</table>
 			</div><!-- / block_inner_dataTable -->
