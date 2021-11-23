@@ -43,7 +43,7 @@
 			</li>
 		</ul>
 	</nav> -->
-	<form method="post" action="" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('client.index')}}" class="js-insuranceSearchForm">
 		@csrf
 		<div class="block"><!-- 検索枠 -->
 			<div class="block_inner block_inner-7half">
@@ -62,11 +62,11 @@
 						<tr class="js-inputClear">
 							<th class="table_title table_title-positionCenter">店舗番号</th>
 							<td class="table_data">
-								<input type="text" name="" value="" maxlength="" class="form" placeholder="0000" tabindex="1">
+								<input type="text" name="searchShopNumber" value="" maxlength="" class="form" placeholder="0000" tabindex="1">
 							</td>
 							<th class="table_title table_title-positionCenter">配送地域</th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
+								<select name="searchShopArea" class="form" tabindex="1">
 									<option value="">未選択</option>
 									<option value="0">東京(01)</option>
 									<option value="1">千葉(02)</option>
@@ -79,15 +79,15 @@
 							</td>
 							<th class="table_title table_title-positionCenter">電話番号</th>
 							<td class="table_data">
-								<input type="text" name="" value="" class="form" placeholder="09012345678" tabindex="1">
+								<input type="text" name="searchShopTel" value="" class="form" placeholder="09012345678" tabindex="1">
 							</td>
 							<th class="table_title table_title-positionCenter">店舗名</th>
 							<td class="table_data">
-								<input type="text" name="" value="" class="form" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="searchShopName" value="" class="form" placeholder="ここに入力" tabindex="1">
 							</td>
 							<th class="table_title table_title-positionCenter">契約</th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
+								<select name="searchShopContractStatus" class="form" tabindex="1">
 									<option value="1">契約中</option>
 									<option value="2">解約</option>
 								</select>
@@ -111,7 +111,7 @@
 			<div class="block_inner block_inner-btn block_inner-spaceS">
 				<div class="btn">
 					<p class="btn_box btn_box-color6">
-						<a href="#" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-3"></i>検索</a>
+						<input type="submit" value="検索">
 					</p>
 				</div>
 			</div>
@@ -130,15 +130,17 @@
 			<!-- <div class="block_inner_dataTable"> -->{*<!-- dataTable使用の場合 -->*}
 				<div class="pager">
 				{{$shopList->links()}}
-					<div class="block_inner_page">
-						表示件数：<select name="" class="form form-maxSizeS" tabindex="1">
+				<div class="block_inner_page">
+						<form method="get" action = "{{route('client.index')}}">
+							表示件数：<select name="" class="form form-maxSizeS" tabindex="1">
 							<option value="25">25件</option>
 							<option value="50" selected>50件</option>
 							<option value="75">75件</option>
 							<option value="100">100件</option>
 							<option value="200">200件</option>
-						</select>
-					</div>
+						</form>
+					</select>
+				</div>
 				</div>
 				<table class="table table-list table-center table-borderTopNone table-positionCenter js-dataTable">
 					<!-- <colgroup style="width: 4%;"></colgroup> -->
