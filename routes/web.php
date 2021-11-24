@@ -23,7 +23,8 @@ Route::prefix('admin')->group(function(){
 
 
 Route::prefix('client')->group(function(){
-    Route::match(['get', 'post'], '/index'  ,'ClientController@client_index')           ->name('client.index');
+    Route::get('/index'  ,'ClientController@client_index_get')                          ->name('client.index');
+    Route::post('/index'  ,'ClientController@client_index_post');
     Route::get('/create' ,'ClientController@client_create_get')                         ->name('client.create');
     Route::post('/create' ,'ClientController@client_create_post');
     Route::get('/edit'  ,'ClientController@client_edit_get')                            ->name('client.edit');

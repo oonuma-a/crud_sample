@@ -132,7 +132,7 @@
 				{{$shopList->links()}}
 				<div class="block_inner_page">
 						<form method="get" action = "{{route('client.index')}}">
-							表示件数：<select name="" class="form form-maxSizeS" tabindex="1">
+							表示件数：<select name="paginateValue" class="form form-maxSizeS" tabindex="1" onchange="submit();">
 							<option value="25">25件</option>
 							<option value="50" selected>50件</option>
 							<option value="75">75件</option>

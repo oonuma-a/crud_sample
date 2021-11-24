@@ -11,7 +11,18 @@ class ClientController extends Controller
     /**
     * @param App\Http\Requests\ClientRequest;
     */
-    public function client_index(Request $request)//ClientRequest $request)
+    public function client_index_get(Request $request)//ClientRequest $request)
+    {
+        //表示件数変更
+        if(isset($request->paginateValue)){
+            $shopList = shop::paginate($request->paginateValue);
+            return view('client.index', compact('shopList'));
+        }else{
+            $shopList = shop::paginate(5);
+            return view('client.index', compact('shopList'));
+        }
+    }
+    public function client_index_post(Request $request)//ClientRequest $request)
     {
     //dd($request->all());
     //    $request = (object)$request->getPasswordInputs();
@@ -29,9 +40,7 @@ class ClientController extends Controller
 
     if(isset($request->deleteId)){
         return view('client.index');
-    }else if(isset($request->paginateValue)){
-        return view('client.index');
-    }else if(isset($request->searchShopNumber) || isset($request->earchShopArea) || isset($request->searchShopTel) || isset($request->searchShopName) || isset($request->searchShopContractStatus)){
+    }else{
         //データ検索
         $searchShop = shop::query();
         $searchShopNumber = $request->searchShopNumber;
@@ -40,32 +49,25 @@ class ClientController extends Controller
         $searchShopName = $request->searchShopName;
         $searchShopContractStatus = $request->searchShopContractStatus;
         if(isset($searchShopNum)){
-            $searchShop->where('shop_num', $searchShopNum);
+            $searchShop->where('shop_num','like', '%'.$searchShopNum.'%');
         }
         if(isset($searchShopaArea)){
-            $searchShop->where('area1', $searchShopArea);
+            $searchShop->where('area1','like', '%'.$searchShopArea.'%');
         }
         if(isset($searchShopTel)){
-            $searchShop->where('tel', $searchShopTel);
+            $searchShop->where('tel','like', '%'.$searchShopTel.'%');
         }
         if(isset($searchShopName)){
-            $searchShop->where('shop_name', $searchShopName);
+            $searchShop->where('shop_name','like', '%'.$searchShopName.'%');
         }
         if(isset($searchShopContractStatus)){
-            $searchShop->where('contract_status', $searchShopContractStatus);
+            $searchShop->where('contract_status','like', '%'.$searchShopContractStatus.'%');
         }
-        $shopList = $searchShop->get()->paginate(5);
-            return view('client.index', compact('shopList'));
-    }else{
-            $shopList = shop::paginate(5);
+        $shopList = $searchShop->get();
         return view('client.index', compact('shopList'));
         }
     }
-    
-    //ページ表示
-    // $shopList = shop::paginate(5);
-    //         return view('client.index',compact('shopList'));
-    // }
+
     // return back()->withErrors([
     //     'login_error'=>'ユーザーとパスワードが一致しません。',
     // ]);
