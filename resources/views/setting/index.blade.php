@@ -43,8 +43,9 @@
 			</li>
 		</ul>
 	</nav>
-	<form method="post" action="{{route('setting.index')}}" class="js-insuranceSearchForm">
+	<form method="get" action="{{route('setting.index')}}" class="js-insuranceSearchForm">
 		@csrf
+		<input type="hidden" name="searchSendFlg" value="1">
 		<div class="block block-spaceM"><!-- 検索枠 -->
 			<div class="block_inner block_inner-5">
 				<table class="table">
@@ -88,7 +89,11 @@
 		<div class="block_inner block_inner-7">
 			<!-- <div class="block_inner_dataTable"> -->{*<!-- dataTable使用の場合 -->*}
 				<div class="pager">
-				{{$itemList->links()}}
+				@if(isset($searchList))
+					{{$searchList->appends(request()->input())->links()}}
+				@else
+					{{$itemList->links()}}
+				@endif
 					<div class="block_inner_page">
 						<form action="{{route('setting.index')}}" method="get">
 							表示件数：<select name="paginateValue" class="form form-maxSizeS" tabindex="1" onchange="submit();">
@@ -118,72 +123,76 @@
 						</tr>
 					</thead>
 					<tbody>
-						@if(empty($searchData))
+						@if(isset($searchList))
+							@if(count($searchList) == 0)
+								<tr>
+									<td colspan="5" class="table_data">該当データがありません</td>
+								</tr>
+							@else
+								@foreach($searchList as $item)
+									<tr class="table_status table_status-color">
+										<td class="table_data table_data-btn">
+											<div class="btn">
+												<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
+													<form action="{{route('setting.details')}}" method="post">
+														@csrf
+														<input type="hidden" name="updateFlg" value="1">
+														<input type="hidden" name="updateId" value="{{$item->id}}">
+														<input type="submit"class="focus" tabindex="1" value="編集">
+													</form>
+												</p>
+											</div>
+										</td>
+										<td class="table_data table_data-positionCenter">{{$item->item_number}}</td>
+										<td class="table_data table_data-positionLeft">{{$item->item_name}}</td>
+										<td class="table_data table_data-positionLeft">{{$item->remarks}}</td>
+										<td class="table_data table_data-btn">
+											<div class="btn">
+												<p class="btn_box btn_box-innerSpaceXS btn_box-color">
+													<a href="{{route('setting.index')}}" class="focus" tabindex="1">削除</a>
+												</p>
+											</div>
+										</td>
+									</tr>
+								@endforeach	
+							@endif
+						@else
 							@if(count($itemList) == 0)
 								<tr>
 									<td colspan="5" class="table_data">該当データがありません</td>
 								</tr>
 							@else
 								@foreach($itemList as $item)
-								<tr class="table_status table_status-color">
-									<td class="table_data table_data-btn">
-										<div class="btn">
-											<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
-												<form action="{{route('setting.details')}}">
-													@csrf
-													<!-- <a href="{{route('setting.details')}}" class="focus" tabindex="1">編集</a> -->
-													<input type="hidden" name="updateId" value="{{$item->id}}">
-													<input type="hidden" name="remarks" value="{{$item->remarks}}">
-													<input type="submit" value="編集" class="focus">
-												</form>
-											</p>
-										</div>
-									</td>
-									<td class="table_data table_data-positionCenter"><input type="text" name="{{$item->item_number}}" value="" class="form" readonly></td>
-									<td class="table_data table_data-positionLeft">{{$item->item_name}}</td>
-									<td class="table_data table_data-positionLeft">{{$item->remarks}}</td>
-									<td class="table_data table_data-btn">
-										<div class="btn">
-											<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-												<form action="{{route('setting.index')}}" method="post">
-													@csrf
-													<input type="hidden" name="deleteId" value="{{$item->id}}">
-													<input type="submit" class="focus" value="削除">
-												</form>
-												<!-- <a href="{{route('setting.index')}}" class="focus" tabindex="1">削除</a> -->
-											</p>
-										</div>
-									</td>
-								</tr>
-								@endforeach
-							@endif
-						@else
-							@if(count($searchData) == 0)
-								<tr>
-									<td colspan="5" class="table_data">該当データがありません</td>
-								</tr>
-							@else
-								@foreach($searchData as $item)
-								<tr class="table_status table_status-color">
-									<td class="table_data table_data-btn">
-										<div class="btn">
-											<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
-												<a href="{{route('setting.details')}}" class="focus" tabindex="1">編集</a>
-											</p>
-										</div>
-									</td>
-									<td class="table_data table_data-positionCenter"><input type="text" name="{{$item->item_number}}" value="" class="form" readonly></td>
-									<td class="table_data table_data-positionLeft">{{$item->item_name}}</td>
-									<td class="table_data table_data-positionLeft">{{$item->remarks}}</td>
-									<td class="table_data table_data-btn">
-										<div class="btn">
-											<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-												<a href="{{route('setting.index')}}" class="focus" tabindex="1">削除</a>
-											</p>
-										</div>
-									</td>
-								</tr>
-								@endforeach							
+									<tr class="table_status table_status-color">
+										<td class="table_data table_data-btn">
+											<div class="btn">
+												<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
+													<form action="{{route('setting.details')}}" method="get">
+														@csrf
+														<input type="hidden" name="updateFlg" value="1">
+														<input type="hidden" name="updateId" value="{{$item->id}}">
+														<input type="submit"class="focus" tabindex="1" value="編集">
+													</form>
+												</p>
+											</div>
+										</td>
+										<td class="table_data table_data-positionCenter">{{$item->item_number}}</td>
+										<td class="table_data table_data-positionLeft">{{$item->item_name}}</td>
+										<td class="table_data table_data-positionLeft">{{$item->remarks}}</td>
+										<td class="table_data table_data-btn">
+											<div class="btn">
+												<p class="btn_box btn_box-innerSpaceXS btn_box-color">
+													<form action="{{route('setting.index')}}" method="post">
+														@csrf
+														<input type="hidden" name="deleteFlg" value="1">
+														<input type="hidden" name="deleteId" value="{{$item->id}}">
+														<input type="submit" value="削除">
+													</form>
+												</p>
+											</div>
+										</td>
+									</tr>
+								@endforeach	
 							@endif
 						@endif
 					</tbody>

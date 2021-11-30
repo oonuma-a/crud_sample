@@ -8,21 +8,14 @@ class SettingController extends Controller
 {
     public function setting_index_get(Request $request){
         //表示件数変更
+        // dd($request->all());
         if(isset($request->paginateValue)){
             $paginateValue = $request->paginateValue;
             $itemList = Item::paginate($paginateValue);
             return view('setting.index', compact('itemList'));
-        }else{
+        }else if(isset($request->searchSendFlg)){
             $itemList = Item::paginate(5);
-            return view('setting.index', compact('itemList'));
-        }
-    }
-    public function setting_index_post(Request $request){
-        if(isset($request->deleteId)){
-            $deleteId = Item::find($request->deleteId)->delete();
-            $itemList = Item::paginate(5);
-            return view('setting.index', compact('itemList'));
-        }else{
+            $request->all();
             $searchItem = Item::query();
             $searchNumber = $request->searchItemNumber;
             $searchName = $request->searchItemName;
@@ -32,8 +25,25 @@ class SettingController extends Controller
             if(!empty($searchName)){
                 $searchItem->where('item_name','like','%'.$searchName.'%');
             }
-            $searchData = $searchItem->get();
-            return view('setting.index', compact('searchData'));
+            $searchList = $searchItem->paginate(5);
+            return view('setting.index', compact('searchList'));
+        }else{
+            $itemList = Item::paginate(5);
+            return view('setting.index', compact('itemList'));
+        }
+        // else if(empty($request->all)){
+        //     $itemList = Item::paginate(5);
+        //     return view('setting.index', compact('itemList'));
+        // }
+    }
+    public function setting_index_post(Request $request){
+        if(isset($request->deleteFlg)){
+            $deleteId = Item::find($request->deleteId)->delete();
+            $itemList = Item::paginate(5);
+            return view('setting.index', compact('itemList'));
+        }else{
+            $itemList = Item::paginate(5);
+            return view('setting.index', compact('itemList'));
         }
     }
     public function setting_create_get(Request $request){
@@ -53,10 +63,11 @@ class SettingController extends Controller
         return view('setting.details', compact('updateData'));
     }
     public function setting_details_post(Request $request){
-        $getUpdateData = $request->all();
-        unset($getUpdateData['_token']);
-        $updateData = Item::find($request->id);
-        $updateData->fill($getUpdateData)->save();
-        return view('setting.details', compact('updateData'));
+            $getUpdateData = $request->all();
+            unset($getUpdateData['_token']);
+            $updateData = Item::find($request->updateId);
+            $updateData->fill($getUpdateData)->save();
+            return view('setting.details', compact('updateData'));
+
     }
 }

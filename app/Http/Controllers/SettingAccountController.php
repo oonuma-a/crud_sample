@@ -24,7 +24,7 @@ class SettingAccountController extends Controller
     }
     public function setting_account_post(Request $request){  
         //検索アカウント一覧表示処理
-        if(isset($request->accountSeach)){
+        if(isset($request->accountSearch)){
             $accountSearch = Users::query();
             $searchAuthority = $request->searchAuthority;
             $searchDisplayName = $request->searchDisplayName;

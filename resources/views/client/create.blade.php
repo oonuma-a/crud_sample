@@ -17,7 +17,7 @@
 	</div>
 </div>
 <div class="contents"><!-- CONTENTS -->
-	<form method="post" action="" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('client.create')}}" class="js-insuranceSearchForm">
 		<div class="block">
 			<div class="block_inner block_inner-7">
 <!-- 				<table class="table table-borderLeftNone table-form table-borderBottomNone">
@@ -47,25 +47,25 @@
 						<tr>
 							<th class="table_title"><div class="table_title_required">店舗番号<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<input type="tel" name="" value="" class="form form-maxSizeL" placeholder="ここに入力" tabindex="1">
+								<input type="tel" name="shop_number" value="" class="form form-maxSizeL" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">店舗名<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<input type="text" name="" value="" class="form" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="shop_name" value="" class="form" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">パスワード<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<input type="text" name="" value="" class="form form-maxSizeL" tabindex="1">
+								<input type="text" name="password" value="" class="form form-maxSizeL" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">配達エリア<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<select name="" class="form form-maxSizeL" tabindex="1">
+								<select name="area1" class="form form-maxSizeL" tabindex="1">
 									<option value="">未選択</option>
 									<option value="0">東京</option>
 									<option value="1">千葉</option>
@@ -75,7 +75,7 @@
 									<option value="5">群馬</option>
 									<option value="6">栃木</option>
 								</select>
-								<select name="" class="form form-maxSizeL" tabindex="1">
+								<select name="area2" class="form form-maxSizeL" tabindex="1">
 									<option value="">未選択</option>
 									<option value="0">01</option>
 									<option value="1">02</option>
@@ -90,12 +90,12 @@
 						<tr>
 							<th class="table_title" rowspan="2"><div class="table_title_required">住所<span>必須</span></div></th>
 							<td colspan="3" class="table_data table_data-borderBottomNone table_data-spaceBottomNone">
-								<input type="text" name="" value="" class="form form-maxSizeL js-zip" placeholder="2770042" tabindex="1">※ハイフン（&ndash;）無しで入力してください
+								<input type="text" name="zip_code" value="" class="form form-maxSizeL js-zip" placeholder="2770042" tabindex="1">※ハイフン（&ndash;）無しで入力してください
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3" class="table_data">
-								<input type="text" name="" value="" class="form js-adrs3" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="address" value="" class="form js-adrs3" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 
@@ -104,7 +104,7 @@
 						<tr>
 							<th class="table_title"><div class="table_title_required">電話番号<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<input type="text" name="" value="" class="form form-maxSizeL" placeholder="09012345678" tabindex="1">※ハイフン（&ndash;）無しで入力してください
+								<input type="text" name="tel" value="" class="form form-maxSizeL" placeholder="09012345678" tabindex="1">※ハイフン（&ndash;）無しで入力してください
 							</td>
 						</tr>
 						<tr>
@@ -129,7 +129,7 @@
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品①<span>必須</span></div></th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
+								<select name="item1" class="form" tabindex="1">
 									<option value="">未選択</option>
 									<option value="0">丸網・太線（28cm）</option>
 									<option value="1">丸網・細線（28cm）</option>
@@ -151,7 +151,7 @@
 							<td class="table_data">
 								<div class="formList formList-inlineBlock">
 									<div class="formList_item">
-										<input type="checkbox" name="item1" value="1" id="item1" class="js-regularlyBtn" tabindex="1">
+										<input type="checkbox" name="xxxitem1" value="1" id="item1" class="js-regularlyBtn" tabindex="1">
 										<label for="item1"></label><div class="formList_item_checkBox"></div>
 									</div>
 								</div>
@@ -209,7 +209,7 @@
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品③</div></th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
+								<select name="item1" class="form" tabindex="1">
 									<option value="">未選択</option>
 									<option value="0">丸網・太線（28cm）</option>
 									<option value="1">丸網・細線（28cm）</option>

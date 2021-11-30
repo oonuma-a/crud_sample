@@ -43,9 +43,11 @@
 			</li>
 		</ul>
 	</nav> -->
-	<form method="post" action="{{route('client.index')}}" class="js-insuranceSearchForm">
+	<!-- 検索枠 -->
+	<form method="post" action="{{route('client.index')}}" class="js-insuranceSearchForm" name="clientSearch">
 		@csrf
-		<div class="block"><!-- 検索枠 -->
+		<input type="hidden" name="searchFlg" value="1">
+		<div class="block">
 			<div class="block_inner block_inner-7half">
 				<table class="table">
 					<colgroup style="width: 8%"></colgroup>
@@ -129,7 +131,7 @@
 		<div class="block_inner">
 			<!-- <div class="block_inner_dataTable"> -->{*<!-- dataTable使用の場合 -->*}
 				<div class="pager">
-				{{$shopList->links()}}
+				{{$shopList->links() }}
 				<div class="block_inner_page">
 						<form method="get" action = "{{route('client.index')}}">
 							表示件数：<select name="paginateValue" class="form form-maxSizeS" tabindex="1" onchange="submit();">

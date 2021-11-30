@@ -28,7 +28,7 @@
 					<colgroup style="width: 80%"></colgroup>
 					<tbody>
 						<tr>
-							<input type="hidden" name="id" value="{{$updateData->id}}">
+							<input type="hidden" name="updateId" value="{{$updateData->id}}">
 							<th class="table_title"><div class="table_title_required">商品番号<span>必須</span></div></th>
 							<td class="table_data">
 								<input type="text" name="item_number" value="{{$updateData->item_number}}" class="form form-maxSizeL" placeholder="ここに入力" tabindex="1">
