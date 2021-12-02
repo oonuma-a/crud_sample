@@ -18,9 +18,9 @@ class CreateItem extends Migration
             $table->integer('item_number',false,false)->unsigned();
             $table->string('item_name',2);
             $table->text('remarks',100)                  ->default(null)->nullable() ;
-            $table->date('inserted_at',200)->useCurrent();
-            $table->date('updated_at')     ->useCurrent()->default(null)->nullable() ;
-            $table->date('deleted_at', 2)  ->useCurrent()->default(null)->nullable() ;
+            $table->timestamp('inserted_at',200)->useCurrent();
+            $table->timestamp('updated_at')     ->useCurrent()->default(null)->nullable() ;
+            $table->timestamp('deleted_at', 2)  ->useCurrent()->default(null)->nullable() ;
         });
     }
 

@@ -21,9 +21,9 @@ class CreateTable extends Migration
             $table->string('name',200)                                        ;
             $table->text('password')                                          ;
             $table->integer('user_status',false,false)      ->default('1')    ;
-            $table->datetime('inserted_at')   ->useCurrent()                  ;
-            $table->datetime('updated_at')    ->useCurrent()->default(null)  ->nullable();
-            $table->datetime('deleted_at')    ->useCurrent()->default(null)  ->nullable();
+            $table->timestamp('inserted_at')   ->useCurrent()                  ;
+            $table->timestamp('updated_at')    ->useCurrent()->default(null)  ->nullable();
+            $table->timestamp('deleted_at')    ->useCurrent()->default(null)  ->nullable();
         });
         
     }

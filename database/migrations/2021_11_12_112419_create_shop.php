@@ -22,7 +22,7 @@ class CreateShop extends Migration
             $table->integer('area2',false,false)->unsigned()->length(10);
             $table->char('zip_code',false,false)->length(7);    
             $table->text('address');
-            $table->string('tel');
+            $table->string('tel',13);
             $table->integer('contract_status',false,false)->unsigned()->length(1)->default(1);
             $table->integer('item1',false,false)->unsigned()->length(10);
             $table->integer('item2',false,false)->unsigned()->length(10)->default(null)->nullable();
@@ -42,9 +42,9 @@ class CreateShop extends Migration
             $table->integer('item4_num',false,false)->unsigned()->length(10)->default(null)->nullable();
             $table->text('Notices')->default(null)->nullable();
             $table->text('remarks')->default(null)->nullable();
-            $table->date('inserted_at')->useCurrent();
-            $table->date('updated_at')->useCurrent()->default(null)->nullable();
-            $table->date('deleted_at')->useCurrent()->default(null)->nullable();
+            $table->timestamp('inserted_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->default(null)->nullable();
+            $table->timestamp('deleted_at')->useCurrent()->default(null)->nullable();
         });
     }
 

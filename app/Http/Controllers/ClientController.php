@@ -82,35 +82,12 @@ class ClientController extends Controller
     }
     public function client_create_post(Request $request)
     {
-        dd($request->all());
-        if(isset($request->deleteId)){
-            return view('client.create');
-        }else if(isset($request->searchFlg)){
-            //データ検索
-            $searchShop = shop::query();
-            $searchShopNumber = $request->searchShopNumber;
-            $searchShopArea = $request->searchShopArea;
-            $searchShopTel = $request->searchShopTel;
-            $searchShopName = $request->searchShopName;
-            $searchShopContractStatus = $request->searchShopContractStatus;
-            if(isset($searchShopNum)){
-                $searchShop->where('shop_num', $searchShopNum);
-            }
-            if(isset($searchShopaArea)){
-                $searchShop->where('area1', $searchShopArea);
-            }
-            if(isset($searchShopTel)){
-                $searchShop->where('tel', $searchShopTel);
-            }
-            if(isset($searchShopName)){
-                $searchShop->where('shop_name', $searchShopName);
-            }
-            if(isset($searchShopContractStatus)){
-                $searchShop->where('contract_status', $searchShopContractStatus);
-            }
-            $shopList = $searchShop->get();
-                return view('client.create', compact('shopList'));
-        }
+        $shopCreate = $request->all();
+        unset($shopCreate['_token']);
+        $shopData = new shop;
+        $shopData->fill($shopCreate)->save();
+        return view('client.create');
+
     }
     public function client_edit_get(Request $request)
     {
