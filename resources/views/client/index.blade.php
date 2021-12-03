@@ -44,7 +44,7 @@
 		</ul>
 	</nav> -->
 	<!-- 検索枠 -->
-	<form method="post" action="{{route('client.index')}}" class="js-insuranceSearchForm" name="clientSearch">
+	<form method="get" action="{{route('client.index')}}" class="js-insuranceSearchForm" name="clientSearch">
 		@csrf
 		<input type="hidden" name="searchFlg" value="1">
 		<div class="block">
@@ -131,9 +131,14 @@
 		<div class="block_inner">
 			<!-- <div class="block_inner_dataTable"> -->{*<!-- dataTable使用の場合 -->*}
 				<div class="pager">
-				{{$shopList->links() }}
+				@if(isset($searchList))
+					{{$searchList->appends(request()->input())->links()}}
+				@else
+					{{$shopList->links() }}
+				@endif
 				<div class="block_inner_page">
 						<form method="get" action = "{{route('client.index')}}">
+							@csrf
 							表示件数：<select name="paginateValue" class="form form-maxSizeS" tabindex="1" onchange="submit();">
 							<option value="25">25件</option>
 							<option value="50" selected>50件</option>
@@ -173,9 +178,6 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td colspan="12" class="table_data">該当データがありません</td>
-						</tr>
 <!-- 							<td class="table_data table_data-btn">
 								<div class="btn">
 									<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
@@ -190,27 +192,65 @@
 									</p>
 								</div>
 							</td> -->
-
-							@foreach($shopList as $data)
-							@if($data->id  % 2 == 0)
-								<tr class="table_status table_status-color">
+							@if(isset($searchList))
+								@if(count($searchList) == 0 )
+									<tr>
+										<td colspan="12" class="table_data">該当データがありません</td>
+									</tr>
+								@else
+									@foreach($searchList as $data)
+										@if($loop->iteration  % 2 == 0)
+											<tr class="table_status table_status-lineColor4 table_status-color4">
+										@else
+											<tr class="table_status table_status-color">
+										@endif
+											<td class="table_data">{{$data->shop_number}}</td>
+											<td class="table_data">{{$data->password}}</td>
+											<td class="table_data table_data-positionLeft">
+											<a href="{{route('client.edit')}}?" onclick ="document.clientEdit.submit();" class="focus" tabindex="1">{{$data->shop_name}}</a>
+												<form action="{{route('client.edit')}}" method="get" name="clientEdit">
+													<input type="hidden" name="editId" value="{{$data->id}}">
+												</form>
+											</td>
+											<td class="table_data">{{$data->tel}}</td>
+											<td class="table_data">{{$data->area1}}({{$data->area2}})</td>
+											<td class="table_data">{{$data->item1}}<span class="table_data_keep">{{$data->item1_num}}枚</span></td>
+											<td class="table_data">{{$data->item2}}<span class="table_data_keep">{{$data->item2_num}}枚</span></td>
+											<td class="table_data">{{$data->item3}}<span class="table_data_keep">{{$data->item3_num}}枚</span></td>
+											<td class="table_data">{{$data->item4}}<span class="table_data_keep">{{$data->item4_num}}枚</span></td>
+											<td class="table_data table_data-positionLeft">{{$data->Notices}}</td>
+											<td class="table_data">有</td>
+											<td class="table_data">{{$data->contract_status}}</td>
+										</tr>
+									@endforeach
+								@endif
 							@else
-								<tr class="table_status table_status-lineColor4 table_status-color4">
+								@foreach($shopList as $data)
+									@if($data->id  % 2 == 0)
+										<tr class="table_status table_status-color">
+									@else
+										<tr class="table_status table_status-lineColor4 table_status-color4">
+									@endif
+										<td class="table_data">{{$data->shop_number}}</td>
+										<td class="table_data">{{$data->password}}</td>
+										<td class="table_data table_data-positionLeft">
+											<a href="{{route('client.edit')}}?" onclick ="document.clientEdit.submit();" class="focus" tabindex="1">{{$data->shop_name}}</a>
+												<form action="{{route('client.edit')}}" method="post" name="clientEdit">
+													<input type="hidden" name="editId" value="{{$data->id}}">
+												</form>
+										</td>
+										<td class="table_data">{{$data->tel}}</td>
+										<td class="table_data">{{$data->area1}}({{$data->area2}})</td>
+										<td class="table_data">{{$data->item1}}<span class="table_data_keep">{{$data->item1_num}}枚</span></td>
+										<td class="table_data">{{$data->item2}}<span class="table_data_keep">{{$data->item2_num}}枚</span></td>
+										<td class="table_data">{{$data->item3}}<span class="table_data_keep">{{$data->item3_num}}枚</span></td>
+										<td class="table_data">{{$data->item4}}<span class="table_data_keep">{{$data->item4_num}}枚</span></td>
+										<td class="table_data table_data-positionLeft">{{$data->Notices}}</td>
+										<td class="table_data">有</td>
+										<td class="table_data">{{$data->contract_status}}</td>
+									</tr>
+								@endforeach
 							@endif
-									<td class="table_data">{{$data->shop_number}}</td>
-									<td class="table_data">{{$data->password}}</td>
-									<td class="table_data table_data-positionLeft"><a href="{$base_url}client/edit/" class="focus" tabindex="1">{{$data->shop_name}}</a></td>
-									<td class="table_data">{{$data->tel}}</td>
-									<td class="table_data">{{$data->area1}}({{$data->area2}})</td>
-									<td class="table_data">{{$data->item1}}<span class="table_data_keep">{{$data->item1_num}}枚</span></td>
-									<td class="table_data">{{$data->item2}}<span class="table_data_keep">{{$data->item2_num}}枚</span></td>
-									<td class="table_data">{{$data->item3}}<span class="table_data_keep">{{$data->item3_num}}枚</span></td>
-									<td class="table_data">{{$data->item4}}<span class="table_data_keep">{{$data->item4_num}}枚</span></td>
-									<td class="table_data table_data-positionLeft">{{$data->Notices}}</td>
-									<td class="table_data">有</td>
-									<td class="table_data">{{$data->contract_status}}</td>
-								</tr>
-							@endforeach
 					</tbody>
 				</table>
 			</div><!-- / block_inner_dataTable -->

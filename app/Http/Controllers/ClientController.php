@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\shop;
 
@@ -17,6 +16,30 @@ class ClientController extends Controller
         if(isset($request->paginateValue)){
             $shopList = shop::paginate($request->paginateValue);
             return view('client.index', compact('shopList'));
+        }else if(isset($request->searchFlg)){
+            $searchShop = shop::query();
+            $searchShopNumber = $request->searchShopNumber;
+            $searchShopArea = $request->searchShopArea;
+            $searchShopTel = $request->searchShopTel;
+            $searchShopName = $request->searchShopName;
+            $searchShopContractStatus = $request->searchShopContractStatus;
+            if(isset($searchShopNumber)){
+                $searchShop->where('shop_number','like','%'.$searchShopNumber.'%');
+            }
+            if(isset($searchShopArea)){
+                $searchShop->where('area1','like','%'.$searchShopArea.'%');
+            }
+            if(isset($searchShopTel)){
+                $searchShop->where('tel','like','%'.$searchShopTel.'%');
+            }
+            if(isset($searchShopName)){
+                $searchShop->where('shop_name','like','%'.$searchShopName.'%');
+            }
+            if(isset($searchShopContractStatus)){
+                $searchShop->where('contract_status','like','%'.$searchShopContractStatus.'%');
+            }
+            $searchList = $searchShop->paginate(5);
+            return view('client.index', compact('searchList'));
         }else{
             $shopList = shop::paginate(5);
             return view('client.index', compact('shopList'));
@@ -91,10 +114,12 @@ class ClientController extends Controller
     }
     public function client_edit_get(Request $request)
     {
+        dd($request->all());
         return view('client.edit');
     }
     public function client_edit_post(Request $request)
     {
+        dd($request->all());
         return view('client.edit');
     }
     public function client_handled_get(Request $request)

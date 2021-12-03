@@ -14,8 +14,7 @@ class SettingController extends Controller
             $itemList = Item::paginate($paginateValue);
             return view('setting.index', compact('itemList'));
         }else if(isset($request->searchSendFlg)){
-            $itemList = Item::paginate(5);
-            $request->all();
+        //検索
             $searchItem = Item::query();
             $searchNumber = $request->searchItemNumber;
             $searchName = $request->searchItemName;
@@ -28,6 +27,7 @@ class SettingController extends Controller
             $searchList = $searchItem->paginate(5);
             return view('setting.index', compact('searchList'));
         }else{
+        //その他（通常の表示）
             $itemList = Item::paginate(5);
             return view('setting.index', compact('itemList'));
         }

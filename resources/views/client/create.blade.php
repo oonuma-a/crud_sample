@@ -313,7 +313,7 @@
 			<div class="block_inner block_inner-7">
 				<ul class="btn">
 					<li class="btn_box btn_box-sizeS btn_box-inline btn_box-color">
-						<a href="javascript:history.back();" class="focus" tabindex="1"><i class="btn_icon btn_icon-4"></i>戻る</a>
+						<a href="{{route('client.index')}}" class="focus" tabindex="1"><i class="btn_icon btn_icon-4"></i>戻る</a>
 					</li>
 					<li class="btn_box btn_box-sizeS btn_box-inline btn_box-color1">
 						<a href="javascript:formCreate.submit()" class="focus" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a>
