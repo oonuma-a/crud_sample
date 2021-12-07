@@ -113,7 +113,7 @@
 			<div class="block_inner block_inner-btn block_inner-spaceS">
 				<div class="btn">
 					<p class="btn_box btn_box-color6">
-						<input type="submit" value="検索">
+					<a href="javascript:clientSearch.submit()" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-3"></i>検索</a>
 					</p>
 				</div>
 			</div>
@@ -139,12 +139,24 @@
 				<div class="block_inner_page">
 						<form method="get" action = "{{route('client.index')}}">
 							@csrf
-							表示件数：<select name="paginateValue" class="form form-maxSizeS" tabindex="1" onchange="submit();">
-							<option value="25">25件</option>
-							<option value="50" selected>50件</option>
-							<option value="75">75件</option>
-							<option value="100">100件</option>
-							<option value="200">200件</option>
+							表示件数：<select name="paginateValue" id="paginateValue" class="form form-maxSizeS" tabindex="1" onchange="submit();">
+							@if(isset($pageValue))
+								<option value="{{$pageValue}}">{{$pageValue}}件</option>
+								@foreach($paginateArray as $page)
+									@if($page == $pageValue)
+									@continue
+									@else
+										<option value="{{$page}}">{{$page}}件</option>
+									@endif
+								@endforeach
+							@else
+								<option value="5">5件</option>
+								<option value="25">25件</option>
+								<option value="50">50件</option>
+								<option value="75">75件</option>
+								<option value="100">100件</option>
+								<option value="200">200件</option>
+							@endif
 						</form>
 					</select>
 				</div>
@@ -207,10 +219,11 @@
 											<td class="table_data">{{$data->shop_number}}</td>
 											<td class="table_data">{{$data->password}}</td>
 											<td class="table_data table_data-positionLeft">
-											<a href="{{route('client.edit')}}?" onclick ="document.clientEdit.submit();" class="focus" tabindex="1">{{$data->shop_name}}</a>
-												<form action="{{route('client.edit')}}" method="get" name="clientEdit">
-													<input type="hidden" name="editId" value="{{$data->id}}">
-												</form>
+											<form action="{{route('client.edit')}}" method="post" name="clientEdit">
+												@csrf
+												<input type="hidden" name="editId" value="{{$data->id}}">
+												<a href="javascript:clientEdit.submit()" class="focus" tabindex="1">{{$data->shop_name}}</a>
+											</form>
 											</td>
 											<td class="table_data">{{$data->tel}}</td>
 											<td class="table_data">{{$data->area1}}({{$data->area2}})</td>
@@ -219,14 +232,26 @@
 											<td class="table_data">{{$data->item3}}<span class="table_data_keep">{{$data->item3_num}}枚</span></td>
 											<td class="table_data">{{$data->item4}}<span class="table_data_keep">{{$data->item4_num}}枚</span></td>
 											<td class="table_data table_data-positionLeft">{{$data->Notices}}</td>
-											<td class="table_data">有</td>
-											<td class="table_data">{{$data->contract_status}}</td>
+											<td class="table_data">
+												@if(1 == $data->item1_regular_flg ?? 1 == $data->item2_regular_flg ?? 1 == $data->item3_regular_flg ?? 1 == $data->item4_regular_flg)
+													有
+												@else
+													無
+												@endif
+											</td>
+											<td class="table_data">
+												@if($data->contract_status == 1)
+													有
+												@else
+													無
+												@endif
+											</td>
 										</tr>
 									@endforeach
 								@endif
 							@else
 								@foreach($shopList as $data)
-									@if($data->id  % 2 == 0)
+									@if($loop->iteration  % 2 == 1)
 										<tr class="table_status table_status-color">
 									@else
 										<tr class="table_status table_status-lineColor4 table_status-color4">
@@ -234,10 +259,12 @@
 										<td class="table_data">{{$data->shop_number}}</td>
 										<td class="table_data">{{$data->password}}</td>
 										<td class="table_data table_data-positionLeft">
-											<a href="{{route('client.edit')}}?" onclick ="document.clientEdit.submit();" class="focus" tabindex="1">{{$data->shop_name}}</a>
-												<form action="{{route('client.edit')}}" method="post" name="clientEdit">
-													<input type="hidden" name="editId" value="{{$data->id}}">
-												</form>
+											<form action="{{route('client.edit')}}" method="post" name="clientEdit">
+												@csrf
+												<input type="hidden" name="editId" value="{{$data->id}}">
+												<a href="javascript:clientEdit.submit()" class="focus" tabindex="1">{{$data->shop_name}}</a>
+												<input type="submit" value="a">
+											</form>
 										</td>
 										<td class="table_data">{{$data->tel}}</td>
 										<td class="table_data">{{$data->area1}}({{$data->area2}})</td>
@@ -246,8 +273,20 @@
 										<td class="table_data">{{$data->item3}}<span class="table_data_keep">{{$data->item3_num}}枚</span></td>
 										<td class="table_data">{{$data->item4}}<span class="table_data_keep">{{$data->item4_num}}枚</span></td>
 										<td class="table_data table_data-positionLeft">{{$data->Notices}}</td>
-										<td class="table_data">有</td>
-										<td class="table_data">{{$data->contract_status}}</td>
+										<td class="table_data">
+											@if(1 == $data->item1_regular_flg ?? 1 == $data->item2_regular_flg ?? 1 == $data->item3_regular_flg ?? 1 == $data->item4_regular_flg)
+												有
+											@else
+												無
+											@endif
+										</td>
+										<td class="table_data">
+											@if($data->contract_status == 1)
+												有
+											@else
+												無
+											@endif
+										</td>
 									</tr>
 								@endforeach
 							@endif
@@ -259,4 +298,8 @@
 </div><!-- / CONTENTS -->
 </section><!-- / SECTION -->
 </div><!-- / B-CONTENTS -->
+<script>
+	// let select = document.getElementById("paginateValue");
+	// select.options[1].selected = true;
+</script>
 @endsection

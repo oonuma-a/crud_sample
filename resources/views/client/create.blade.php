@@ -17,8 +17,9 @@
 	</div>
 </div>
 <div class="contents"><!-- CONTENTS -->
-	<form method="post" action="{{route('client.create')}}" name="formCreate" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('client.index')}}" name="formCreate" class="js-insuranceSearchForm">
 		@csrf
+		<input type="hidden" name="createFlg" value="1">
 		<div class="block">
 			<div class="block_inner block_inner-7">
 <!-- 				<table class="table table-borderLeftNone table-form table-borderBottomNone">
@@ -117,11 +118,11 @@
 										<label for="no_recruiter">入力なし</label><div class="formList_item_checkBox"></div>
 									</li> -->
 									<li class="formList_item js-clearSpecial">
-										<input type="radio" name="upid" value="1" id="upid1" tabindex="1" checked>
+										<input type="radio" name="contract_status" value="1" id="upid1" tabindex="1" checked>
 										<label for="upid1">契約中</label><div class="formList_item_check"></div>
 									</li>
 									<li class="formList_item js-clearSpecial">
-										<input type="radio" name="upid" value="2" id="upid2" tabindex="1">
+										<input type="radio" name="contract_status" value="2" id="upid2" tabindex="1">
 										<label for="upid2">解約</label><div class="formList_item_check"></div>
 									</li>
 								</ul>
@@ -150,20 +151,15 @@
 							</td>
 							<th class="table_title table_title-positionCenter">定期配送</th>
 							<td class="table_data">
-								<div class="formList formList-inlineBlock">
-									<div class="formList_item">
-										<input type="checkbox" name="item1_regular_flg" value="1" id="item1" class="js-regularlyBtn" tabindex="1">
-										<label for="item1"></label><div class="formList_item_checkBox"></div>
-									</div>
-								</div>
 								<div class="js-regularly">
-									<select name="item1_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1" disabled>
+									<input type="checkbox" name="item1_regular_flg" value="1" id="item1" tabindex="1">
+									<select name="item1_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1">
 										<option value="0">未選択</option>
 										<option value="1">毎日</option>
 										<option value="2">毎週</option>
 										<option value="3">毎月</option>
 									</select>
-									<span class="js-displayNone"><input type="text" name="item1_num" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1" disabled>枚</span>
+									<input type="text" name="item1_num" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1">枚
 								</div>
 							</td>
 						</tr>
@@ -190,20 +186,17 @@
 							</td>
 							<th class="table_title table_title-positionCenter">定期配送</th>
 							<td class="table_data">
-								<div class="formList formList-inlineBlock">
-									<div class="formList_item">
-										<input type="checkbox" name="item2_regular_flg" value="1" id="item2" class="js-regularlyBtn" tabindex="1">
-										<label for="item2"></label><div class="formList_item_checkBox"></div>
-									</div>
-								</div>
 								<div class="js-regularly">
-									<select name="item2_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1" disabled>
+									<input type="checkbox" name="item1_regular_flg" value="1" id="item2" tabindex="1">
+									<select name="item2_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1">
 										<option value="0">未選択</option>
 										<option value="1">毎日</option>
 										<option value="2">毎週</option>
 										<option value="3">毎月</option>
 									</select>
-									<span class="js-displayNone"><input type="text" name="item2_num" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1" disabled>枚</span>
+									<span>
+										<input type="text" name="item2_num" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1">枚
+									</span>
 								</div>
 							</td>
 						</tr>
@@ -230,20 +223,17 @@
 							</td>
 							<th class="table_title table_title-positionCenter">定期配送</th>
 							<td class="table_data">
-								<div class="formList formList-inlineBlock">
-									<div class="formList_item">
-										<input type="checkbox" name="item3_regular_flg" value="1" id="item1_regular_flg" class="js-regularlyBtn" tabindex="1">
-										<label for="item1_regular_flg"></label><div class="formList_item_checkBox"></div>
-									</div>
-								</div>
 								<div class="js-regularly">
-									<select name="item3_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1" disabled>
+									<input type="checkbox" name="item1_regular_flg" value="1" id="item3" tabindex="1">
+									<select name="item3_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1">
 										<option value="0">未選択</option>
 										<option value="1">毎日</option>
 										<option value="2">毎週</option>
 										<option value="3">毎月</option>
 									</select>
-									<span class="js-displayNone"><input type="text" name="item3_num" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1" disabled>枚</span>
+									<span>
+										<input type="text" name="item3_num" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1">枚
+									</span>
 								</div>
 							</td>
 						</tr>
@@ -270,20 +260,17 @@
 							</td>
 							<th class="table_title table_title-positionCenter">定期配送</th>
 							<td class="table_data">
-								<div class="formList formList-inlineBlock">
-									<div class="formList_item">
-										<input type="checkbox" name="item4_regular_flg" value="1" id="item4" class="js-regularlyBtn" tabindex="1">
-										<label for="item4"></label><div class="formList_item_checkBox"></div>
-									</div>
-								</div>
 								<div class="js-regularly">
-									<select name="item4_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1" disabled>
+									<input type="checkbox" name="item1_regular_flg" value="1" id="item4" tabindex="1">
+									<select name="item4_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1">
 										<option value="0">未選択</option>
 										<option value="1">毎日</option>
 										<option value="2">毎週</option>
 										<option value="3">毎月</option>
 									</select>
-									<span class="js-displayNone"><input type="text" name="item4_num" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1" disabled>枚</span>
+									<span>
+										<input type="text" name="item4_num" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1">枚
+									</span>
 								</div>
 							</td>
 						</tr>
@@ -330,37 +317,37 @@
 </div><!-- /L-WRAPPER  -->
 {literal}
 <script>
-$(function() {
-	$('.js-zip').jpostal({
-		postcode : [
-				'.js-zip'	//郵便番号
-		],
-		address : {
-				'.js-adrs3'  : '%3%4%5'	//都道府県
-		}
-	});
+// $(function() {
+// 	$('.js-zip').jpostal({
+// 		postcode : [
+// 				'.js-zip'	//郵便番号
+// 		],
+// 		address : {
+// 				'.js-adrs3'  : '%3%4%5'	//都道府県
+// 		}
+// 	});
 	//定期配送
-	$('.js-regularlyBtn').on('click', function(){
-		var checked = $(this).prop("checked");
-		var elem = $(this).closest('.table_data').find('.js-regularly');
-		elem.find('input,select').prop('disabled', true);
-		elem.find('.js-displayNone').hide();
-		if(checked) {
-			elem.find('input,select').prop('disabled', false);
-		}else{
-			elem.find('input').val('');
-			elem.find('select').each(function() {
-				this.selectedIndex  = 0;
-			});
-		}
-	});
-	$('.js-regularly select').on('change', function(){
-		var data = $(this).find('option:selected').val();
-		$(this).next('.js-displayNone').hide();
-		if(data != '' && data != '0') $(this).next('.js-displayNone').show();
-	});
+	// $('.js-regularlyBtn').on('click', function(){
+	// 	var checked = $(this).prop("checked");
+	// 	var elem = $(this).closest('.table_data').find('.js-regularly');
+	// 	elem.find('input,select').prop('disabled', true);
+	// 	elem.find('.js-displayNone').hide();
+	// 	if(checked) {
+	// 		elem.find('input,select').prop('disabled', false);
+	// 	}else{
+	// 		elem.find('input').val('');
+	// 		elem.find('select').each(function() {
+	// 			this.selectedIndex  = 0;
+	// 		});
+	// 	}
+	// });
+	// $('.js-regularly select').on('change', function(){
+	// 	var data = $(this).find('option:selected').val();
+	// 	$(this).next('.js-displayNone').hide();
+	// 	if(data != '' && data != '0') $(this).next('.js-displayNone').show();
+	// });
 	// Form 初期化
-	appForm.initialize();
+	// appForm.initialize();
 	//テキスト入力の削除
 	// $('.js-clearBtn').on('click', function(e) {
 	// 	e.preventDefault();
@@ -375,7 +362,7 @@ $(function() {
 	// 	changeYear: false,
 	// 	changeMonth: false
 	// });
-});
+// });
 </script>
 {/literal}
 {include file='include/common.tpl'}

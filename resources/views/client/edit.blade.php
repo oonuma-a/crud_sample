@@ -17,7 +17,11 @@
 	</div>
 </div>
 <div class="contents"><!-- CONTENTS -->
-	<form method="post" action="" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('client.index')}}" class="js-insuranceSearchForm" name="clientForm">
+		@csrf
+		<input type="hidden" name="updateFlg" value="1">
+		<input type="hidden" name="id" value="{{$userData->id}}">
+		
 <!-- 		<div class="block">
 			<div class="block_inner block_inner-3">
 				<table class="table table-borderLeftNone">
@@ -51,25 +55,53 @@
 						<tr>
 							<th class="table_title"><div class="table_title_required">店舗番号<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<input type="tel" name="" value="" class="form form-maxSizeL" placeholder="ここに入力" tabindex="1">
+								<input type="tel" name="shop_number" value="{{$userData->shop_number}}" class="form form-maxSizeL" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">店舗名<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<input type="text" name="" value="テスト店舗" class="form" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="shop_name" value="{{$userData->shop_name}}" class="form" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">パスワード<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<input type="text" name="" value="password" class="form form-maxSizeL" tabindex="1">
+								<input type="text" name="password" value="{{$userData->password}}" class="form form-maxSizeL" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">配達エリア<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<select name="" class="form form-maxSizeL" tabindex="1">
+								<select name="area1" class="form form-maxSizeL" tabindex="1">
+									@switch($userData->area1)
+										@case(1)
+											<option value="1">千葉</option>
+											@break
+										@case(2)
+											<option value="2">神奈川</option>
+											@break
+										@case(3)
+											<option value="3">埼玉</option>
+											@break
+										@case(4)
+											<option value="4">茨城</option>
+											@break
+										@case(5)
+											<option value="5">群馬</option>
+											@break
+										@case(6)
+											<option value="6">栃木</option>
+											@break
+										@case("")
+											<option value="">未選択</option>
+											@break
+										@case(0)
+											<option value="0">東京</option>
+											@break
+										@default
+											<option value="">未選択</option>
+									@endswitch
 									<option value="">未選択</option>
 									<option value="0">東京</option>
 									<option value="1">千葉</option>
@@ -79,33 +111,61 @@
 									<option value="5">群馬</option>
 									<option value="6">栃木</option>
 								</select>
-								<select name="" class="form form-maxSizeL" tabindex="1">
-									<option value="">未選択</option>
-									<option value="0">01</option>
-									<option value="1">02</option>
-									<option value="2">03</option>
-									<option value="3">04</option>
-									<option value="4">05</option>
-									<option value="5">06</option>
-									<option value="6">07</option>
+								<select name="area2" class="form form-maxSizeL" tabindex="1">
+									@switch($userData->area2)
+										@case(1)
+											<option value="1">02</option>
+											@break
+										@case(2)
+											<option value="2">03</option>
+											@break
+										@case(3)
+											<option value="3">04</option>
+											@break
+										@case(4)
+											<option value="4">05</option>
+											@break
+										@case(5)
+											<option value="5">06</option>
+											@break
+										@case(6)
+											<option value="6">07</option>
+											@break
+										@case("")
+											<option value="">未選択</option>
+											@break
+										@case(0)
+											<option value="0">01</option>
+											@break
+										@default
+											<option value="">未選択</option>
+									@endswitch
+											<option value="">未選択</option>
+											<option value="0">01</option>
+											<option value="1">02</option>
+											<option value="2">03</option>
+											<option value="3">04</option>
+											<option value="4">05</option>
+											<option value="5">06</option>
+											<option value="6">07</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title" rowspan="2"><div class="table_title_required">住所<span>必須</span></div></th>
 							<td colspan="3" class="table_data table_data-borderBottomNone table_data-spaceBottomNone">
-								<input type="text" name="" value="" class="form form-maxSizeL js-zip" placeholder="2770042" tabindex="1">※ハイフン（&ndash;）無しで入力してください
+								<input type="text" name="zip_code" value="{{$userData->zip_code}}" class="form form-maxSizeL js-zip" placeholder="2770042" tabindex="1">※ハイフン（&ndash;）無しで入力してください
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3" class="table_data">
-								<input type="text" name="" value="" class="form js-adrs3" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="address" value="{{$userData->address}}" class="form js-adrs3" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">電話番号<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<input type="text" name="" value="" class="form form-maxSizeL" placeholder="09012345678" tabindex="1">※ハイフン（&ndash;）無しで入力してください
+								<input type="text" name="tel" value="{{$userData->tel}}" class="form form-maxSizeL" placeholder="09012345678" tabindex="1">※ハイフン（&ndash;）無しで入力してください
 							</td>
 						</tr>
 						<tr>
@@ -113,7 +173,7 @@
 							<td colspan="3" class="table_data">
 								<ul class="formList">
 									<li class="formList_item js-clearSpecial">
-										<input type="radio" name="upid" value="1" id="upid1" tabindex="1" checked>
+										<input type="radio" name="upid" value="1{{$userData->contract_status}}" id="upid1" tabindex="1" checked>
 										<label for="upid1">契約中</label><div class="formList_item_check"></div>
 									</li>
 									<li class="formList_item js-clearSpecial">
@@ -126,28 +186,75 @@
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品①<span>必須</span></div></th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
-									<option value="">未選択</option>
-									<option value="0">丸網・太線（28cm）</option>
-									<option value="1">丸網・細線（28cm）</option>
-									<option value="2">丸網・太線（24cm）</option>
-									<option value="3">丸網・細線（24cm）</option>
-									<option value="4">丸網・太線（29ｘ17cm）</option>
-									<option value="5">丸網・細線（29ｘ17cm）</option>
-									<option value="6">角網・太線（29ｘ17cm）</option>
-									<option value="7">角網・細線（29ｘ18cm）</option>
-									<option value="8">角網・細線（34ｘ17cm）</option>
-									<option value="9">ヘビーロストル</option>
-									<option value="10">ハードロストル</option>
-									<option value="11">ハイパーロストル</option>
-									<option value="12">ロストル（29ｘ18cm）</option>
-									<option value="13">ロストル（34ｘ17cm）</option>
+								<select name="item1" class="form" tabindex="1">
+									@switch($userData->item1)
+										@case(1)
+											<option value="1">丸網・細線（28cm）</option>
+											@break
+										@case(2)
+											<option value="2">丸網・太線（24cm）</option>
+											@break
+										@case(3)
+											<option value="3">丸網・細線（24cm）</option>
+											@break
+										@case(4)
+											<option value="4">丸網・太線（29ｘ17cm）</option>
+											@break
+										@case(5)
+											<option value="5">丸網・細線（29ｘ17cm）</option>
+											@break
+										@case(6)
+											<option value="6">角網・太線（29ｘ17cm）</option>
+											@break
+										@case(7)
+											<option value="7">角網・細線（29ｘ18cm）</option>
+											@break
+										@case(8)
+											<option value="8">角網・細線（34ｘ17cm）</option>
+											@break
+										@case(9)
+											<option value="9">ヘビーロストル</option>
+											@break
+										@case(10)
+											<option value="10">ハードロストル</option>
+											@break
+										@case(11)
+											<option value="11">ハイパーロストル</option>
+											@break
+										@case(12)
+											<option value="12">ロストル（29ｘ18cm）</option>
+											@break
+										@case(13)
+											<option value="13">ロストル（34ｘ17cm）</option>
+											@break
+										@case (""))
+											<option value="">未選択</option>									
+										@case(0)
+											<option value="0">丸網・太線（28cm）</option>
+										@default
+											<option value="">未選択</option>
+									@endswitch
+										<option value="">未選択</option>
+										<option value="0">丸網・太線（28cm）</option>
+										<option value="1">丸網・細線（28cm）</option>
+										<option value="2">丸網・太線（24cm）</option>
+										<option value="3">丸網・細線（24cm）</option>
+										<option value="4">丸網・太線（29ｘ17cm）</option>
+										<option value="5">丸網・細線（29ｘ17cm）</option>
+										<option value="6">角網・太線（29ｘ17cm）</option>
+										<option value="7">角網・細線（29ｘ18cm）</option>
+										<option value="8">角網・細線（34ｘ17cm）</option>
+										<option value="9">ヘビーロストル</option>
+										<option value="10">ハードロストル</option>
+										<option value="11">ハイパーロストル</option>
+										<option value="12">ロストル（29ｘ18cm）</option>
+										<option value="13">ロストル（34ｘ17cm）</option>
 								</select>
 							</td>
 							<th class="table_title table_title-positionCenter">定期配送</th>
 							<td class="table_data">
 								<div class="formList formList-inlineBlock">
-									<div class="formList_item">
+									<div class="formList_item1">
 										<input type="checkbox" name="item1" value="1" id="item1" class="js-regularlyBtn" tabindex="1">
 										<label for="item1"></label><div class="formList_item_checkBox"></div>
 									</div>
@@ -166,28 +273,75 @@
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品②</div></th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
-									<option value="">未選択</option>
-									<option value="0">丸網・太線（28cm）</option>
-									<option value="1">丸網・細線（28cm）</option>
-									<option value="2">丸網・太線（24cm）</option>
-									<option value="3">丸網・細線（24cm）</option>
-									<option value="4">丸網・太線（29ｘ17cm）</option>
-									<option value="5">丸網・細線（29ｘ17cm）</option>
-									<option value="6">角網・太線（29ｘ17cm）</option>
-									<option value="7">角網・細線（29ｘ18cm）</option>
-									<option value="8">角網・細線（34ｘ17cm）</option>
-									<option value="9">ヘビーロストル</option>
-									<option value="10">ハードロストル</option>
-									<option value="11">ハイパーロストル</option>
-									<option value="12">ロストル（29ｘ18cm）</option>
-									<option value="13">ロストル（34ｘ17cm）</option>
+								<select name="item2" class="form" tabindex="1">
+									@switch($userData->item2)
+										@case(1)
+											<option value="1">丸網・細線（28cm）</option>
+											@break
+										@case(2)
+											<option value="2">丸網・太線（24cm）</option>
+											@break
+										@case(3)
+											<option value="3">丸網・細線（24cm）</option>
+											@break
+										@case(4)
+											<option value="4">丸網・太線（29ｘ17cm）</option>
+											@break
+										@case(5)
+											<option value="5">丸網・細線（29ｘ17cm）</option>
+											@break
+										@case(6)
+											<option value="6">角網・太線（29ｘ17cm）</option>
+											@break
+										@case(7)
+											<option value="7">角網・細線（29ｘ18cm）</option>
+											@break
+										@case(8)
+											<option value="8">角網・細線（34ｘ17cm）</option>
+											@break
+										@case(9)
+											<option value="9">ヘビーロストル</option>
+											@break
+										@case(10)
+											<option value="10">ハードロストル</option>
+											@break
+										@case(11)
+											<option value="11">ハイパーロストル</option>
+											@break
+										@case(12)
+											<option value="12">ロストル（29ｘ18cm）</option>
+											@break
+										@case(13)
+											<option value="13">ロストル（34ｘ17cm）</option>
+											@break
+										@case (""))
+											<option value="">未選択</option>									
+										@case(0)
+											<option value="0">丸網・太線（28cm）</option>
+										@default
+											<option value="">未選択</option>
+									@endswitch
+										<option value="">未選択</option>
+										<option value="0">丸網・太線（28cm）</option>
+										<option value="1">丸網・細線（28cm）</option>
+										<option value="2">丸網・太線（24cm）</option>
+										<option value="3">丸網・細線（24cm）</option>
+										<option value="4">丸網・太線（29ｘ17cm）</option>
+										<option value="5">丸網・細線（29ｘ17cm）</option>
+										<option value="6">角網・太線（29ｘ17cm）</option>
+										<option value="7">角網・細線（29ｘ18cm）</option>
+										<option value="8">角網・細線（34ｘ17cm）</option>
+										<option value="9">ヘビーロストル</option>
+										<option value="10">ハードロストル</option>
+										<option value="11">ハイパーロストル</option>
+										<option value="12">ロストル（29ｘ18cm）</option>
+										<option value="13">ロストル（34ｘ17cm）</option>
 								</select>
 							</td>
 							<th class="table_title table_title-positionCenter">定期配送</th>
 							<td class="table_data">
 								<div class="formList formList-inlineBlock">
-									<div class="formList_item">
+									<div class="formList_item2">
 										<input type="checkbox" name="item2" value="2" id="item2" class="js-regularlyBtn" tabindex="1">
 										<label for="item2"></label><div class="formList_item_checkBox"></div>
 									</div>
@@ -206,28 +360,75 @@
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品③</div></th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
-									<option value="">未選択</option>
-									<option value="0">丸網・太線（28cm）</option>
-									<option value="1">丸網・細線（28cm）</option>
-									<option value="2">丸網・太線（24cm）</option>
-									<option value="3">丸網・細線（24cm）</option>
-									<option value="4">丸網・太線（29ｘ17cm）</option>
-									<option value="5">丸網・細線（29ｘ17cm）</option>
-									<option value="6">角網・太線（29ｘ17cm）</option>
-									<option value="7">角網・細線（29ｘ18cm）</option>
-									<option value="8">角網・細線（34ｘ17cm）</option>
-									<option value="9">ヘビーロストル</option>
-									<option value="10">ハードロストル</option>
-									<option value="11">ハイパーロストル</option>
-									<option value="12">ロストル（29ｘ18cm）</option>
-									<option value="13">ロストル（34ｘ17cm）</option>
+								<select name="item3" class="form" tabindex="1">
+									@switch($userData->item3)
+										@case(1)
+											<option value="1">丸網・細線（28cm）</option>
+											@break
+										@case(2)
+											<option value="2">丸網・太線（24cm）</option>
+											@break
+										@case(3)
+											<option value="3">丸網・細線（24cm）</option>
+											@break
+										@case(4)
+											<option value="4">丸網・太線（29ｘ17cm）</option>
+											@break
+										@case(5)
+											<option value="5">丸網・細線（29ｘ17cm）</option>
+											@break
+										@case(6)
+											<option value="6">角網・太線（29ｘ17cm）</option>
+											@break
+										@case(7)
+											<option value="7">角網・細線（29ｘ18cm）</option>
+											@break
+										@case(8)
+											<option value="8">角網・細線（34ｘ17cm）</option>
+											@break
+										@case(9)
+											<option value="9">ヘビーロストル</option>
+											@break
+										@case(10)
+											<option value="10">ハードロストル</option>
+											@break
+										@case(11)
+											<option value="11">ハイパーロストル</option>
+											@break
+										@case(12)
+											<option value="12">ロストル（29ｘ18cm）</option>
+											@break
+										@case(13)
+											<option value="13">ロストル（34ｘ17cm）</option>
+											@break
+										@case (""))
+											<option value="">未選択</option>									
+										@case(0)
+											<option value="0">丸網・太線（28cm）</option>
+										@default
+											<option value="">未選択</option>
+									@endswitch
+										<option value="">未選択</option>
+										<option value="0">丸網・太線（28cm）</option>
+										<option value="1">丸網・細線（28cm）</option>
+										<option value="2">丸網・太線（24cm）</option>
+										<option value="3">丸網・細線（24cm）</option>
+										<option value="4">丸網・太線（29ｘ17cm）</option>
+										<option value="5">丸網・細線（29ｘ17cm）</option>
+										<option value="6">角網・太線（29ｘ17cm）</option>
+										<option value="7">角網・細線（29ｘ18cm）</option>
+										<option value="8">角網・細線（34ｘ17cm）</option>
+										<option value="9">ヘビーロストル</option>
+										<option value="10">ハードロストル</option>
+										<option value="11">ハイパーロストル</option>
+										<option value="12">ロストル（29ｘ18cm）</option>
+										<option value="13">ロストル（34ｘ17cm）</option>
 								</select>
 							</td>
 							<th class="table_title table_title-positionCenter">定期配送</th>
 							<td class="table_data">
 								<div class="formList formList-inlineBlock">
-									<div class="formList_item">
+									<div class="formList_item3">
 										<input type="checkbox" name="item3" value="3" id="item3" class="js-regularlyBtn" tabindex="1">
 										<label for="item3"></label><div class="formList_item_checkBox"></div>
 									</div>
@@ -246,28 +447,75 @@
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品④</div></th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
-									<option value="">未選択</option>
-									<option value="0">丸網・太線（28cm）</option>
-									<option value="1">丸網・細線（28cm）</option>
-									<option value="2">丸網・太線（24cm）</option>
-									<option value="3">丸網・細線（24cm）</option>
-									<option value="4">丸網・太線（29ｘ17cm）</option>
-									<option value="5">丸網・細線（29ｘ17cm）</option>
-									<option value="6">角網・太線（29ｘ17cm）</option>
-									<option value="7">角網・細線（29ｘ18cm）</option>
-									<option value="8">角網・細線（34ｘ17cm）</option>
-									<option value="9">ヘビーロストル</option>
-									<option value="10">ハードロストル</option>
-									<option value="11">ハイパーロストル</option>
-									<option value="12">ロストル（29ｘ18cm）</option>
-									<option value="13">ロストル（34ｘ17cm）</option>
+								<select name="item4" class="form" tabindex="1">
+									@switch($userData->item4)
+										@case(1)
+											<option value="1">丸網・細線（28cm）</option>
+											@break
+										@case(2)
+											<option value="2">丸網・太線（24cm）</option>
+											@break
+										@case(3)
+											<option value="3">丸網・細線（24cm）</option>
+											@break
+										@case(4)
+											<option value="4">丸網・太線（29ｘ17cm）</option>
+											@break
+										@case(5)
+											<option value="5">丸網・細線（29ｘ17cm）</option>
+											@break
+										@case(6)
+											<option value="6">角網・太線（29ｘ17cm）</option>
+											@break
+										@case(7)
+											<option value="7">角網・細線（29ｘ18cm）</option>
+											@break
+										@case(8)
+											<option value="8">角網・細線（34ｘ17cm）</option>
+											@break
+										@case(9)
+											<option value="9">ヘビーロストル</option>
+											@break
+										@case(10)
+											<option value="10">ハードロストル</option>
+											@break
+										@case(11)
+											<option value="11">ハイパーロストル</option>
+											@break
+										@case(12)
+											<option value="12">ロストル（29ｘ18cm）</option>
+											@break
+										@case(13)
+											<option value="13">ロストル（34ｘ17cm）</option>
+											@break
+										@case (""))
+											<option value="">未選択</option>									
+										@case(0)
+											<option value="0">丸網・太線（28cm）</option>
+										@default
+											<option value="">未選択</option>
+									@endswitch
+										<option value="">未選択</option>
+										<option value="0">丸網・太線（28cm）</option>
+										<option value="1">丸網・細線（28cm）</option>
+										<option value="2">丸網・太線（24cm）</option>
+										<option value="3">丸網・細線（24cm）</option>
+										<option value="4">丸網・太線（29ｘ17cm）</option>
+										<option value="5">丸網・細線（29ｘ17cm）</option>
+										<option value="6">角網・太線（29ｘ17cm）</option>
+										<option value="7">角網・細線（29ｘ18cm）</option>
+										<option value="8">角網・細線（34ｘ17cm）</option>
+										<option value="9">ヘビーロストル</option>
+										<option value="10">ハードロストル</option>
+										<option value="11">ハイパーロストル</option>
+										<option value="12">ロストル（29ｘ18cm）</option>
+										<option value="13">ロストル（34ｘ17cm）</option>
 								</select>
 							</td>
 							<th class="table_title table_title-positionCenter">定期配送</th>
 							<td class="table_data">
 								<div class="formList formList-inlineBlock">
-									<div class="formList_item">
+									<div class="formList_item4">
 										<input type="checkbox" name="item4" value="4" id="item4" class="js-regularlyBtn" tabindex="1">
 										<label for="item4"></label><div class="formList_item_checkBox"></div>
 									</div>
@@ -286,7 +534,7 @@
 						<tr>
 							<th class="table_title">備考</th>
 							<td colspan="3" class="table_data">
-								<textarea name="remarks" class="form form-textarea form-heightS form-textAreaMiddle" tabindex="1"></textarea>
+								<textarea name="remarks" class="form form-textarea form-heightS form-textAreaMiddle" tabindex="1">{{$userData->remarks}}</textarea>
 							</td>
 						</tr>
 					</tbody>
@@ -300,7 +548,7 @@
 						<a href="javascript:history.back();" class="focus" tabindex="1"><i class="btn_icon btn_icon-4"></i>戻る</a>
 					</li>
 					<li class="btn_box btn_box-sizeS btn_box-inline btn_box-color1">
-						<a href="{$base_url}client/" class="focus" tabindex="1"><i class="btn_icon btn_icon-1"></i>編集</a>
+						<a href="javascript:clientForm.submit()" class="focus" tabindex="1"><i class="btn_icon btn_icon-1"></i>編集</a>
 					</li>
 <!-- 					<li class="btn_box btn_box-sizeM btn_box-inline btn_box-color">
 						<a href="{$base_url}client/" class="focus" tabindex="1"></i>戻る</a>
@@ -320,38 +568,39 @@
 </div><!-- /L-WRAPPER  -->
 {literal}
 <script>
-$(function() {
-	$('.js-zip').jpostal({
-		postcode : [
-				'.js-zip'	//郵便番号
-		],
-		address : {
-				'.js-adrs3'  : '%3%4%5'	//都道府県
-		}
-	});
-	//定期配送
-	$('.js-regularlyBtn').on('click', function(){
-		var checked = $(this).prop("checked");
-		var elem = $(this).closest('.table_data').find('.js-regularly');
-		elem.find('input,select').prop('disabled', true);
-		elem.find('.js-displayNone').hide();
-		if(checked) {
-			elem.find('input,select').prop('disabled', false);
-		}else{
-			elem.find('input').val('');
-			elem.find('select').each(function() {
-				this.selectedIndex  = 0;
-			});
-		}
-	});
-	$('.js-regularly select').on('change', function(){
-		var data = $(this).find('option:selected').val();
-		$(this).next('.js-displayNone').hide();
-		if(data != '' && data != '0') $(this).next('.js-displayNone').show();
-	});
-	// Form 初期化
-	appForm.initialize();
-});
+	formList_item
+// $(function() {
+// 	$('.js-zip').jpostal({
+// 		postcode : [
+// 				'.js-zip'	//郵便番号
+// 		],
+// 		address : {
+// 				'.js-adrs3'  : '%3%4%5'	//都道府県
+// 		}
+// 	});
+// 	//定期配送
+// 	$('.js-regularlyBtn').on('click', function(){
+// 		var checked = $(this).prop("checked");
+// 		var elem = $(this).closest('.table_data').find('.js-regularly');
+// 		elem.find('input,select').prop('disabled', true);
+// 		elem.find('.js-displayNone').hide();
+// 		if(checked) {
+// 			elem.find('input,select').prop('disabled', false);
+// 		}else{
+// 			elem.find('input').val('');
+// 			elem.find('select').each(function() {
+// 				this.selectedIndex  = 0;
+// 			});
+// 		}
+// 	});
+// 	$('.js-regularly select').on('change', function(){
+// 		var data = $(this).find('option:selected').val();
+// 		$(this).next('.js-displayNone').hide();
+// 		if(data != '' && data != '0') $(this).next('.js-displayNone').show();
+// 	});
+// 	// Form 初期化
+// 	appForm.initialize();
+// });
 </script>
 {/literal}
 {include file='include/common.tpl'}
