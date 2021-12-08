@@ -14,8 +14,9 @@
 </div>
 @section('content')
 <div class="contents"><!-- CONTENTS -->
-	<form method="post" action="{{route('setting.account_create')}}" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('setting.account')}}" class="js-insuranceSearchForm" name="accountForm">
 		@csrf
+		<input type="hidden" name="accountCreateFlg" value="1">
 		<div class="block">
 			<div class="block_inner block_inner-7">
 				<table class="table table-borderLeftNone table-form">
@@ -84,8 +85,7 @@
 						<a href="{{route('setting.account')}}" class="focus" tabindex="1"><i class="btn_icon btn_icon-4"></i>戻る</a>
 					</li>
 					<li class="btn_box btn_box-sizeS btn_box-inline btn_box-color1">
-						<!-- <a href="{{route('setting.account_post')}}" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a> -->
-						<input type="submit"  value="登録" class="focus js-btnSearch">
+						<a href="javascript:accountForm.submit()" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a>
 					</li>
 				</ul>
 			</div>

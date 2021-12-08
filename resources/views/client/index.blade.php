@@ -139,7 +139,7 @@
 				<div class="block_inner_page">
 						<form method="get" action = "{{route('client.index')}}">
 							@csrf
-							表示件数：<select name="paginateValue" id="paginateValue" class="form form-maxSizeS" tabindex="1" onchange="submit();">
+							表示件数：<select name="paginateValue" id="paginateValue" class="form form-maxSizeS" tabindex="1" onchange="submit()">
 							@if(isset($pageValue))
 								<option value="{{$pageValue}}">{{$pageValue}}件</option>
 								@foreach($paginateArray as $page)
@@ -219,11 +219,11 @@
 											<td class="table_data">{{$data->shop_number}}</td>
 											<td class="table_data">{{$data->password}}</td>
 											<td class="table_data table_data-positionLeft">
-											<form action="{{route('client.edit')}}" method="post" name="clientEdit">
-												@csrf
-												<input type="hidden" name="editId" value="{{$data->id}}">
-												<a href="javascript:clientEdit.submit()" class="focus" tabindex="1">{{$data->shop_name}}</a>
-											</form>
+												<form action="{{route('client.edit')}}" method="post" name="clientEdit">
+													@csrf
+													<input type="hidden" name="editId" value="{{$data->id}}">
+													<a href="javascript:clientEdit.submit()" class="focus" tabindex="1">{{$data->shop_name}}</a>
+												</form>
 											</td>
 											<td class="table_data">{{$data->tel}}</td>
 											<td class="table_data">{{$data->area1}}({{$data->area2}})</td>
@@ -259,19 +259,218 @@
 										<td class="table_data">{{$data->shop_number}}</td>
 										<td class="table_data">{{$data->password}}</td>
 										<td class="table_data table_data-positionLeft">
-											<form action="{{route('client.edit')}}" method="post" name="clientEdit">
+											<form action="{{route('client.edit')}}" method="post" name="clientform">
 												@csrf
 												<input type="hidden" name="editId" value="{{$data->id}}">
-												<a href="javascript:clientEdit.submit()" class="focus" tabindex="1">{{$data->shop_name}}</a>
-												<input type="submit" value="a">
+												<a href="javascript:clientform.submit()" class="focus" tabindex="1">{{$data->shop_name}}</a>
 											</form>
 										</td>
 										<td class="table_data">{{$data->tel}}</td>
 										<td class="table_data">{{$data->area1}}({{$data->area2}})</td>
-										<td class="table_data">{{$data->item1}}<span class="table_data_keep">{{$data->item1_num}}枚</span></td>
-										<td class="table_data">{{$data->item2}}<span class="table_data_keep">{{$data->item2_num}}枚</span></td>
-										<td class="table_data">{{$data->item3}}<span class="table_data_keep">{{$data->item3_num}}枚</span></td>
-										<td class="table_data">{{$data->item4}}<span class="table_data_keep">{{$data->item4_num}}枚</span></td>
+										<td class="table_data">
+											@switch($data->item1)
+												@case(1)
+													丸網・細線（28cm）
+												@break
+												@case(2)
+													丸網・太線（24cm）
+												@break
+												@case(3)
+													丸網・細線（24cm）
+												@break
+												@case(4)
+													丸網・太線（29ｘ17cm）
+												@break
+												@case(5)
+												>丸網・細線（29ｘ17cm）
+												@break
+												@case(6)
+													角網・太線（29ｘ17cm）
+												@break
+												@case(7)
+													角網・細線（29ｘ18cm）
+												@break
+												@case(8)
+													角網・細線（34ｘ17cm）
+												@break
+												@case(9)
+													ヘビーロストルハードロストル
+												@break
+												@case(10)
+													ハイパーロストル
+												@break
+												@case(11)
+													丸網・太線（28cm）
+												@break
+												@case(12)
+													ロストル（29ｘ18cm）
+												@break
+												@case(13)
+													ロストル（34ｘ17cm）
+												@break
+												@case("")
+													未選択
+												@break
+												@case(0)
+													丸網・太線（28cm）
+												@break
+												@default
+													未選択
+											@endswitch
+											<span class="table_data_keep">{{$data->item1_num}}枚</span></td>
+										<td class="table_data">
+											@switch($data->item2)
+													@case(1)
+														丸網・細線（28cm）
+													@break
+													@case(2)
+														丸網・太線（24cm）
+													@break
+													@case(3)
+														丸網・細線（24cm）
+													@break
+													@case(4)
+														丸網・太線（29ｘ17cm）
+													@break
+													@case(5)
+													>丸網・細線（29ｘ17cm）
+													@break
+													@case(6)
+														角網・太線（29ｘ17cm）
+													@break
+													@case(7)
+														角網・細線（29ｘ18cm）
+													@break
+													@case(8)
+														角網・細線（34ｘ17cm）
+													@break
+													@case(9)
+														ヘビーロストルハードロストル
+													@break
+													@case(10)
+														ハイパーロストル
+													@break
+													@case(11)
+														丸網・太線（28cm）
+													@break
+													@case(12)
+														ロストル（29ｘ18cm）
+													@break
+													@case(13)
+														ロストル（34ｘ17cm）
+													@break
+													@case("")
+														未選択
+													@break
+													@case(0)
+														丸網・太線（28cm）
+													@break
+													@default
+														未選択
+												@endswitch
+											<span class="table_data_keep">({{$data->item2_num}}枚)</span></td>
+										<td class="table_data">
+											@switch($data->item3)
+												@case(1)
+													丸網・細線（28cm）
+												@break
+												@case(2)
+													丸網・太線（24cm）
+												@break
+												@case(3)
+													丸網・細線（24cm）
+												@break
+												@case(4)
+													丸網・太線（29ｘ17cm）
+												@break
+												@case(5)
+												>丸網・細線（29ｘ17cm）
+												@break
+												@case(6)
+													角網・太線（29ｘ17cm）
+												@break
+												@case(7)
+													角網・細線（29ｘ18cm）
+												@break
+												@case(8)
+													角網・細線（34ｘ17cm）
+												@break
+												@case(9)
+													ヘビーロストルハードロストル
+												@break
+												@case(10)
+													ハイパーロストル
+												@break
+												@case(11)
+													丸網・太線（28cm）
+												@break
+												@case(12)
+													ロストル（29ｘ18cm）
+												@break
+												@case(13)
+													ロストル（34ｘ17cm）
+												@break
+												@case("")
+													未選択
+												@break
+												@case(0)
+													丸網・太線（28cm）
+												@break
+												@default
+													未選択
+											@endswitch
+										<span class="table_data_keep">({{$data->item3_num}}枚)</span></td>
+										<td class="table_data">
+										@switch($data->item4)
+												@case(1)
+													丸網・細線（28cm）
+												@break
+												@case(2)
+													丸網・太線（24cm）
+												@break
+												@case(3)
+													丸網・細線（24cm）
+												@break
+												@case(4)
+													丸網・太線（29ｘ17cm）
+												@break
+												@case(5)
+												>丸網・細線（29ｘ17cm）
+												@break
+												@case(6)
+													角網・太線（29ｘ17cm）
+												@break
+												@case(7)
+													角網・細線（29ｘ18cm）
+												@break
+												@case(8)
+													角網・細線（34ｘ17cm）
+												@break
+												@case(9)
+													ヘビーロストルハードロストル
+												@break
+												@case(10)
+													ハイパーロストル
+												@break
+												@case(11)
+													丸網・太線（28cm）
+												@break
+												@case(12)
+													ロストル（29ｘ18cm）
+												@break
+												@case(13)
+													ロストル（34ｘ17cm）
+												@break
+												@case("")
+													未選択
+												@break
+												@case(0)
+													丸網・太線（28cm）
+												@break
+												@default
+													未選択
+											@endswitch
+										<span class="table_data_keep">({{$data->item4_num}}枚)</span></td>
 										<td class="table_data table_data-positionLeft">{{$data->Notices}}</td>
 										<td class="table_data">
 											@if(1 == $data->item1_regular_flg ?? 1 == $data->item2_regular_flg ?? 1 == $data->item3_regular_flg ?? 1 == $data->item4_regular_flg)
@@ -298,8 +497,4 @@
 </div><!-- / CONTENTS -->
 </section><!-- / SECTION -->
 </div><!-- / B-CONTENTS -->
-<script>
-	// let select = document.getElementById("paginateValue");
-	// select.options[1].selected = true;
-</script>
 @endsection

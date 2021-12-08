@@ -16,8 +16,9 @@
 </div>
 @section('content')
 <div class="contents"><!-- CONTENTS -->
-	<form method="post" action="" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('setting.index')}}" class="js-insuranceSearchForm" name="settingForm">
 		@csrf
+		<input type="hidden" name="createFlg" value="1">
 		<div class="block">
 			<div class="block_inner block_inner-7">
 				<table class="table table-borderLeftNone table-form">
@@ -59,8 +60,7 @@
 						<a href="javascript:history.back();" class="focus" tabindex="1"><i class="btn_icon btn_icon-4"></i>戻る</a>
 					</li>
 					<li class="btn_box btn_box-sizeS btn_box-inline btn_box-color1">
-						<input type="submit"  value="登録" class="focus js-btnSearch">
-						<!-- <a href="{{route('setting.index')}}" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a> -->
+						<a href="javascript:settingForm.submit()" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a>
 					</li>
 				</ul>
 			</div>

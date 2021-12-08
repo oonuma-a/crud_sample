@@ -43,7 +43,7 @@
 			</li>
 		</ul>
 	</nav>
-	<form method="get" action="{{route('setting.index')}}" class="js-insuranceSearchForm">
+	<form method="get" action="{{route('setting.index')}}" class="js-insuranceSearchForm"　name="settingform">
 		@csrf
 		<input type="hidden" name="searchSendFlg" value="1">
 		<div class="block block-spaceM"><!-- 検索枠 -->
@@ -70,8 +70,7 @@
 			<div class="block_inner block_inner-btn block_inner-spaceS">
 				<div class="btn">
 					<p class="btn_box btn_box-color6">
-						<input type="submit" value="検索">
-						<!-- <a href="{{route('setting.index')}}" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-3"></i>検索</a> -->
+						<a href="javascript:settingform.submit()" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-3"></i>検索</a>
 					</p>
 				</div>
 			</div>
@@ -134,11 +133,13 @@
 										<td class="table_data table_data-btn">
 											<div class="btn">
 												<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
-													<form action="{{route('setting.details')}}" method="post">
+													<form action="{{route('setting.details')}}" method="post" name="searchform">
 														@csrf
 														<input type="hidden" name="updateFlg" value="1">
 														<input type="hidden" name="updateId" value="{{$item->id}}">
-														<input type="submit"class="focus" tabindex="1" value="編集">
+														<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
+															<a href="javascript:searchform.submit()" class="focus" tabindex="1">編集</a>
+														</p>
 													</form>
 												</p>
 											</div>
@@ -149,7 +150,14 @@
 										<td class="table_data table_data-btn">
 											<div class="btn">
 												<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-													<a href="{{route('setting.index')}}" class="focus" tabindex="1">削除</a>
+													<form action="{{route('setting.index')}}" method="post" name="deletesearchform">
+														@csrf
+														<input type="hidden" name="deleteFlg" value="1">
+														<input type="hidden" name="deleteId" value="{{$item->id}}">
+														<p class="btn_box btn_box-innerSpaceXS btn_box-color">
+															<a href="javascript:deletesearchForm.submit()" class="focus" tabindex="1">削除</a>
+														</p>
+													</form>
 												</p>
 											</div>
 										</td>
@@ -167,11 +175,13 @@
 										<td class="table_data table_data-btn">
 											<div class="btn">
 												<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
-													<form action="{{route('setting.details')}}" method="get">
+													<form action="{{route('setting.details')}}" method="get" name="settingForm">
 														@csrf
 														<input type="hidden" name="updateFlg" value="1">
 														<input type="hidden" name="updateId" value="{{$item->id}}">
-														<input type="submit"class="focus" tabindex="1" value="編集">
+														<p class="btn_box btn_box-innerSpaceXS btn_box-color4">
+															<a href="javascript:settingform.submit()" class="focus" tabindex="1">編集</a>
+														</p>
 													</form>
 												</p>
 											</div>
@@ -182,11 +192,13 @@
 										<td class="table_data table_data-btn">
 											<div class="btn">
 												<p class="btn_box btn_box-innerSpaceXS btn_box-color">
-													<form action="{{route('setting.index')}}" method="post">
+													<form action="{{route('setting.index')}}" method="post" name="deleteform">
 														@csrf
 														<input type="hidden" name="deleteFlg" value="1">
 														<input type="hidden" name="deleteId" value="{{$item->id}}">
-														<input type="submit" value="削除">
+														<p class="btn_box btn_box-innerSpaceXS btn_box-color">
+														<a href="javascript:deleteform.submit()" class="focus" tabindex="1">削除</a>
+														</p>
 													</form>
 												</p>
 											</div>

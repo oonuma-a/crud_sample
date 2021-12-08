@@ -43,7 +43,7 @@
 			</li>
 		</ul>
 	</nav>
-	<form method="post" action="{{route('setting.account')}}" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('setting.account')}}" class="js-insuranceSearchForm" name="accountSearchForm">
 		@csrf
 		<div class="block block-spaceM"><!-- 検索枠 -->
 			<div class="block_inner block_inner-6">
@@ -90,8 +90,7 @@
 			<div class="block_inner block_inner-btn block_inner-spaceS">
 				<div class="btn">
 					<p class="btn_box btn_box-color6">
-						<input type="submit" value="検索">
-						<!-- <a href="{{route('setting.account')}}" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-3"></i>検索</a> -->
+						<a href="javascript:accountSearchForm.submit()" class="focus js-btnSearch" tabindex="1"><i class="btn_icon btn_icon-3"></i>検索</a>
 					</p>
 				</div>
 			</div>

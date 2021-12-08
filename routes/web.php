@@ -59,13 +59,10 @@ Route::prefix('setting')->group(function(){
     Route::post('/create','SettingController@setting_create_post');
     Route::get('/details','SettingController@setting_details_get')                               ->name('setting.details');
     Route::post('/details','SettingController@setting_details_post');
-
-    Route::prefix('setting')->group(function(){
-        Route::get('/account','SettingAccountController@setting_account')                        ->name('setting.account');
-        Route::post('/account','SettingAccountController@setting_account_post');
-        Route::get('/account_create','SettingAccountController@setting_account_create')          ->name('setting.account_create');
-        Route::post('/account_create','SettingAccountController@setting_account_create_post');
-    });
+    Route::get('/account','SettingAccountController@setting_account_get')                        ->name('setting.account');
+    Route::post('/account','SettingAccountController@setting_account_post');
+    Route::get('/account_create','SettingAccountController@setting_account_create_get')          ->name('setting.account_create');
+    Route::post('/account_create','SettingAccountController@setting_account_create_post');
 });
 
 
@@ -79,20 +76,4 @@ Route::prefix('setting')->group(function(){
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-// CREATE TABLE "user" (
-// 	"id"	INTEGER NOT NULL UNIQUE,
-// 	"user_id"	string(30) NOT NULL,
-// 	"authority"	tinyint(2) NOT NULL,
-// 	"display_name"	string(100) NOT NULL,
-// 	"name"	string(200) NOT NULL,
-// 	"password"	text NOT NULL,
-// 	"user_status"	tinyint(2) NOT NULL DEFAULT ('1'),
-// 	"inserted_at"	datetime NOT NULL,
-// 	"updated_at"	 DEFAULT (null),
-// 	"deleted_at"	 DEFAULT (null),
-// 	PRIMARY KEY("id" AUTOINCREMENT)
-// );
-
 

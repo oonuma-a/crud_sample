@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class SettingAccountController extends Controller
 {
-    public function setting_account(Request $request){
+    public function setting_account_get(Request $request){
         //表示件数変更
         if(isset($request->paginateValue)){
             $paginateValue = $request->paginateValue;
@@ -42,22 +42,27 @@ class SettingAccountController extends Controller
             if(!empty($searchUserStatus)){
                 $accountSearch->where('user_status','like','%'.$searchUserStatus.'%');
             }
-            $searchData = $accountSearch->get();
+            $searchData = $accountSearch->paginate(5);
             return view('setting.account', compact('searchData'));
-        }elseif(isset($request->userStatusChange)){
+        }else if($request->accountCreateFlg){
+            //新規アカウント登録時処理
+            $newUserInfo = $request->all();
+            unset($newUserInfo['_token']);
+            $insertData = new Users;
+            $insertData->fill($newUserInfo)->save();
+            $accountList = Users::paginate(5);
+            return view('setting.account',compact('accountList'));
+        }else{
+            //通常表示
+            $accountList = Users::paginate(5);
+            return view('setting.account', compact('accountList'));
         }
     }
-    public function setting_account_create(Request $request){
+    public function setting_account_create_get(Request $request){
         return view('setting.account_create');
     }
     
     public function setting_account_create_post(Request $request){
-        //新規アカウント登録時処理
-        $newUserInfo = $request->all();
-        unset($newUserInfo['_token']);
-        $insertData = new Users;
-        $insertData->fill($newUserInfo)->save();
-        $accountList = Users::all();
-        return view('setting.account_create',compact('accountList'));
+        return view('setting.account_create');
     }
 }

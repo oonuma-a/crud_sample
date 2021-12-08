@@ -152,14 +152,14 @@
 							<th class="table_title table_title-positionCenter">定期配送</th>
 							<td class="table_data">
 								<div class="js-regularly">
-									<input type="checkbox" name="item1_regular_flg" value="1" id="item1" tabindex="1">
-									<select name="item1_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1">
+									<input type="checkbox" name="item1_regular_flg" value="1" id="item1" tabindex="1" onchange="item_block()">
+									<select name="item1_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1" id="item1_cycle" disabled>
 										<option value="0">未選択</option>
 										<option value="1">毎日</option>
 										<option value="2">毎週</option>
 										<option value="3">毎月</option>
 									</select>
-									<input type="text" name="item1_num" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1">枚
+										<input type="text" name="item1_num" id="item_num1_input" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1"  disabled>枚
 								</div>
 							</td>
 						</tr>
@@ -187,15 +187,15 @@
 							<th class="table_title table_title-positionCenter">定期配送</th>
 							<td class="table_data">
 								<div class="js-regularly">
-									<input type="checkbox" name="item1_regular_flg" value="1" id="item2" tabindex="1">
-									<select name="item2_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1">
+									<input type="checkbox" name="item2_regular_flg" value="1" id="item2" tabindex="1" onchange="item_block()">
+									<select name="item2_delivery_cycle" class="form form-maxSizeS form-disabled" id="item2_cycle" tabindex="1" disabled>
 										<option value="0">未選択</option>
 										<option value="1">毎日</option>
 										<option value="2">毎週</option>
 										<option value="3">毎月</option>
 									</select>
 									<span>
-										<input type="text" name="item2_num" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1">枚
+										<input type="text" name="item2_num" id="item_num2_input" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1" disabled>枚
 									</span>
 								</div>
 							</td>
@@ -224,15 +224,15 @@
 							<th class="table_title table_title-positionCenter">定期配送</th>
 							<td class="table_data">
 								<div class="js-regularly">
-									<input type="checkbox" name="item1_regular_flg" value="1" id="item3" tabindex="1">
-									<select name="item3_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1">
+									<input type="checkbox" name="item3_regular_flg" value="1" id="item3" tabindex="1" onchange="item_block()">
+									<select name="item3_delivery_cycle" id="item3_cycle" class="form form-maxSizeS form-disabled" tabindex="1" disabled>
 										<option value="0">未選択</option>
 										<option value="1">毎日</option>
 										<option value="2">毎週</option>
 										<option value="3">毎月</option>
 									</select>
 									<span>
-										<input type="text" name="item3_num" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1">枚
+										<input type="text" name="item3_num" id="item_num3_input" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1" disabled>枚
 									</span>
 								</div>
 							</td>
@@ -261,15 +261,15 @@
 							<th class="table_title table_title-positionCenter">定期配送</th>
 							<td class="table_data">
 								<div class="js-regularly">
-									<input type="checkbox" name="item1_regular_flg" value="1" id="item4" tabindex="1">
-									<select name="item4_delivery_cycle" class="form form-maxSizeS form-disabled" tabindex="1">
+									<input type="checkbox" name="item4_regular_flg" value="1" id="item4" tabindex="1" onchange="item_block()">
+									<select name="item4_delivery_cycle" id="item4_cycle" class="form form-maxSizeS form-disabled" tabindex="1" disabled>
 										<option value="0">未選択</option>
 										<option value="1">毎日</option>
 										<option value="2">毎週</option>
 										<option value="3">毎月</option>
 									</select>
 									<span>
-										<input type="text" name="item4_num" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1">枚
+										<input type="text" name="item4_num" id="item_num4_input" value="" class="form form-textAreaTop form-maxSizeXS form-disabled" placeholder="00" tabindex="1" disabled>枚
 									</span>
 								</div>
 							</td>
@@ -317,6 +317,50 @@
 </div><!-- /L-WRAPPER  -->
 {literal}
 <script>
+	// checkbox:item1 cycle:item1_cycle num:item_num1_input
+	function item_block(){
+		$item1 = document.getElementById('item1');
+		$item1_cycle = document.getElementById('item1_cycle');
+		$item_num1_input = document.getElementById('item_num1_input');
+		$item2 = document.getElementById('item2');
+		$item2_cycle = document.getElementById('item2_cycle');
+		$item_num2_input = document.getElementById('item_num2_input');
+		$item3 = document.getElementById('item3');
+		$item3_cycle = document.getElementById('item3_cycle');
+		$item_num3_input = document.getElementById('item_num3_input');
+		$item4 = document.getElementById('item4');
+		$item4_cycle = document.getElementById('item4_cycle');
+		$item_num4_input = document.getElementById('item_num4_input');
+		if($item1.checked){
+			itemBlock($item1_cycle,$item_num1_input);
+		}else if(!$item1.checked){
+			itemNone($item1_cycle,$item_num1_input);
+		}
+		if($item2.checked){
+			itemBlock($item2_cycle,$item_num2_input);
+		}else if(!$item2.checked){
+			itemNone($item2_cycle,$item_num2_input);
+		}
+		if($item3.checked){
+			itemBlock($item3_cycle,$item_num3_input);
+		}else if(!$item3.checked){
+			itemNone($item3_cycle,$item_num3_input);
+		}
+		if($item4.checked){
+			itemBlock($item4_cycle,$item_num4_input);
+		}else if(!$item4.checked){
+			itemNone($item4_cycle,$item_num4_input);
+		}
+	}
+	function itemBlock($item_cycle, $item_num_input){
+		$item_cycle.disabled = false;
+		$item_num_input.disabled = false;
+	}
+	function itemNone($item_cycle, $item_num_input){
+		$item_cycle.disabled = true;
+		$item_num_input.disabled = true;
+	}
+
 // $(function() {
 // 	$('.js-zip').jpostal({
 // 		postcode : [

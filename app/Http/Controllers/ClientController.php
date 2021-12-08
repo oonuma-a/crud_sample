@@ -124,11 +124,13 @@ class ClientController extends Controller
     }
     public function client_edit_get(Request $request)
     {
-        return view('client.edit');
+        dd(shop::find($request->editId));
+        $userData = shop::find($request->editId);
+        return view('client.edit', compact('userData'));
     }
     public function client_edit_post(Request $request)
     {
-        // dd(shop::find($request->editId));
+        dd(shop::find($request->editId));
         $userData = shop::find($request->editId);
         return view('client.edit', compact('userData'));
     }

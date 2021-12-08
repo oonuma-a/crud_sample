@@ -41,6 +41,13 @@ class SettingController extends Controller
             $deleteId = Item::find($request->deleteId)->delete();
             $itemList = Item::paginate(5);
             return view('setting.index', compact('itemList'));
+        }else if($request->createFlg){
+            $itemInsert = $request->all();
+            unset($itemInsert['_token']);
+            $tableData = new Item;
+            $tableData->fill($itemInsert)->save();
+            $itemList = Item::paginate(5);
+            return view('setting.index', compact('itemList'));
         }else{
             $itemList = Item::paginate(5);
             return view('setting.index', compact('itemList'));
