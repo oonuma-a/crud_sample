@@ -16,6 +16,7 @@
 			<h1 class="loginBox_title"><img src="{{asset('/img/logo.png')}}" alt="Ken CLEANERS SYSTEM"></h1>
 			<form method="post" action="{{ route('client.index')}}">
 			@csrf
+			<input type="hidden" name="LoginFlg" value="1">
 				<dl class="loginBox_item">
 					@if(count($errors) > 0)
 						<ul>

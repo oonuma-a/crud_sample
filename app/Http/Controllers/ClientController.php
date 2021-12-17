@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Http\Requests\ClientRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Models\shop;
 
 class ClientController extends Controller
@@ -64,25 +66,23 @@ class ClientController extends Controller
             return view('client.index', compact('shopList'));
         }
     }
-    public function client_index_post(Request $request)//ClientRequest $request)
+    public function client_index_post(ClientRequest $request)//ClientRequest $request)
     {
-    //dd($request->all());
-    //    $request = (object)$request->getPasswordInputs();
-
-    // $credentials = $request->validate([
-    //     'user_id' => ['required'],
-    //     'password' => ['required'],
-    // ]);
-    // $credentials = $request->only(
-    //     'user_id' ,
-    //     'password'
-    // );
-    // if(Auth::attempt($credentials)){
-    //     $request->session()->regenerate();
-    //  return back()->withErrors([
-    //     'login_error'=>'ユーザーとパスワードが一致しません。',
-    // ]);
-        if(isset($request->deleteId)){
+        //ログイン処理
+        if(isset($request->LoginFlg)){
+            //  $request = (object)$request->getPasswordInputs();
+            $credentials = $request->only(
+                'user_id' ,
+                'password'
+            );
+            if(Auth::attempt($credentials)){
+                $request->session()->regenerate();
+                return redirect('client/index');
+            }
+            return back()->withErrors([
+                'login_error'=>'ユーザーとパスワードが一致しません。',
+        ]);
+        }else if(isset($request->deleteId)){
             //データ削除処理
             return view('client.index');
         }else if(isset($request->updateFlg)){

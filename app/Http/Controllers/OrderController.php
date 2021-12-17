@@ -11,9 +11,8 @@ class OrderController extends Controller
     }
     public function order_index_post(Request $request){
 
-        $user = Auth::user();
-        $user_id = Auth::id();
-        dd($user, $user_id);
+        // $user = Auth::user();
+        // $user_id = Auth::id();
         if(isset($request->insertFlg)){
             //データ登録処理
             $newOrderData = $request->all();
@@ -22,8 +21,11 @@ class OrderController extends Controller
             $tel2 = substr($newOrderData['tel'],3,3);
             $tel3 = substr($newOrderData['tel'],6,4);
             $order_status = "1";
-            $newOrderData = array_merge($newOrderData,array('tel1'=>$tel1,),array('tel2'=>$tel2,),array('tel3'=>$tel3,), array('order_status'=>$order_status));
+            $newOrderData = array_merge($newOrderData,array('tel1'=>$tel1),array('tel2'=>$tel2),array('tel3'=>$tel3), array('order_status'=>$order_status));
             unset($newOrderData['tel']);
+            $user_id = Auth::id();
+            $newOrderData = array_merge($newOrderData,array('user_id'=>$user_id));
+            // dd($newOrderData);
             $orderTable = new order;
             $orderTable->fill($newOrderData)->save();
             $orderDatas = order::paginate(5);
