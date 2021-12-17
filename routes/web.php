@@ -45,10 +45,14 @@ Route::prefix('include')->group(function(){
 });
 
 Route::prefix('order')->group(function(){
-    Route::match(['get', 'post'], '/order/index','OrderController@order_index')          ->name('order.index');
-    Route::match(['get', 'post'], '/order/cancel','OrderController@order_cancel')        ->name('order.cancel');
-    Route::match(['get', 'post'], '/order/create','OrderController@order_create')        ->name('order.create');
-    Route::match(['get', 'post'], '/order/history','OrderController@order_history')      ->name('order.history');
+    Route::get('/index','OrderController@order_index_get')          ->name('order.index');
+    Route::post('/index','OrderController@order_index_post');
+    Route::get('/cancel','OrderController@order_cancel_get')        ->name('order.cancel');
+    Route::post('/cancel','OrderController@order_cancel_post');
+    Route::get('/create','OrderController@order_create_get')        ->name('order.create');
+    Route::post('/create','OrderController@order_create_post');
+    Route::get('/history','OrderController@order_history_get')      ->name('order.history');
+    Route::post('/history','OrderController@order_history_post');
 });
 
 
@@ -59,6 +63,7 @@ Route::prefix('setting')->group(function(){
     Route::post('/create','SettingController@setting_create_post');
     Route::get('/details','SettingController@setting_details_get')                               ->name('setting.details');
     Route::post('/details','SettingController@setting_details_post');
+    
     Route::get('/account','SettingAccountController@setting_account_get')                        ->name('setting.account');
     Route::post('/account','SettingAccountController@setting_account_post');
     Route::get('/account_create','SettingAccountController@setting_account_create_get')          ->name('setting.account_create');

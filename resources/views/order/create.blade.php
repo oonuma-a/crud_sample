@@ -1,22 +1,8 @@
-{nocache}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-{include file='include/head.tpl'}
-{literal}
-<style>
-<!--
-.js-regularly {
-	white-space: nowrap;
-	display: inline-block;
-}
--->
-</style>
-{/literal}
+@extends('layouts.layout')
 </head>
 <body{if !empty($pageID)} id="{$pageID}"{/if}>
 <div class="l-wrapper"><!-- L-WRAPPER  -->
-{include file='include/header.tpl'}
+@section('content')
 <div class="b-contents"><!-- B-CONTENTS -->
 <section><!-- SECTION -->
 <div class="contentsTitle">
@@ -31,27 +17,12 @@
 	</div>
 </div>
 <div class="contents"><!-- CONTENTS -->
-	<form method="post" action="" class="js-insuranceSearchForm">
+	<form method="post" action="{{route('order.index')}}" class="js-insuranceSearchForm" name="orderForm">
+		@csrf
+		<input type="hidden" name="insertFlg" value="1">
+		<input type="hidden" name="order_number" value="1">
 		<div class="block">
 			<div class="block_inner block_inner-7">
-<!-- 				<table class="table table-borderLeftNone table-form table-borderBottomNone">
-					<colgroup style="width: 20%"></colgroup>
-					<colgroup style="width: 45%"></colgroup>
-					<colgroup style="width: 20%"></colgroup>
-					<colgroup style="width: 15%"></colgroup>
-					<tbody>
-						<tr class="js-inputClear">
-							<th class="table_title">管理番号</th>
-							<td class="table_data">
-								<input type="text" name="" value="" maxlength="" class="form form-sizeM" tabindex="1">
-							</td>
-							<th class="table_title table_title-positionCenter">登録日</th>
-							<td class="table_data table_data-positionCenter">
-								<input type="text" name="" value="{$smarty.now|date_format:"%Y/%m/%d"}" class="form form-size" placeholder="0000" tabindex="1" readonly>
-							</td>
-						</tr>
-					</tbody>
-				</table> -->
 				<table class="table table-borderLeftNone table-form">
 					<colgroup style="width: 20%"></colgroup>
 					<colgroup style="width: 60%"></colgroup>
@@ -61,19 +32,20 @@
 						<tr>
 							<th class="table_title"><div class="table_title_required">店舗番号<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<input type="tel" name="" value="" class="form form-maxSizeL" placeholder="ここに入力" tabindex="1">
+								<input type="tel" name="shop_id" value="" class="form form-maxSizeL" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">店舗名<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<input type="text" name="" value="" class="form" placeholder="ここに入力" tabindex="1">
+								<input type="text" value="" class="form" placeholder="ここに入力" tabindex="1">
 							</td>
+							<!-- name="shop_name"  -->
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">配達エリア<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<select name="" class="form form-maxSizeL" tabindex="1">
+								<select name="area1" class="form form-maxSizeL" tabindex="1">
 									<option value="">未選択</option>
 									<option value="0">東京</option>
 									<option value="1">千葉</option>
@@ -83,7 +55,7 @@
 									<option value="5">群馬</option>
 									<option value="6">栃木</option>
 								</select>
-								<select name="" class="form form-maxSizeL" tabindex="1">
+								<select name="area2" class="form form-maxSizeL" tabindex="1">
 									<option value="">未選択</option>
 									<option value="0">01</option>
 									<option value="1">02</option>
@@ -98,12 +70,12 @@
 						<tr>
 							<th class="table_title" rowspan="2"><div class="table_title_required">住所<span>必須</span></div></th>
 							<td colspan="3" class="table_data table_data-borderBottomNone table_data-spaceBottomNone">
-								<input type="text" name="" value="" class="form form-maxSizeL js-zip" placeholder="2770042" tabindex="1">※ハイフン（&ndash;）無しで入力してください
+								<input type="text" name="zip_code" value="" class="form form-maxSizeL js-zip" placeholder="2770042" tabindex="1">※ハイフン（&ndash;）無しで入力してください
 							</td>
 						</tr>
 						<tr>
 							<td colspan="3" class="table_data">
-								<input type="text" name="" value="" class="form js-adrs3" placeholder="ここに入力" tabindex="1">
+								<input type="text" name="address" value="" class="form js-adrs3" placeholder="ここに入力" tabindex="1">
 							</td>
 						</tr>
 
@@ -112,13 +84,13 @@
 						<tr>
 							<th class="table_title"><div class="table_title_required">電話番号<span>必須</span></div></th>
 							<td colspan="3" class="table_data">
-								<input type="text" name="" value="" class="form form-maxSizeL" placeholder="09012345678" tabindex="1">※ハイフン（&ndash;）無しで入力してください
+								<input type="text" name="tel" value="" class="form form-maxSizeL" placeholder="09012345678" tabindex="1">※ハイフン（&ndash;）無しで入力してください
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品①<span>必須</span></div></th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
+								<select name="item1" class="form" tabindex="1">
 									<option value="">未選択</option>
 									<option value="1">1番:丸網・太線（28cm）</option>
 									<option value="2">2番:丸網・細線（28cm）</option>
@@ -138,13 +110,13 @@
 							</td>
 							<th class="table_title table_title-positionCenter">注文枚数</th>
 							<td class="table_data">
-								<input type="text" name="" value="" class="form form-sizeL" placeholder="00" tabindex="1">
+								<input type="text" name="item1_num" value="" class="form form-sizeL" placeholder="00" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品②</div></th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
+								<select name="item2" class="form" tabindex="1">
 									<option value="">未選択</option>
 									<option value="1">1番:丸網・太線（28cm）</option>
 									<option value="2">2番:丸網・細線（28cm）</option>
@@ -164,13 +136,13 @@
 							</td>
 							<th class="table_title table_title-positionCenter">注文枚数</th>
 							<td class="table_data">
-								<input type="text" name="" value="" class="form form-sizeL" placeholder="00" tabindex="1">
+								<input type="text" name="item2_num" value="" class="form form-sizeL" placeholder="00" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品③</div></th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
+								<select name="item3" class="form" tabindex="1">
 									<option value="">未選択</option>
 									<option value="1">1番:丸網・太線（28cm）</option>
 									<option value="2">2番:丸網・細線（28cm）</option>
@@ -190,13 +162,13 @@
 							</td>
 							<th class="table_title table_title-positionCenter">注文枚数</th>
 							<td class="table_data">
-								<input type="text" name="" value="" class="form form-sizeL" placeholder="00" tabindex="1">
+								<input type="text" name="item3_num" value="" class="form form-sizeL" placeholder="00" tabindex="1">
 							</td>
 						</tr>
 						<tr>
 							<th class="table_title"><div class="table_title_required">商品④</div></th>
 							<td class="table_data">
-								<select name="" class="form" tabindex="1">
+								<select name="item4" class="form" tabindex="1">
 									<option value="">未選択</option>
 									<option value="1">1番:丸網・太線（28cm）</option>
 									<option value="2">2番:丸網・細線（28cm）</option>
@@ -216,7 +188,7 @@
 							</td>
 							<th class="table_title table_title-positionCenter">注文枚数</th>
 							<td class="table_data">
-								<input type="text" name="" value="" class="form form-sizeL" placeholder="00" tabindex="1">
+								<input type="text" name="item4_num" value="" class="form form-sizeL" placeholder="00" tabindex="1">
 							</td>
 						</tr>
 						<tr>
@@ -248,7 +220,7 @@
 						<a href="javascript:history.back();" class="focus" tabindex="1"><i class="btn_icon btn_icon-4"></i>戻る</a>
 					</li>
 					<li class="btn_box btn_box-sizeS btn_box-inline btn_box-color1">
-						<a href="{$base_url}order/" class="focus" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a>
+						<a href="javascript:orderForm.submit()" class="focus" tabindex="1"><i class="btn_icon btn_icon-1"></i>登録</a>
 					</li>
 				</ul>
 			</div>
@@ -258,59 +230,4 @@
 </div><!-- / CONTENTS -->
 </section><!-- / SECTION -->
 </div><!-- / B-CONTENTS -->
-{include file='include/sidebar.tpl'}
-</div><!-- /L-WRAPPER  -->
-{literal}
-<script>
-$(function() {
-	$('.js-zip').jpostal({
-		postcode : [
-				'.js-zip'	//郵便番号
-		],
-		address : {
-				'.js-adrs3'  : '%3%4%5'	//都道府県
-		}
-	});
-	//定期配送
-	$('.js-regularlyBtn').on('click', function(){
-		var checked = $(this).prop("checked");
-		var elem = $(this).closest('.table_data').find('.js-regularly');
-		elem.find('input,select').prop('disabled', true);
-		elem.find('.js-displayNone').hide();
-		if(checked) {
-			elem.find('input,select').prop('disabled', false);
-		}else{
-			elem.find('input').val('');
-			elem.find('select').each(function() {
-				this.selectedIndex  = 0;
-			});
-		}
-	});
-	$('.js-regularly select').on('change', function(){
-		var data = $(this).find('option:selected').val();
-		$(this).next('.js-displayNone').hide();
-		if(data != '' && data != '0') $(this).next('.js-displayNone').show();
-	});
-	// Form 初期化
-	appForm.initialize();
-	//テキスト入力の削除
-	// $('.js-clearBtn').on('click', function(e) {
-	// 	e.preventDefault();
-	// 	$('.js-inputClear').each(function() {
-	// 		$(this).find('input').val('');
-	// 	});
-	// 	$('.js-inputClear select').each(function() {
-	// 		this.selectedIndex  = 0;
-	// 	});
-	// });
-	// $('.js-datepicker').datepicker({
-	// 	changeYear: false,
-	// 	changeMonth: false
-	// });
-});
-</script>
-{/literal}
-{include file='include/common.tpl'}
-</body>
-</html>
-{/nocache}
+@endsection

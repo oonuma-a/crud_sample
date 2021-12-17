@@ -79,6 +79,9 @@ class ClientController extends Controller
     // );
     // if(Auth::attempt($credentials)){
     //     $request->session()->regenerate();
+    //  return back()->withErrors([
+    //     'login_error'=>'ユーザーとパスワードが一致しません。',
+    // ]);
         if(isset($request->deleteId)){
             //データ削除処理
             return view('client.index');
@@ -97,16 +100,12 @@ class ClientController extends Controller
             $shopData->fill($shopCreate)->save();
             $shopList = shop::paginate(5);
             return view('client.index', compact('shopList'));
-        }
-        else{
+        }else{
             $shopList = shop::paginate(5);
             return view('client.index', compact('shopList'));            
         }
     }
 
-    // return back()->withErrors([
-    //     'login_error'=>'ユーザーとパスワードが一致しません。',
-    // ]);
     
 
     public function client_create_get(Request $request)

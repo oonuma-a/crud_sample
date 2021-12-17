@@ -50,6 +50,10 @@ class SettingAccountController extends Controller
             unset($newUserInfo['_token']);
             $insertData = new Users;
             $insertData->fill($newUserInfo)->save();
+            $insertData->fill([
+                'password' => Hash::make($request->password)
+            ])->save();
+            
             $accountList = Users::paginate(5);
             return view('setting.account',compact('accountList'));
         }else{
