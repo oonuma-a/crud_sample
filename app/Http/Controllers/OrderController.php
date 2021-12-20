@@ -2,17 +2,50 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\order;
+use App\Models\shop;
+use App\Models\user;
 use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
     public function order_index_get(Request $request){
-        $orderDatas = order::paginate(5);
-        return view('order.index', compact('orderDatas'));
+         //表示件数変更
+        // dd($request->all());
+        if(isset($request->paginateValue)){
+            $paginateValue = $request->paginateValue;
+            $orderDatas = order::paginate($paginateValue);
+            return view('order.index', compact('orderDatas'));
+        }else if(isset($request->searchOrderFlg)){
+        //検索
+            $searchOrder = order::query();
+            $start_day = $request->start_day;
+            $end_day = $request->end_day;
+            $searchOrderNum = $request->searchOrderNum;
+            $searchShopId = $request->searchShopId;
+            $searchArea = $request->searchArea;
+            // dd($request->all());
+            if(!empty($start_day)){
+                $searchOrder->where('inserted_at','>',$start_day);
+            }
+            if(!empty($end_day)){
+                $searchOrder->where('inserted_at','<',$end_day);
+            }
+            if(!empty($searchOrderNum)){
+                $searchOrder->where('order_number','like','%'.$searchOrderNum.'%');
+            }
+            if(!empty($searchShopId)){
+                $searchOrder->where('shop_id','like','%'.$searchShopId.'%');
+            }
+            if(!empty($searchArea)){
+                $searchOrder->where('area1','like','%'.$searchArea.'%');
+            }
+            $searchList = $searchOrder->paginate(5);
+            return view('order.index', compact('searchList'));
+        }else{
+            $orderDatas = order::paginate(5);
+            return view('order.index', compact('orderDatas'));
+        }
     }
     public function order_index_post(Request $request){
-
-        // $user = Auth::user();
-        // $user_id = Auth::id();
         if(isset($request->insertFlg)){
             //データ登録処理
             $newOrderData = $request->all();
@@ -25,9 +58,14 @@ class OrderController extends Controller
             unset($newOrderData['tel']);
             $user_id = Auth::id();
             $newOrderData = array_merge($newOrderData,array('user_id'=>$user_id));
-            // dd($newOrderData);
             $orderTable = new order;
             $orderTable->fill($newOrderData)->save();
+            $orderDatas = order::paginate(5);
+            return view('order.index', compact('orderDatas'));
+        }else if(isset($request->deleteFlg)){
+            //削除処理
+            // dd($request->deleteId);
+            order::find($request->deleteId)->delete();
             $orderDatas = order::paginate(5);
             return view('order.index', compact('orderDatas'));
         }else{

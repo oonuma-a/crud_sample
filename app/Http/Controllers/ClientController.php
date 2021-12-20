@@ -66,7 +66,7 @@ class ClientController extends Controller
             return view('client.index', compact('shopList'));
         }
     }
-    public function client_index_post(ClientRequest $request)//ClientRequest $request)
+    public function client_index_post(Request $request)//ClientRequest $request)
     {
         //ログイン処理
         if(isset($request->LoginFlg)){
@@ -87,6 +87,7 @@ class ClientController extends Controller
             return view('client.index');
         }else if(isset($request->updateFlg)){
             //データ更新処理
+            dd($request->all());
             $getUpdateData = $request->all();
             unset($getUpdateData['_token']);
             $newData = shop::find($request->id);
@@ -123,13 +124,11 @@ class ClientController extends Controller
     }
     public function client_edit_get(Request $request)
     {
-        dd(shop::find($request->editId));
         $userData = shop::find($request->editId);
         return view('client.edit', compact('userData'));
     }
     public function client_edit_post(Request $request)
     {
-        dd(shop::find($request->editId));
         $userData = shop::find($request->editId);
         return view('client.edit', compact('userData'));
     }

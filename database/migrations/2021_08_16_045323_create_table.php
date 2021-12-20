@@ -14,7 +14,7 @@ class CreateTable extends Migration
     public function up()
     {
         Schema::create('user', function (Blueprint $table) {
-            $table->increments('id', 10)->unique()                            ;
+            $table->increments('id', 10)                            ;
             $table->string('user_id',30)                                      ;
             $table->integer('authority',false,false)                          ;
             $table->string('display_name',100)                                ;

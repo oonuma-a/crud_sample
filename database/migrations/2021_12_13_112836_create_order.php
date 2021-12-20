@@ -34,9 +34,9 @@ class CreateOrder extends Migration
             $table->text('remarks')->default(null)->nullable();
             $table->integer('order_status',false,false)->unsigned()->length(2);
             $table->integer('user_id',false,false)->unsigned()->length(10);
-            $table->timestamp('inserted_at')->userCurrent();
-            $table->timestamp('updated_at')->userCurrent()->default(null)->nullable();
-            $table->timestamp('deleted_at')->userCurrent()->default(null)->nullable();
+            $table->timestamp('inserted_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->default(null)->nullable();
+            $table->timestamp('deleted_at')->useCurrent()->default(null)->nullable();
         });
     }
     /**
